@@ -107,12 +107,30 @@ router.post(
   authenticateToken,
   upload.single("file"),
   async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
+      /////////////////////////
+      console.log("📥 File received on backend:", req.file);
+      console.log("📄 Original name:", req.file.originalname);
+      console.log("📑 MIME type:", req.file.mimetype);
+      console.log("📏 Size (bytes):", req.file.size);
+      let filePath = req.file.path;
+
+      // Handle .doc → .docx
+      if (req.file.originalname.toLowerCase().endsWith(".doc")) {
+        console.log("⚙️ Converting .doc to .docx...");
+        const docxPath = filePath + "x"; // make .docx
+        await convertDocToDocx(filePath, docxPath);
+        filePath = docxPath;
+      }
+
+      // Handle .xls → .xlsx
+      if (req.file.originalname.toLowerCase().endsWith(".xls")) {
+        console.log("⚙️ Converting .xls to .xlsx...");
+        const xlsxPath = filePath + "x";
+        await convertXlsToXlsx(filePath, xlsxPath);
+        filePath = xlsxPath;
+      }
+      ////////////////////////////
       const { instrumentId } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });

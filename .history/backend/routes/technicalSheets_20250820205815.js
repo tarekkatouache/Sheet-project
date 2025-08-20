@@ -102,50 +102,7 @@ router.delete("/:id", authenticateToken, async (req, res) => {
 //   }
 // });
 //  // ✅ Upload a technical sheet and save data to TechnicalSheetData table
-router.post(
-  "/upload",
-  authenticateToken,
-  upload.single("file"),
-  async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
-    try {
-      const { instrumentId } = req.body;
-      if (!req.file) {
-        return res.status(400).json({ message: "File upload failed" });
-      }
-      const originalFilePath = req.file.path;
-      const filenameWithoutExt = path.basename(
-        originalFilePath,
-        path.extname(originalFilePath)
-      );
-      const pdfFilePath = path.join(
-        "uploads/technical_pdf_sheets",
-        `${filenameWithoutExt}.pdf`
-      );
-      await generatePdfFromOffice(originalFilePath, pdfFilePath);
-      const sheet = await TechnicalSheet.create({
-        instrumentId,
-        // systemId,
-        uploadedByUserId: req.user.userId,
-        originalFilePath,
-        pdfFilePath,
-        createdAt: new Date(),
-      });
 
-      res.status(201).json({
-        message: "Technical sheet uploaded & vertical data saved",
-        sheet,
-      });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: err.message });
-    }
-  }
-);
 // ✅ download a technical sheet file by ID
 // GET /api/technical-sheets/:id/download
 // http://localhost:3000/api/technicalSheets/:id/download

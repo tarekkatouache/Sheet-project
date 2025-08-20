@@ -2,6 +2,8 @@ import api from "./api";
 import { apiMultipart } from "./api"; //  multipart instance
 
 export const getSheetsByInstrument = async (instrumentId) => {
+  console.log("Base URL:", api.defaults.baseURL);
+  console.log("Full URL:", `/technical-sheets/instrument/${instrumentId}`);
   const response = await api.get(
     `/technical-sheets/instrument/${instrumentId}`
   );
@@ -27,13 +29,10 @@ export const deleteTechnicalSheet = async (id) => {
 // services/technicalSheet.js
 // uploadTechnicalSheet function to handle file uploads
 export const uploadTechnicalSheet = async (file, instrumentId) => {
-  console.log("📂 File selected for upload:", file);
-  console.log("📄 File name:", file?.name);
-  console.log("📏 File size (bytes):", file?.size);
-  console.log("📑 File type:", file?.type);
   const formData = new FormData();
   formData.append("file", file); // must match multer field name
   if (instrumentId) formData.append("instrumentId", instrumentId);
+  console.log("Uploading technical sheet:", formData);
 
   const response = await apiMultipart.post("/technicalSheets/upload", formData);
   return response.data;

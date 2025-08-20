@@ -27,10 +27,6 @@ export const deleteTechnicalSheet = async (id) => {
 // services/technicalSheet.js
 // uploadTechnicalSheet function to handle file uploads
 export const uploadTechnicalSheet = async (file, instrumentId) => {
-  console.log("📂 File selected for upload:", file);
-  console.log("📄 File name:", file?.name);
-  console.log("📏 File size (bytes):", file?.size);
-  console.log("📑 File type:", file?.type);
   const formData = new FormData();
   formData.append("file", file); // must match multer field name
   if (instrumentId) formData.append("instrumentId", instrumentId);

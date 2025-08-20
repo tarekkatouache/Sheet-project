@@ -10,41 +10,6 @@ export default function AddSheetModal({ onClose, onAdd }) {
   const [systemId, setSystemId] = useState(null); // ✅ store systemId
   const token = localStorage.getItem("token");
   const [instrument, setInstrument] = useState(null);
-  const [fileError, setFileError] = useState("");
-  //////////////////////////
-
-  const MIME = {
-    DOC: "application/msword",
-    DOCX: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    XLS: "application/vnd.ms-excel",
-    XLSX: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  };
-
-  // Some browsers don’t set file.type reliably → fall back to extension too
-  const isLegacyDoc = (file) =>
-    file?.type === MIME.DOC || /\.doc$/i.test(file?.name || "");
-  const isLegacyXls = (file) =>
-    file?.type === MIME.XLS || /\.xls$/i.test(file?.name || "");
-
-  const isAllowedFile = (file) => {
-    if (!file) return false;
-    const name = file.name || "";
-    const type = file.type || "";
-
-    // block legacy .doc specifically
-    if (isLegacyDoc(file)) return false;
-    if (isLegacyXls(file)) return false;
-
-    // allow docx/xls/xlsx (by mime or extension)
-    const ok =
-      type === MIME.DOCX ||
-      type === MIME.XLSX ||
-      /\.docx$/i.test(name) ||
-      /\.xlsx?$/i.test(name); // .xls or .xlsx
-
-    return ok;
-  };
-  //////////////////////////
 
   const handleFileChange = (e) => {
     const f = e.target.files?.[0];
@@ -55,14 +20,6 @@ export default function AddSheetModal({ onClose, onAdd }) {
       setFileError("“.doc” files aren’t supported. Please convert to “.docx”.");
       e.target.value = ""; // reset input
       alert("“.doc” files aren’t supported. Please convert to “.docx”.");
-      return;
-    }
-
-    if (isLegacyXls(f)) {
-      setFile(null);
-      setFileError("“.xls” files aren’t supported. Please convert to “.xlsx”.");
-      e.target.value = ""; // reset input
-      alert("“.xls” files aren’t supported. Please convert to “.xlsx”.");
       return;
     }
 

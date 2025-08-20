@@ -105,13 +105,40 @@ router.delete("/:id", authenticateToken, async (req, res) => {
 router.post(
   "/upload",
   authenticateToken,
-  upload.single("file"),
+  upload.single("file"), async (req, res) => {
+  try {
+    let filePath = req.file.path;
+    const originalName = req.file.originalname.toLowerCase();
+
+    // If it's a .doc file, convert it to .docx
+    if (originalName.endsWith(".doc")) {
+      const docxPath = filePath + "x"; // turn .doc into .docx
+      await convertDocToDocx(filePath, docxPath);
+      filePath = docxPath; // update to converted file
+    }
+
+    // If it's a .xls file, convert it to .xlsx
+    if (originalName.endsWith(".xls")) {
+      const xlsxPath = filePath + "x"; // turn .xls into .xlsx
+      await convertXlsToXlsx(filePath, xlsxPath);
+      filePath = xlsxPath; // update to converted file
+    }
+
+    // Continue processing as .docx or .xlsx
+    await processFile(filePath);
+
+    res.json({ message: "File uploaded and processed successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error processing file" });
+  }
+};
+,
   async (req, res) => {
     console.log("📡 Upload called");
     console.log("req.file:", req.file);
     console.log("req.body:", req.body);
     console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
       const { instrumentId } = req.body;
       if (!req.file) {

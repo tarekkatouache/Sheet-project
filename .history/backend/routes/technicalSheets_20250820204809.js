@@ -107,11 +107,6 @@ router.post(
   authenticateToken,
   upload.single("file"),
   async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
       const { instrumentId } = req.body;
       if (!req.file) {

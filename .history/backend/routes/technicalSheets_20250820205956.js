@@ -102,34 +102,67 @@ router.delete("/:id", authenticateToken, async (req, res) => {
 //   }
 // });
 //  // ✅ Upload a technical sheet and save data to TechnicalSheetData table
+
+// Simple LibreOffice converter
+function convertWithLibreOffice(inputPath, outputPath) {
+  return new Promise((resolve, reject) => {
+    exec(
+      `soffice --headless --convert-to ${path
+        .extname(outputPath)
+        .slice(1)} --outdir ${path.dirname(outputPath)} ${inputPath}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error("❌ LibreOffice conversion error:", stderr);
+          return reject(error);
+        }
+        resolve(outputPath);
+      }
+    );
+  });
+}
 router.post(
   "/upload",
   authenticateToken,
   upload.single("file"),
   async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
       const { instrumentId } = req.body;
+
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
-      const originalFilePath = req.file.path;
+
+      let originalFilePath = req.file.path;
+      const ext = path.extname(originalFilePath).toLowerCase();
+
+      // Convert .doc → .docx
+      if (ext === ".doc") {
+        const newPath = originalFilePath + "x"; // just append 'x'
+        await convertWithLibreOffice(originalFilePath, newPath);
+        originalFilePath = newPath;
+      }
+
+      // Convert .xls → .xlsx
+      if (ext === ".xls") {
+        const newPath = originalFilePath + "x"; // append 'x'
+        await convertWithLibreOffice(originalFilePath, newPath);
+        originalFilePath = newPath;
+      }
+
       const filenameWithoutExt = path.basename(
         originalFilePath,
         path.extname(originalFilePath)
       );
+
       const pdfFilePath = path.join(
         "uploads/technical_pdf_sheets",
         `${filenameWithoutExt}.pdf`
       );
+
       await generatePdfFromOffice(originalFilePath, pdfFilePath);
+
       const sheet = await TechnicalSheet.create({
         instrumentId,
-        // systemId,
         uploadedByUserId: req.user.userId,
         originalFilePath,
         pdfFilePath,
@@ -137,11 +170,11 @@ router.post(
       });
 
       res.status(201).json({
-        message: "Technical sheet uploaded & vertical data saved",
+        message: "Technical sheet uploaded & converted",
         sheet,
       });
     } catch (err) {
-      console.error(err);
+      console.error("❌ Upload route error:", err);
       res.status(500).json({ error: err.message });
     }
   }

@@ -1,4 +1,5 @@
 const express = require("express");
+const { exec } = require("child_process"); //
 const upload = require("../middleware/upload"); // middleware for file upload
 const authenticateToken = require("../middleware/auth"); // middleware for authentication
 const TechnicalSheet = require("../models/TechnicalSheet"); // model for technical sheets
@@ -9,6 +10,7 @@ const {
   processTechnicalSheetData,
 } = require("../controllers/technicalSheetController"); // controller to process technical sheet data
 const logAction = require("../utils/logAction");
+const { convertDocToDocx } = require("../models/convertDocToDocx"); // middleware to convert .doc to .docx
 ////////////////////////
 const XLSX = require("xlsx");
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -102,21 +104,25 @@ router.delete("/:id", authenticateToken, async (req, res) => {
 //   }
 // });
 //  // ✅ Upload a technical sheet and save data to TechnicalSheetData table
+
+// configure Multer
+const upload = multer({ dest: "uploads/technical_sheets/" });
+
 router.post(
   "/upload",
   authenticateToken,
   upload.single("file"),
+  convertDocToDocx, // 👈 middleware converts .doc → .docx before continuing
   async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
       const { instrumentId } = req.body;
+
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
+
+      console.log("📂 File after conversion:", req.file);
+
       const originalFilePath = req.file.path;
       const filenameWithoutExt = path.basename(
         originalFilePath,
@@ -126,10 +132,13 @@ router.post(
         "uploads/technical_pdf_sheets",
         `${filenameWithoutExt}.pdf`
       );
+
+      // Generate PDF from Word/Excel
       await generatePdfFromOffice(originalFilePath, pdfFilePath);
+
+      // Save to DB
       const sheet = await TechnicalSheet.create({
         instrumentId,
-        // systemId,
         uploadedByUserId: req.user.userId,
         originalFilePath,
         pdfFilePath,
@@ -137,11 +146,11 @@ router.post(
       });
 
       res.status(201).json({
-        message: "Technical sheet uploaded & vertical data saved",
+        message: "✅ Technical sheet uploaded & saved",
         sheet,
       });
     } catch (err) {
-      console.error(err);
+      console.error("❌ Upload route error:", err);
       res.status(500).json({ error: err.message });
     }
   }

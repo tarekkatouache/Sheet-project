@@ -107,16 +107,25 @@ router.post(
   authenticateToken,
   upload.single("file"),
   async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
+    /////////////////////////////
+    try {
+    if (!req.file) {
+      console.error("❌ No file received in request");
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    console.log("✅ File received");
+    console.log("Original Name:", req.file.originalname);
+    console.log("Stored Path:", req.file.path);
+    console.log("MIME Type:", req.file.mimetype);
+    console.log("Size:", req.file.size);
+
     try {
       const { instrumentId } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
+
       const originalFilePath = req.file.path;
       const filenameWithoutExt = path.basename(
         originalFilePath,

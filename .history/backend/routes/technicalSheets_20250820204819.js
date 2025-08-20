@@ -107,12 +107,11 @@ router.post(
   authenticateToken,
   upload.single("file"),
   async (req, res) => {
-    console.log("📡 Upload called");
-    console.log("req.file:", req.file);
-    console.log("req.body:", req.body);
-    console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
+      console.log("📥 File received on backend:", req.file);
+      console.log("📄 Original name:", req.file.originalname);
+      console.log("📑 MIME type:", req.file.mimetype);
+      console.log("📏 Size (bytes):", req.file.size);
       const { instrumentId } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });

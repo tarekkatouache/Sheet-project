@@ -58,14 +58,6 @@ export default function AddSheetModal({ onClose, onAdd }) {
       return;
     }
 
-    if (isLegacyXls(f)) {
-      setFile(null);
-      setFileError("“.xls” files aren’t supported. Please convert to “.xlsx”.");
-      e.target.value = ""; // reset input
-      alert("“.xls” files aren’t supported. Please convert to “.xlsx”.");
-      return;
-    }
-
     if (!isAllowedFile(f)) {
       setFile(null);
       setFileError(

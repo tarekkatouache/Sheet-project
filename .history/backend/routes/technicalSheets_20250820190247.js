@@ -107,16 +107,61 @@ router.post(
   authenticateToken,
   upload.single("file"),
   async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      console.log("---- Uploaded File Debug ----");
+      console.log("Original Name:", req.file.originalname);
+      console.log("Stored Path:", req.file.path);
+      console.log("MIME Type:", req.file.mimetype);
+      console.log("Size (bytes):", req.file.size);
+      console.log("-----------------------------");
+
+      let filePath = req.file.path;
+
+      // Convert .doc → .docx
+      if (req.file.originalname.endsWith(".doc")) {
+        const docxPath = filePath + "x"; // add "x" to make .docx
+        console.log("Converting .doc to .docx:", docxPath);
+        await convertDocToDocx(filePath, docxPath);
+        filePath = docxPath;
+      }
+
+      // Convert .xls → .xlsx
+      if (req.file.originalname.endsWith(".xls")) {
+        const xlsxPath = filePath + "x"; // add "x" to make .xlsx
+        console.log("Converting .xls to .xlsx:", xlsxPath);
+        await convertXlsToXlsx(filePath, xlsxPath);
+        filePath = xlsxPath;
+      }
+
+      // Now continue processing
+      console.log("Final file path for processing:", filePath);
+
+      await processDocx(filePath);
+
+      res
+        .status(200)
+        .json({ message: "File uploaded and processed successfully!" });
+    } catch (error) {
+      console.error("Upload route error:", error);
+      res.status(500).json({ error: "File processing failed" });
+    }
+  },
+  async (req, res) => {
+    /////////////////////////////
     console.log("📡 Upload called");
     console.log("req.file:", req.file);
     console.log("req.body:", req.body);
     console.log("req.user:", req.user);
-    console.log("req.file.type:", req.file.type);
     try {
       const { instrumentId } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
+
       const originalFilePath = req.file.path;
       const filenameWithoutExt = path.basename(
         originalFilePath,
