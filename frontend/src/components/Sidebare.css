@@ -1,0 +1,260 @@
+:root {
+  --dark: #1a1a1a; /* Define the --dark variable globally */
+}
+@media (max-width: 1367px) {
+  .side-nav-container {
+  }
+  h2 {
+    font-size: 15px !important;
+  }
+  .menu-item P {
+    font-size: 13px !important;
+  }
+  .menu-item p {
+    margin-left: 0px;
+  }
+  .tooltips {
+    font-size: 15px !important;
+  }
+  .menu-item {
+    height: 39px !important;
+    width: 10em !important;
+    margin-bottom: auto !important;
+  }
+  .menu-item-NX {
+    width: 3.8em !important;
+  }
+  .hamburger {
+    top: 40px !important;
+  }
+  .nav-menu {
+    margin-top: 40px !important;
+  }
+  .menu-item img {
+    /* width: 60px; */
+    padding: 16px 18px !important;
+  }
+}
+@media (min-width: 1467px) {
+  .side-nav-container {
+  }
+
+  .nav-brand h2 {
+  }
+  .tooltips {
+  }
+  .menu-item {
+    height: 49px;
+    width: 12em !important;
+  }
+  .menu-item-NX {
+    width: 3.8em !important;
+  }
+}
+.side-nav-container {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 3px;
+
+  z-index: 2; /* Lower than sidebar */
+  top: 3px;
+  border-radius: 20px;
+  /* background-color: var(--dark); */
+  background-color: #0a171f;
+  width: 15%;
+  height: 260vh;
+  position: fixed;
+  /* color: var(--light); */
+  color: white;
+  transition: 0.9s;
+  left: 0; /* Ensures it's aligned left */
+}
+.side-nav-container-NX {
+  width: 90px;
+}
+.nav-upper,
+.nav-heading,
+.menu-item,
+.nav-menu {
+  display: grid;
+}
+.nav-heading {
+  grid-template-columns: 2fr, fr;
+  grid-template-rows: 1fr;
+  height: 75px;
+}
+.nav-brand {
+  display: flex;
+  /* justify-items: center; */
+  /* justify-content: center; */
+  align-items: center;
+  margin-top: 17px;
+}
+.nav-brand h2 {
+  display: flex;
+  /* justify-items: center; */
+  /* justify-content: center; */
+  align-items: center;
+  font-size: 20px;
+}
+.nav-brand img {
+  width: 60px;
+  padding: 0 16px;
+  margin: 2px;
+  border-radius: 30%;
+}
+.hamburger {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  top: 66px;
+
+  margin: auto -30px;
+  /* background-color: var(--primary); */
+  background-color: #404344;
+  /* border: 2px solid var(--light); */
+  border: 3px solid white;
+  padding: 10px 10px 14px 12px;
+  border-radius: 20px;
+  height: 54px;
+  width: 57px;
+}
+.hamburger span {
+  display: block;
+  margin-top: 5px;
+  border-radius: 15px;
+  /* background-color: var(--light); */
+  background-color: white;
+  height: 4px;
+  width: 25px;
+
+  transition: 0.4s;
+}
+.hamburger-in:hover span:nth-child(1) {
+  width: 25px;
+  transform: translate(0px, 0px) rotate(-25deg);
+}
+.hamburger-in:hover span:nth-child(2) {
+  display: none;
+}
+.hamburger-in:hover span:nth-child(3) {
+  width: 25px;
+  transform: translate(0px, 0px) rotate(25deg);
+}
+.hamburger-out:hover span:nth-child(1) {
+  width: 25px;
+  transform: translate(0px, 0px) rotate(25deg);
+}
+.hamburger-out:hover span:nth-child(2) {
+  display: none;
+}
+.hamburger-out:hover span:nth-child(3) {
+  width: 25px;
+  transform: translate(0px, 0px) rotate(-25deg);
+}
+
+/* for the h2 in the side */
+.showkart-heading {
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+  height: 0;
+  overflow: hidden;
+}
+
+/* When expanded */
+.showkart-heading.expanded {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+}
+
+/* When collapsed */
+.showkart-heading.collapsed {
+  opacity: 0;
+  height: auto;
+
+  transform: translateY(-10px);
+}
+
+.nav-menu {
+  grid-template-rows: repeat(7, 1fr);
+  margin-top: 50px;
+  margin-left: 6px;
+}
+
+.menu-item {
+  height: 49px;
+  width: 15em;
+  display: flex;
+  /* justify-items: center; */
+  align-items: center;
+  /* color: var(--light); */
+  color: white;
+  text-decoration: none;
+  margin: auto auto 8px auto;
+  /* text-transform: uppercase; */
+  border-radius: 10px;
+  position: relative;
+  /* transform: ; */
+}
+.menu-item:hover {
+  /* background-color: var(--primary); */
+  background-color: gray;
+}
+.menu-item img {
+  /* width: 60px; */
+  padding: 14px 16px;
+  /* margin: auto; */
+  transform: translateX(5%);
+}
+.menu-item p {
+  margin-left: 0px;
+}
+.menu-item-NX {
+  width: 3em;
+  display: flex;
+  /* justify-items: center; */
+  align-items: center;
+  /* color: var(--light); */
+  color: white;
+  text-decoration: none;
+  margin: auto auto 6px 4px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 0px;
+  transition: all 0.4s ease-in-out;
+}
+.menu-item {
+  position: relative; /* Needed for absolute positioning inside */
+}
+
+.menu-item:hover > .tooltips {
+  bottom: 0%; /* Position above the menu-item */
+  left: 75%;
+  bottom: 50%;
+  transform: translateX(0%);
+  margin-bottom: 10px; /* 10px gap from the element */
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltips {
+  position: absolute; /* Tooltip must be absolutely positioned */
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s ease;
+
+  background-color: #0a171f;
+  color: white;
+  border: 1px solid white;
+
+  padding: 9px 8px; /* Use space not comma */
+  border-radius: 15px 15px 15px 0;
+  white-space: nowrap;
+  font-size: 14px;
+  z-index: 10;
+}
+
+/*  */
