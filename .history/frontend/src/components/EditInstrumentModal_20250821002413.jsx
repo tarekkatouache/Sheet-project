@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import api from "../services/api"; // ton instance axios
 import ReactDOM from "react-dom";
+import api from "../services/api";
+
 const token = localStorage.getItem("token");
 
 export default function EditInstrumentModal({
@@ -27,17 +28,19 @@ export default function EditInstrumentModal({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(
+      const response = await axios.put(
         `http://localhost:5000/api/instruments/${instrument.id}`,
         formData,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      onUpdate(res.data); // 👈 send updated instrument back to parent
+      // ✅ send updated instrument back to parent
+      if (onUpdate) {
+        onUpdate(response.data);
+      }
+
       onClose();
     } catch (err) {
       console.error("Failed to update instrument", err);
@@ -64,6 +67,7 @@ export default function EditInstrumentModal({
             value={formData.description}
             onChange={handleChange}
           />
+
           <label>Location:</label>
           <input
             name="location"
@@ -78,7 +82,6 @@ export default function EditInstrumentModal({
             onChange={handleChange}
             required
           >
-            {/* <option value={formData.systemId}>{formData.systemId}</option> */}
             {systems.map((sys) => (
               <option key={sys.id} value={sys.id}>
                 {sys.name}

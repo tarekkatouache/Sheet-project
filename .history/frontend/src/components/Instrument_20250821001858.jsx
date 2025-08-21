@@ -1,8 +1,20 @@
+// frontend/src/components/Instrument.jsx
+
 import React from "react";
 import "./Instrument.css"; // optional, for styling
 import { useState } from "react";
 import EditInstrumentModal from "./EditInstrumentModal";
 import { Link } from "react-router-dom";
+import ReactDOM from "react-dom";
+const [instruments, setInstruments] = useState([]);
+
+const handleUpdate = (updatedInstrument) => {
+  setInstruments((prev) =>
+    prev.map((inst) =>
+      inst.id === updatedInstrument.id ? updatedInstrument : inst
+    )
+  );
+};
 
 function handleFicheClick(instrument) {
   // Handle the logic for Fiche click
@@ -17,7 +29,11 @@ export default function Instrument({
 }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const system = systems.find((sys) => sys.id === instrument.systemId);
-
+  const refreshInstruments = () => {
+    // Logic to refresh instruments, e.g., re-fetch from API
+    console.log("Refreshing instruments...");
+    handleInstrumentUpdated();
+  };
   return (
     <div className="instrument-card">
       <div className="instrument">
@@ -78,7 +94,7 @@ export default function Instrument({
               instrument={instrument}
               systems={systems}
               onClose={() => setShowEditModal(false)}
-              onUpdate={handleInstrumentUpdated} // 👈 send it
+              onUpdate={refreshInstruments} // A function you define in parent to re-fetch or update state
             />
           )}
         </div>

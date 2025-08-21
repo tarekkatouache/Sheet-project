@@ -1,8 +1,11 @@
+// frontend/src/components/Instrument.jsx
+
 import React from "react";
 import "./Instrument.css"; // optional, for styling
 import { useState } from "react";
 import EditInstrumentModal from "./EditInstrumentModal";
 import { Link } from "react-router-dom";
+import ReactDOM from "react-dom";
 
 function handleFicheClick(instrument) {
   // Handle the logic for Fiche click
@@ -78,7 +81,7 @@ export default function Instrument({
               instrument={instrument}
               systems={systems}
               onClose={() => setShowEditModal(false)}
-              onUpdate={handleInstrumentUpdated} // 👈 send it
+              // onUpdate={refreshInstruments} // A function you define in parent to re-fetch or update state
             />
           )}
         </div>

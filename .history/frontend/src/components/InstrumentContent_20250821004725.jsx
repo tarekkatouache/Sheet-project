@@ -39,16 +39,6 @@ export default function InstrumentContent() {
     };
     fetchInstruments();
   }, []);
-  /////////////////////
-  const handleUpdateInstrument = (updatedInstrument) => {
-    setInstruments((prev) =>
-      prev.map((inst) =>
-        inst.id === updatedInstrument.id ? updatedInstrument : inst
-      )
-    );
-  };
-
-  //////////////////////
 
   const handleDeleteInstrument = async (id) => {
     // add condition for admin only
@@ -97,7 +87,6 @@ export default function InstrumentContent() {
             instrument={instrument}
             systems={systems}
             onDelete={handleDeleteInstrument}
-            handleInstrumentUpdated={handleUpdateInstrument} // 👈 add this
           />
         ))}
       </div>

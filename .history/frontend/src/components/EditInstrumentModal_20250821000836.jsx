@@ -10,6 +10,7 @@ export default function EditInstrumentModal({
   onClose,
   onUpdate,
 }) {
+  const [instruments, setInstruments] = useState([]);
   const [formData, setFormData] = useState({
     name: instrument.name || "",
     description: instrument.description || "",
@@ -23,11 +24,32 @@ export default function EditInstrumentModal({
       [e.target.name]: e.target.value,
     }));
   };
-
+  useEffect(() => {
+    const fetchInstruments = async () => {
+      try {
+        const response = await api.get("/instruments");
+        setInstruments(response.data);
+      } catch (error) {
+        console.error("Failed to fetch instruments:", error);
+      }
+    };
+    fetchInstruments();
+  }, []);
+  const fetchInstruments = async () => {
+    try {
+      const response = await api.get("/instruments");
+      setInstruments(response.data);
+    } catch (error) {
+      console.error("Failed to fetch instruments:", error);
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // refetch instruments after update
+    fetchInstruments();
+
     try {
-      const res = await axios.put(
+      await axios.put(
         `http://localhost:5000/api/instruments/${instrument.id}`,
         formData,
         {
@@ -36,12 +58,11 @@ export default function EditInstrumentModal({
           },
         }
       );
-
-      onUpdate(res.data); // 👈 send updated instrument back to parent
-      onClose();
+      // onUpdate(); // Refresh list or parent state
+      onClose(); // Close modal
     } catch (err) {
+      onClose(); // Close modal
       console.error("Failed to update instrument", err);
-      onClose();
     }
   };
 

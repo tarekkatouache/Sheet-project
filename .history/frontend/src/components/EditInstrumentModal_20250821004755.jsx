@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../services/api"; // ton instance axios
-import ReactDOM from "react-dom";
 const token = localStorage.getItem("token");
 
 export default function EditInstrumentModal({
@@ -26,8 +25,9 @@ export default function EditInstrumentModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await axios.put(
+      await axios.put(
         `http://localhost:5000/api/instruments/${instrument.id}`,
         formData,
         {
@@ -36,16 +36,15 @@ export default function EditInstrumentModal({
           },
         }
       );
-
-      onUpdate(res.data); // 👈 send updated instrument back to parent
-      onClose();
+      // onUpdate(); // Refresh list or parent state
+      onClose(); // Close modal
     } catch (err) {
+      onClose(); // Close modal
       console.error("Failed to update instrument", err);
-      onClose();
     }
   };
 
-  return ReactDOM.createPortal(
+  return (
     <div className="modal-backdrop">
       <div className="modal">
         <h2>Modifier l'instrument</h2>
@@ -92,7 +91,6 @@ export default function EditInstrumentModal({
           </button>
         </form>
       </div>
-    </div>,
-    document.getElementById("modal-root") || document.body
+    </div>
   );
 }

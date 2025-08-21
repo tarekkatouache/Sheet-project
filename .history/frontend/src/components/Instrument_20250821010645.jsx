@@ -3,6 +3,7 @@ import "./Instrument.css"; // optional, for styling
 import { useState } from "react";
 import EditInstrumentModal from "./EditInstrumentModal";
 import { Link } from "react-router-dom";
+import ReactDOM from "react-dom";
 
 function handleFicheClick(instrument) {
   // Handle the logic for Fiche click

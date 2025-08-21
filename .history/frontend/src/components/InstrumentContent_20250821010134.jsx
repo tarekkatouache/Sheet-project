@@ -97,7 +97,6 @@ export default function InstrumentContent() {
             instrument={instrument}
             systems={systems}
             onDelete={handleDeleteInstrument}
-            handleInstrumentUpdated={handleUpdateInstrument} // 👈 add this
           />
         ))}
       </div>

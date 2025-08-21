@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import api from "../services/api"; // ton instance axios
-import ReactDOM from "react-dom";
 const token = localStorage.getItem("token");
 
 export default function EditInstrumentModal({
@@ -45,7 +44,7 @@ export default function EditInstrumentModal({
     }
   };
 
-  return ReactDOM.createPortal(
+  return (
     <div className="modal-backdrop">
       <div className="modal">
         <h2>Modifier l'instrument</h2>
@@ -92,7 +91,6 @@ export default function EditInstrumentModal({
           </button>
         </form>
       </div>
-    </div>,
-    document.getElementById("modal-root") || document.body
+    </div>
   );
 }

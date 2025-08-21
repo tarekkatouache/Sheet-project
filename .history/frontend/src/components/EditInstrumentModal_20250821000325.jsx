@@ -26,8 +26,9 @@ export default function EditInstrumentModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await axios.put(
+      await axios.put(
         `http://localhost:5000/api/instruments/${instrument.id}`,
         formData,
         {
@@ -36,12 +37,11 @@ export default function EditInstrumentModal({
           },
         }
       );
-
-      onUpdate(res.data); // 👈 send updated instrument back to parent
-      onClose();
+      // onUpdate(); // Refresh list or parent state
+      onClose(); // Close modal
     } catch (err) {
+      onClose(); // Close modal
       console.error("Failed to update instrument", err);
-      onClose();
     }
   };
 
