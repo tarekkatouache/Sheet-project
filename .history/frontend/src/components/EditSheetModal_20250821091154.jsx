@@ -1,0 +1,43 @@
+export default function EditSheetModal({ sheet, onClose, onUpdate }) {
+  const [title, setTitle] = useState(sheet.title);
+  const [description, setDescription] = useState(sheet.description);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Call API to update the sheet
+      await api.put(`/technical-sheets/${sheet.id}`, { title, description });
+      onUpdate(); // Refresh the list after update
+      onClose(); // Close the modal
+    } catch (err) {
+      console.error("Error updating sheet:", err);
+    }
+  };
+
+  return (
+    <div className="edit-sheet-modal">
+      <form onSubmit={handleSubmit}>
+        <h2>Edit Sheet</h2>
+        <label>
+          Title:
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <button type="submit">Save</button>
+        <button type="button" onClick={onClose}>
+          Cancel
+        </button>
+      </form>
+    </div>
+  );
+}

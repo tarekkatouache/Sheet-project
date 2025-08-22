@@ -1,0 +1,24 @@
+/* EditSheetModal.css */
+.edit-sheet-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.6); /* dark backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000; /* 👈 ensures modal is on top */
+}
+
+.edit-sheet-modal form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 200px;
+  max-width: 80%;
+  z-index: 1001; /* above the backdrop */
+}
