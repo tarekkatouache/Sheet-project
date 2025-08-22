@@ -87,25 +87,21 @@ function TechnicalSheet({ sheet, onDelete }) {
             <p>
               <strong>téléchargé-par</strong>
               <br></br>
-              {user ? `${user.name} ${user.lastName}` : "Inconnu"}
+              {user ? `${user.name}${user.lastName}` : "Inconnu"}
             </p>
             <p>
-              <strong>location</strong>
+              <strong>location :</strong>
               <br></br>
               {instrument ? instrument.location : "Inconnu"}
             </p>
 
-            <p>
-              <strong>version</strong> {sheet.version}
-            </p>
+            <p>version: {sheet.version}</p>
             {/* fetch username and lastname using uploadedByUserId */}
-            <p>
-              <strong>created at</strong> {sheet.createdAt}
-            </p>
+            <p>created at: {sheet.createdAt}</p>
             {/* <strong>description:</strong> {instrument.description} */}
-            {/* <strong>
-               Système: {system ? system.name : "Non attribué (supprimé)"} 
-            </strong> */}
+            <strong>
+              {/* Système: {system ? system.name : "Non attribué (supprimé)"} */}
+            </strong>
           </div>
           <div className="technical-sheet-buttons">
             <button

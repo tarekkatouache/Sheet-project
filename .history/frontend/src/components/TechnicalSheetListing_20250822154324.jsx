@@ -8,7 +8,7 @@ import api from "../services/api";
 import { uploadTechnicalSheet } from "../services/technicalSheet"; // import the upload function
 import { deleteTechnicalSheet } from "../services/technicalSheet"; // import the delete function
 
-export default function TechnicalSheetListing({ instrumentName }) {
+export default function TechnicalSheetListing() {
   const [sheets, setSheets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddSheetModal, setShowAddSheetModal] = useState(false);

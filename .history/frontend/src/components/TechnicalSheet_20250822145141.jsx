@@ -44,33 +44,35 @@ function TechnicalSheet({ sheet, onDelete }) {
   const [instrument, setInstrument] = useState(null);
 
   useEffect(() => {
-    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
-    if (!sheet.instrumentId) return;
+    if (!sheet?.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)
       .then((fetchedInstrument) => {
         // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
-        instrument && console.log("Instrument set:", instrument.name);
       })
       .catch((error) => {
         console.error("Error fetching instrument:", error);
       });
   }, [sheet?.instrumentId]); // ✅ run only when this id changes
+  // console.log("TechnicalSheet instrument:", instrument);
   //get username and lastname using uploadedByUserId////////////////////
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    if (!sheet?.uploadedByUserId) return;
+  try {
+    useEffect(() => {
+      if (!sheet?.uploadedByUserId) return;
 
     getUserById(sheet.uploadedByUserId)
       .then((fetchedUser) => {
+        // console.log("Fetched user:", fetchedUser);
         setUser(fetchedUser);
       })
       .catch((error) => {
-        // console.error("Error fetchi  ng user:", error);
+        console.error("Error fetching user:", error);
       });
   }, [sheet?.uploadedByUserId]); // ✅ run only when this id changes
 
+  console.log("TechnicalSheet user:", user);
   ////////////////////////////////////////////////////////
   const [showEditModal, setShowEditModal] = useState(false);
   return (
@@ -78,34 +80,21 @@ function TechnicalSheet({ sheet, onDelete }) {
       <div className="technical-sheet-card">
         <div className="technical-sheet">
           <div className="inside-technical-sheet">
+            {/* <h3>{instrument.name}</h3> */}
             <p>
-              <strong>instrument</strong>
-              <br></br>
-              {instrument ? instrument.name : "Chargement..."}
-            </p>
-            {/* Display instrument name is null why */}
-            <p>
-              <strong>téléchargé-par</strong>
-              <br></br>
+              téléchargé par :{" "}
               {user ? `${user.name} ${user.lastName}` : "Inconnu"}
             </p>
-            <p>
-              <strong>location</strong>
-              <br></br>
-              {instrument ? instrument.location : "Inconnu"}
-            </p>
 
-            <p>
-              <strong>version</strong> {sheet.version}
-            </p>
+            <p>{/* <strong>location :</strong> {instrument.location} */}</p>
+            <p>version: {sheet.version}</p>
             {/* fetch username and lastname using uploadedByUserId */}
-            <p>
-              <strong>created at</strong> {sheet.createdAt}
-            </p>
+            <p>created at: {sheet.createdAt}</p>
             {/* <strong>description:</strong> {instrument.description} */}
-            {/* <strong>
-               Système: {system ? system.name : "Non attribué (supprimé)"} 
-            </strong> */}
+
+            <strong>
+              {/* Système: {system ? system.name : "Non attribué (supprimé)"} */}
+            </strong>
           </div>
           <div className="technical-sheet-buttons">
             <button

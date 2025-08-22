@@ -79,33 +79,29 @@ function TechnicalSheet({ sheet, onDelete }) {
         <div className="technical-sheet">
           <div className="inside-technical-sheet">
             <p>
-              <strong>instrument</strong>
+              <strong>instrument :</strong>
               <br></br>
               {instrument ? instrument.name : "Chargement..."}
             </p>
             {/* Display instrument name is null why */}
             <p>
-              <strong>téléchargé-par</strong>
+              <strong>téléchargé-par :</strong>
               <br></br>
               {user ? `${user.name} ${user.lastName}` : "Inconnu"}
             </p>
             <p>
-              <strong>location</strong>
+              <strong>location :</strong>
               <br></br>
               {instrument ? instrument.location : "Inconnu"}
             </p>
 
-            <p>
-              <strong>version</strong> {sheet.version}
-            </p>
+            <p>version: {sheet.version}</p>
             {/* fetch username and lastname using uploadedByUserId */}
-            <p>
-              <strong>created at</strong> {sheet.createdAt}
-            </p>
+            <p>created at: {sheet.createdAt}</p>
             {/* <strong>description:</strong> {instrument.description} */}
-            {/* <strong>
-               Système: {system ? system.name : "Non attribué (supprimé)"} 
-            </strong> */}
+            <strong>
+              {/* Système: {system ? system.name : "Non attribué (supprimé)"} */}
+            </strong>
           </div>
           <div className="technical-sheet-buttons">
             <button

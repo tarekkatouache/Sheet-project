@@ -63,7 +63,7 @@ export default function TechnicalPage() {
 
   return (
     <div className="technical-page">
-      <h3>Fiches techniques </h3>
+      <h2>Fiches techniques </h2>
 
       {/* Filters */}
       <div

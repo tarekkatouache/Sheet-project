@@ -90,7 +90,7 @@ function TechnicalSheet({ sheet, onDelete }) {
               {user ? `${user.name} ${user.lastName}` : "Inconnu"}
             </p>
             <p>
-              <strong>location</strong>
+              <strong>location :</strong>
               <br></br>
               {instrument ? instrument.location : "Inconnu"}
             </p>
@@ -103,9 +103,9 @@ function TechnicalSheet({ sheet, onDelete }) {
               <strong>created at</strong> {sheet.createdAt}
             </p>
             {/* <strong>description:</strong> {instrument.description} */}
-            {/* <strong>
-               Système: {system ? system.name : "Non attribué (supprimé)"} 
-            </strong> */}
+            <strong>
+              {/* Système: {system ? system.name : "Non attribué (supprimé)"} */}
+            </strong>
           </div>
           <div className="technical-sheet-buttons">
             <button
