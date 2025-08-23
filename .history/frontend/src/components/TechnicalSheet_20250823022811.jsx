@@ -60,7 +60,7 @@ function TechnicalSheet({ sheet, onDelete }) {
       .catch((error) => {
         if (error.response?.status === 404) {
           console.log("Instrument not found (probably soft deleted)");
-          setInstrument(null);
+          // setInstrument(null);
         } else {
           console.error(error);
         }

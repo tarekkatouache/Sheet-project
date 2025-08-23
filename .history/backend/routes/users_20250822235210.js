@@ -115,7 +115,7 @@ router.put(
   }
 );
 // ✅ Get user by ID
-router.get("/:id", authenticateToken, async (req, res) => {
+router.get("/users/:id", authenticateToken, async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id, {

@@ -15,19 +15,19 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // // fetch systems to put them in the filter select
-  // const [Allsystems, setAllSystems] = useState([]);
-  // useEffect(() => {
-  //   const fetchSystems = async () => {
-  //     try {
-  //       const res = await getSystems();
-  //       setAllSystems(res.data);
-  //     } catch (err) {
-  //       console.error("Error fetching systems:", err);
-  //     }
-  //   };
-  //   fetchSystems();
-  // }, []);
+  // fetch systems to put them in the filter select
+  const [Allsystems, setAllSystems] = useState([]);
+  useEffect(() => {
+    const fetchSystems = async () => {
+      try {
+        const res = await api.get("/systems");
+        setAllSystems(res.data);
+      } catch (err) {
+        console.error("Error fetching systems:", err);
+      }
+    };
+    fetchSystems();
+  }, []);
 
   // fetch sheets
   useEffect(() => {
@@ -108,8 +108,9 @@ export default function TechnicalPage() {
           value={systemFilter}
           onChange={(e) => setSystemFilter(e.target.value)}
         >
-          <option value="">-- Sélectionner un système --</option>
-          {/* {console.log("Allsystems:", Allsystems)} */}
+          <option value="">All Systems</option>
+          <option value="1">System A</option>
+          <option value="2">System B</option>
         </select>
 
         <select

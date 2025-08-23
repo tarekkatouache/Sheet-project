@@ -20,8 +20,10 @@ export const updateInstrument = async (id, data) => {
   return response.data;
 };
 export const getInstrumentById = async (id) => {
+  console.log("Fetching instrument with id:", id); // 👀 debug
+
   const response = await api.get(`/instruments/${id}`);
+  // console.log("API response:", response.data);
+
   return response.data;
 };
-///////////////
-// Get instrument by ID

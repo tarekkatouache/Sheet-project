@@ -15,8 +15,8 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // // fetch systems to put them in the filter select
-  // const [Allsystems, setAllSystems] = useState([]);
+  // fetch systems to put them in the filter select
+  const [Allsystems, setAllSystems] = useState([]);
   // useEffect(() => {
   //   const fetchSystems = async () => {
   //     try {

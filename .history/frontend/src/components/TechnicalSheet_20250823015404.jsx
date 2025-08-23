@@ -53,7 +53,7 @@ function TechnicalSheet({ sheet, onDelete }) {
         // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
         instrument && console.log("Instrument set:", instrument.name);
-        if (instrument?.deletedAt !== null) {
+        if (instrument.deletedAt !== null) {
           setInstrumentIsSoftDeleted(true);
         }
       })
@@ -87,9 +87,9 @@ function TechnicalSheet({ sheet, onDelete }) {
       <div
         style={{
           backgroundColor: instrumentIsSoftDeleted
-            ? "#b0242fff"
+            ? "#89040fff"
             : "transparent",
-          opacity: instrumentIsSoftDeleted ? 0.6 : 1,
+          transition: "background-color 0.3s ease",
         }}
         className="technical-sheet-card"
       >

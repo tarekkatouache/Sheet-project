@@ -1,7 +1,6 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TechnicalSheet from "./TechnicalSheet";
 import api from "../services/api";
-import { getSystems } from "../services/systems";
 
 export default function TechnicalPage() {
   const [sheets, setSheets] = useState([]);
@@ -15,21 +14,8 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // // fetch systems to put them in the filter select
-  // const [Allsystems, setAllSystems] = useState([]);
-  // useEffect(() => {
-  //   const fetchSystems = async () => {
-  //     try {
-  //       const res = await getSystems();
-  //       setAllSystems(res.data);
-  //     } catch (err) {
-  //       console.error("Error fetching systems:", err);
-  //     }
-  //   };
-  //   fetchSystems();
-  // }, []);
+  // fetch systems to put them in the filter seclec
 
-  // fetch sheets
   useEffect(() => {
     const fetchSheets = async () => {
       try {
@@ -108,8 +94,9 @@ export default function TechnicalPage() {
           value={systemFilter}
           onChange={(e) => setSystemFilter(e.target.value)}
         >
-          <option value="">-- Sélectionner un système --</option>
-          {/* {console.log("Allsystems:", Allsystems)} */}
+          <option value="">All Systems</option>
+          <option value="1">System A</option>
+          <option value="2">System B</option>
         </select>
 
         <select

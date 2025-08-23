@@ -115,18 +115,23 @@ router.put(
   }
 );
 // ✅ Get user by ID
-router.get("/:id", authenticateToken, async (req, res) => {
-  const { id } = req.params;
-  try {
-    const user = await User.findByPk(id, {
-      attributes: { exclude: ["password"] }, // exclude password from response
-    });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json(user);
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+router.get(
+  "/users/:id",
+  authenticateToken,
+  authorizeRole("admin"),
+  async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await User.findByPk(id, {
+        attributes: { exclude: ["password"] }, // exclude password from response
+      });
+      if (!user) return res.status(404).json({ message: "User not found" });
+      res.json(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      res.status(500).json({ message: "Server error", error: error.message });
+    }
   }
-});
+);
 
 module.exports = router;

@@ -19,9 +19,12 @@ export const updateInstrument = async (id, data) => {
   const response = await api.put(`/instruments/${id}`, data);
   return response.data;
 };
+// export const getInstrumentById = async (id) => {
+//   const response = await api.get(`/instruments/${id}`);
+//   return response.data;
+// };
+///////////////
 export const getInstrumentById = async (id) => {
-  const response = await api.get(`/instruments/${id}`);
+  const response = await api.get(`/api/instruments/${id}`);
   return response.data;
 };
-///////////////
-// Get instrument by ID

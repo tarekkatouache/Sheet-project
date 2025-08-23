@@ -53,7 +53,7 @@ function TechnicalSheet({ sheet, onDelete }) {
         // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
         instrument && console.log("Instrument set:", instrument.name);
-        if (instrument?.deletedAt !== null) {
+        if (instrument.deletedAt !== "null") {
           setInstrumentIsSoftDeleted(true);
         }
       })

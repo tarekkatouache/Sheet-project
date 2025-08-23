@@ -92,26 +92,10 @@ router.delete(
 // routes/instruments.js
 
 // GET instrument by ID
-// router.get("/:id", authenticateToken, async (req, res) => {
-//   try {
-//     const instrument = await Instrument.findByPk(req.params.id);
-//     paranoid: false; // this includes soft-deleted if you use Sequelize
-
-//     if (!instrument) {
-//       return res.status(404).json({ message: "Instrument not found" });
-//     }
-//     res.json(instrument);
-//   } catch (err) {
-//     console.error("Error fetching instrument:", err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-// GET instrument by ID
 router.get("/:id", authenticateToken, async (req, res) => {
   try {
-    const instrument = await Instrument.findByPk(req.params.id, {
-      paranoid: false, // ✅ include soft-deleted records
-    });
+    const instrument = await Instrument.findByPk(req.params.id);
+    paranoid: false;
 
     if (!instrument) {
       return res.status(404).json({ message: "Instrument not found" });

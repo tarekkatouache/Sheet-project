@@ -23,5 +23,3 @@ export const getInstrumentById = async (id) => {
   const response = await api.get(`/instruments/${id}`);
   return response.data;
 };
-///////////////
-// Get instrument by ID

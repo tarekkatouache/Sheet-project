@@ -53,7 +53,7 @@ function TechnicalSheet({ sheet, onDelete }) {
         // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
         instrument && console.log("Instrument set:", instrument.name);
-        if (instrument?.deletedAt !== null) {
+        if (instrument.deletedAt !== null) {
           setInstrumentIsSoftDeleted(true);
         }
       })
@@ -83,16 +83,14 @@ function TechnicalSheet({ sheet, onDelete }) {
   ////////////////////////////////////////////////////////
   const [showEditModal, setShowEditModal] = useState(false);
   return (
-    <div className="technical-sheet-container">
-      <div
-        style={{
-          backgroundColor: instrumentIsSoftDeleted
-            ? "#b0242fff"
-            : "transparent",
-          opacity: instrumentIsSoftDeleted ? 0.6 : 1,
-        }}
-        className="technical-sheet-card"
-      >
+    <div
+      style={{
+        opacity: instrumentIsSoftDeleted ? 0.5 : 1,
+        backgroundColor: instrumentIsSoftDeleted ? "#f8d7da" : "transparent",
+      }}
+      className="technical-sheet-container"
+    >
+      <div className="technical-sheet-card">
         <div className="technical-sheet">
           <div className="inside-technical-sheet">
             <p>
