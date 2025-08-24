@@ -138,12 +138,9 @@ export default function TechnicalPage() {
     //   );
     // }
     if (userFilter) {
-      // normalize both sides to Number; falls back across possible field names
-      const target = Number(userFilter);
-      filtered = filtered.filter((s) => {
-        const sid = s.userId ?? s.user_id ?? (s.user && s.user.id) ?? null;
-        return Number(sid) === target;
-      });
+      filtered = filtered.filter(
+        (s) => String(s.userId) === String(userFilter)
+      );
     }
 
     // Date filter
@@ -163,20 +160,6 @@ export default function TechnicalPage() {
     sheets,
     instruments,
   ]);
-  ///////////////////////
-  useEffect(() => {
-    console.log("userFilter =", userFilter, "type:", typeof userFilter);
-    if (sheets.length) {
-      console.table(
-        sheets.slice(0, 10).map((s) => ({
-          sheetId: s.id,
-          userId: s.userId,
-          user_id: s.user_id,
-          userObjId: s.user?.id,
-        }))
-      );
-    }
-  }, [userFilter, sheets]);
 
   return (
     <div className="technical-page">
@@ -223,9 +206,9 @@ export default function TechnicalPage() {
           onChange={(e) => setUserFilter(e.target.value)}
         >
           <option value="">All Users</option>
-          {users.map((u) => (
-            <option key={u.id} value={u.id}>
-              {u.name}
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.name}
             </option>
           ))}
         </select>

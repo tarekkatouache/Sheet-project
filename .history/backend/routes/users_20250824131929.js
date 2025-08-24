@@ -131,23 +131,14 @@ router.get("/:id", authenticateToken, async (req, res) => {
 // });
 // get all users
 // get all users
-// get all users or filter by query
 router.get("/", authenticateToken, async (req, res) => {
   try {
-    const { id, jobTitle, role } = req.query;
-
-    // build dynamic filter
-    const where = {};
-    if (id) where.id = id;
-    if (jobTitle) where.jobTitle = jobTitle;
-    if (role) where.role = role;
-
+    console.log("Fetching all users...");
     const users = await User.findAll({
-      where,
-      attributes: { exclude: ["password"] },
+      // attributes: { exclude: ["password"] }, // keep all but password
     });
 
-    res.json(users);
+    res.json(users); // return objects, not only names
   } catch (error) {
     console.error("Failed to fetch users:", error);
     res.status(500).json({

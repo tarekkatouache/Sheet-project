@@ -21,7 +21,6 @@ export const getUserById = async (userId) => {
 //   }
 // };
 export const getAllUsers = async () => {
-  console.log("Fetching all users from frontend/services/user.js...");
   const response = await api.get("/users");
   return response.data;
 };

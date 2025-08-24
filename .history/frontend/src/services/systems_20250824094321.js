@@ -20,7 +20,6 @@ export const updateSystem = async (id, data) => {
   return response.data;
 };
 export const getSystemById = async (id) => {
-  console.log(" from frontend Fetching system with id:", id);
   const response = await api.get(`/systems/${id}`);
   return response.data;
 };

@@ -102,24 +102,23 @@ export default function TechnicalPage() {
   useEffect(() => {
     let filtered = sheets;
 
-    // Search filter
     if (search.trim()) {
-      const lowerSearch = search.toLowerCase();
       filtered = filtered.filter(
         (s) =>
-          s.title?.toLowerCase().includes(lowerSearch) ||
-          s.description?.toLowerCase().includes(lowerSearch)
+          s.title?.toLowerCase().includes(search.toLowerCase()) ||
+          s.description?.toLowerCase().includes(search.toLowerCase())
       );
     }
 
-    // Instrument filter
     if (instrumentFilter) {
       filtered = filtered.filter(
-        (s) => String(s.instrumentId) === String(instrumentFilter)
+        (s) => s.instrumentId === parseInt(instrumentFilter)
       );
     }
 
-    // System filter (via instrument relation)
+    // if (systemFilter) {
+    //   filtered = filtered.filter((s) => s.systemId === parseInt(systemFilter));
+    // }
     if (systemFilter) {
       filtered = filtered.filter((s) => {
         const instrument = instruments.find(
@@ -131,22 +130,10 @@ export default function TechnicalPage() {
       });
     }
 
-    // User filter
-    // if (userFilter) {
-    //   filtered = filtered.filter(
-    //     (s) => String(s.userId) === String(userFilter)
-    //   );
-    // }
     if (userFilter) {
-      // normalize both sides to Number; falls back across possible field names
-      const target = Number(userFilter);
-      filtered = filtered.filter((s) => {
-        const sid = s.userId ?? s.user_id ?? (s.user && s.user.id) ?? null;
-        return Number(sid) === target;
-      });
+      filtered = filtered.filter((s) => s.userId === parseInt(userFilter));
     }
 
-    // Date filter
     if (dateFilter) {
       filtered = filtered.filter(
         (s) => new Date(s.createdAt).toISOString().split("T")[0] === dateFilter
@@ -154,29 +141,7 @@ export default function TechnicalPage() {
     }
 
     setFilteredSheets(filtered);
-  }, [
-    search,
-    instrumentFilter,
-    systemFilter,
-    userFilter,
-    dateFilter,
-    sheets,
-    instruments,
-  ]);
-  ///////////////////////
-  useEffect(() => {
-    console.log("userFilter =", userFilter, "type:", typeof userFilter);
-    if (sheets.length) {
-      console.table(
-        sheets.slice(0, 10).map((s) => ({
-          sheetId: s.id,
-          userId: s.userId,
-          user_id: s.user_id,
-          userObjId: s.user?.id,
-        }))
-      );
-    }
-  }, [userFilter, sheets]);
+  }, [search, instrumentFilter, systemFilter, userFilter, dateFilter, sheets]);
 
   return (
     <div className="technical-page">
@@ -223,9 +188,9 @@ export default function TechnicalPage() {
           onChange={(e) => setUserFilter(e.target.value)}
         >
           <option value="">All Users</option>
-          {users.map((u) => (
-            <option key={u.id} value={u.id}>
-              {u.name}
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.name}
             </option>
           ))}
         </select>

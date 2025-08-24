@@ -60,7 +60,7 @@ function TechnicalSheet({ sheet, onDelete }) {
         // 2️⃣ If instrument has a valid systemId and is not soft deleted, fetch system
         if (
           fetchedInstrument.systemId &&
-          fetchedInstrument.deletedAt !== null
+          fetchedInstrument.deletedAt === null
         ) {
           try {
             const fetchedSystem = await getSystemById(

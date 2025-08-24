@@ -6,6 +6,22 @@ const authorizeRole = require("../middleware/authorizeRole"); // custom middlewa
 const logAction = require("../utils/logAction");
 const AuditLog = require("../models/AuditLog");
 
+// ✅ Get all users (Admin only)
+router.get("/", authenticateToken, authorizeRole("admin"), async (req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ["password"] },
+    });
+    res.json(users);
+  } catch (error) {
+    console.error("Failed to fetch users:", error);
+    res.status(500).json({
+      message: "Server error while fetching users.",
+      error: error.message,
+    });
+  }
+});
+
 // ✅ Get own profile
 router.get("/me", authenticateToken, async (req, res) => {
   const user = await User.findByPk(req.user.userId, {
@@ -130,24 +146,13 @@ router.get("/:id", authenticateToken, async (req, res) => {
 //   }
 // });
 // get all users
-// get all users
-// get all users or filter by query
 router.get("/", authenticateToken, async (req, res) => {
+  console.log("Fetching all users...");
   try {
-    const { id, jobTitle, role } = req.query;
-
-    // build dynamic filter
-    const where = {};
-    if (id) where.id = id;
-    if (jobTitle) where.jobTitle = jobTitle;
-    if (role) where.role = role;
-
     const users = await User.findAll({
-      where,
       attributes: { exclude: ["password"] },
     });
-
-    res.json(users);
+    // res.json(users);
   } catch (error) {
     console.error("Failed to fetch users:", error);
     res.status(500).json({
@@ -158,19 +163,3 @@ router.get("/", authenticateToken, async (req, res) => {
 });
 
 module.exports = router;
-
-// // ✅ Get all users (Admin only)
-// router.get("/", authenticateToken, async (req, res) => {
-//   try {
-//     const users = await User.findAll({
-//       // attributes: { exclude: ["password"] },
-//     });
-//     res.json(users);
-//   } catch (error) {
-//     console.error("Failed to fetch users:", error);
-//     res.status(500).json({
-//       message: "Server error while fetching users.",
-//       error: error.message,
-//     });
-//   }
-// });

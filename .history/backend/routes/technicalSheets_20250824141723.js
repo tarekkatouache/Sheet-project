@@ -199,7 +199,7 @@ router.get("/api/sheetdata/:id", async (req, res) => {
           model: Instrument,
           include: [System],
         },
-        { model: User, attributes: ["id", "name", "lastName"] },
+        { model: User, attributes: ["id", "name"] },
       ],
     });
 

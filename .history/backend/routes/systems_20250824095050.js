@@ -119,14 +119,22 @@ router.delete(
     }
   }
 );
-// get system by id
+// get system by id (Admin and User)
 router.get("/:id", authenticateToken, async (req, res) => {
-  console.log(" from backend route Fetching system with id:", req.params.id);
+  console.log("Fetching system with id:", req.params.id);
   try {
     const system = await System.findByPk(req.params.id);
     if (!system) {
       return res.status(404).json({ message: "System not found" });
     }
+    await AuditLog.create({
+      userId: req.user.id, // user performing the action (from JWT)
+      action: "READ",
+      userLogged: req.user.username,
+      entity: "System",
+      entityId: system.id,
+      description: `System  ${system.name} read by ${req.user.name} ${req.user.lastName}`,
+    });
     res.json(system);
   } catch (error) {
     console.error("Error fetching system:", error);

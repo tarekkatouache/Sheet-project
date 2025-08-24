@@ -41,61 +41,29 @@ function TechnicalSheet({ sheet, onDelete }) {
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
-  /////////////////////////////// get instrument and system detail at the same time
-  const [system, setSystem] = useState(null);
-  const [systemIsSoftDeleted, setSystemIsSoftDeleted] = useState(false);
-
   useEffect(() => {
-    const fetchInstrumentAndSystem = async () => {
-      if (!sheet.instrumentId) return;
+    if (!sheet.instrumentId) return;
 
-      try {
-        // 1️⃣ Fetch instrument
-        const fetchedInstrument = await getInstrumentById(sheet.instrumentId);
+    getInstrumentById(sheet.instrumentId)
+      .then((fetchedInstrument) => {
+        // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
 
-        // Handle soft delete for instrument
-        setInstrumentIsSoftDeleted(fetchedInstrument.deletedAt !== null);
-
-        // 2️⃣ If instrument has a valid systemId and is not soft deleted, fetch system
-        if (
-          fetchedInstrument.systemId &&
-          fetchedInstrument.deletedAt !== null
-        ) {
-          try {
-            const fetchedSystem = await getSystemById(
-              fetchedInstrument.systemId
-            );
-            setSystem(fetchedSystem);
-            setSystemIsSoftDeleted(fetchedSystem.deletedAt !== null);
-          } catch (error) {
-            if (error.response?.status === 404) {
-              console.log("System not found (probably soft deleted)");
-              setSystem(null);
-              setSystemIsSoftDeleted(true);
-            } else {
-              console.error("Error fetching system:", error);
-            }
-          }
+        if (fetchedInstrument.deletedAt !== null) {
+          setInstrumentIsSoftDeleted(true);
         } else {
-          setSystem(null); // no system if instrument soft deleted
+          setInstrumentIsSoftDeleted(false);
         }
-      } catch (error) {
+      })
+      .catch((error) => {
         if (error.response?.status === 404) {
           console.log("Instrument not found (probably soft deleted)");
           setInstrument(null);
-          setInstrumentIsSoftDeleted(true);
         } else {
-          console.error("Error fetching instrument:", error);
+          console.error(error);
         }
-      }
-    };
-
-    fetchInstrumentAndSystem();
-  }, [sheet.instrumentId]); // 🔑 runs when instrumentId changes
-
-  ///////////////////////////////  instrument and system detail at the same time
-
+      });
+  }, []); // ✅ run only when this id changes
   //get username and lastname using uploadedByUserId////////////////////
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -113,6 +81,22 @@ function TechnicalSheet({ sheet, onDelete }) {
   ////////////////////////////////////////////////////////
   const [showEditModal, setShowEditModal] = useState(false);
 
+  // get system name using systemId from instrument
+  const [system, setSystem] = useState(null);
+  useEffect(() => {
+    if (instrument && instrument.systemId) {
+      // Fetch system details using systemId
+      // Assuming you have a service function getSystemById
+      getSystemById(instrument.systemId)
+        .then((fetchedSystem) => {
+          setSystem(fetchedSystem);
+          console.log("Fetched system:", fetchedSystem);
+        })
+        .catch((error) => {
+          console.error("Error fetching system:", error);
+        });
+    }
+  }, [instrument]);
   return (
     <div className="technical-sheet-container">
       <div
@@ -121,29 +105,24 @@ function TechnicalSheet({ sheet, onDelete }) {
             ? "#b0242fff"
             : "transparent",
           opacity: instrumentIsSoftDeleted ? 0.6 : 1,
-          border: systemIsSoftDeleted ? "2px solid red" : "none",
         }}
         className="technical-sheet-card"
       >
         <div className="technical-sheet">
           <div className="inside-technical-sheet">
             <p>
-              <strong>System</strong>
-              <br></br>
-              {system ? system.name : "Chargement..."}
-            </p>
-            <p>
-              <strong>Instrument</strong>
+              <strong>instrument</strong>
               <br></br>
               {instrument ? instrument.name : "Chargement..."}
             </p>
+            {/* Display instrument name is null why */}
             <p>
-              <strong>Téléchargé par</strong>
+              <strong>téléchargé-par</strong>
               <br></br>
               {user ? `${user.name} ${user.lastName}` : "Inconnu"}
             </p>
             <p>
-              <strong>Location</strong>
+              <strong>location</strong>
               <br></br>
               {instrument ? instrument.location : "Inconnu"}
             </p>

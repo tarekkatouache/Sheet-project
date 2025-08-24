@@ -121,7 +121,7 @@ router.delete(
 );
 // get system by id
 router.get("/:id", authenticateToken, async (req, res) => {
-  console.log(" from backend route Fetching system with id:", req.params.id);
+  console.log("Fetching system with id:", req.params.id);
   try {
     const system = await System.findByPk(req.params.id);
     if (!system) {
