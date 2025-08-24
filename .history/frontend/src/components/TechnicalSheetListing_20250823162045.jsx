@@ -29,21 +29,8 @@ export default function TechnicalSheetListing({ instrumentName }) {
     fetchSheets();
   }, [id]);
 
-  const handleDelete = async (Id) => {
-    console.log("Deleting sheet with id from techsheetlisting:", Id);
-    //delete sheet only by admin
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (!user || user.role !== "admin") {
-      alert(
-        "Vous n'êtes pas autorisé à supprimer cette feuille, veuillez contacter l'administrateur"
-      );
-      console.error("Unauthorized delete attempt");
-      return;
-    }
+  const handleDelete = async (Id) => {};
 
-    await deleteTechnicalSheet(Id);
-    setSheets((prev) => prev.filter((sheet) => sheet.id !== Id)); // optimistically update the state  };
-  };
   const handleAdd = (uploadedSheet) => {
     setSheets((prev) => [...prev, uploadedSheet]); // no API call here
   };

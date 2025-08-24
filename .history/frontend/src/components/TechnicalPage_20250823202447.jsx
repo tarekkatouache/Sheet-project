@@ -43,6 +43,8 @@ export default function TechnicalPage() {
       try {
         const res = await getSystems();
         setSystems(res);
+        console.log(" system[0]:", res[0].name);
+        console.log(" all systems:", res);
       } catch (err) {
         console.error("Error fetching systems:", err);
       }
@@ -58,6 +60,7 @@ export default function TechnicalPage() {
       try {
         const res = await api.get("/instruments");
         setInstruments(res.data);
+        console.log(" all instruments:", res.data);
       } catch (err) {
         console.error("Error fetching instruments:", err);
       }

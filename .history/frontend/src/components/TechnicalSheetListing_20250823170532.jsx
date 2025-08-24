@@ -43,7 +43,7 @@ export default function TechnicalSheetListing({ instrumentName }) {
 
     await deleteTechnicalSheet(Id);
     setSheets((prev) => prev.filter((sheet) => sheet.id !== Id)); // optimistically update the state  };
-  };
+
   const handleAdd = (uploadedSheet) => {
     setSheets((prev) => [...prev, uploadedSheet]); // no API call here
   };

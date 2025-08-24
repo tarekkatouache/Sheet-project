@@ -36,33 +36,14 @@ function handleEditSheet(sheet) {
 }
 
 function TechnicalSheet({ sheet, onDelete }) {
+  // console.log("TechnicalSheet user id:", sheet.uploadedByUserId);
+  // console.log("####################");
+  // console.log("TechnicalSheet instrument id sheet:", sheet.instrumentId);
+
   //get instrument name and system id using instrumentId
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
-  useEffect(() => {
-    if (!sheet.instrumentId) return;
-
-    getInstrumentById(sheet.instrumentId)
-      .then((fetchedInstrument) => {
-        // console.log("Fetched instrument:", fetchedInstrument);
-        setInstrument(fetchedInstrument);
-
-        if (fetchedInstrument.deletedAt !== null) {
-          setInstrumentIsSoftDeleted(true);
-        } else {
-          setInstrumentIsSoftDeleted(false);
-        }
-      })
-      .catch((error) => {
-        if (error.response?.status === 404) {
-          console.log("Instrument not found (probably soft deleted)");
-          setInstrument(null);
-        } else {
-          console.error(error);
-        }
-      });
-  }, []); // ✅ run only when this id changes
   //get username and lastname using uploadedByUserId////////////////////
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -78,6 +59,29 @@ function TechnicalSheet({ sheet, onDelete }) {
   }, [sheet?.uploadedByUserId]); // ✅ run only when this id changes
 
   ////////////////////////////////////////////////////////
+  useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
+    if (!sheet.instrumentId) return;
+
+    getInstrumentById(sheet.instrumentId)
+      .then((fetchedInstrument) => {
+        // console.log("Fetched instrument:", fetchedInstrument);
+        setInstrument(fetchedInstrument);
+        instrument && console.log("Instrument set:", instrument.name);
+        if (instrument?.deletedAt != null) {
+          setInstrumentIsSoftDeleted(true);
+        }
+      })
+      .catch((error) => {
+        if (error.response?.status === 404) {
+          console.log("Instrument not found (probably soft deleted)");
+          setInstrument(null);
+        } else {
+          console.error(error);
+        }
+      });
+  }, [sheet.instrumentId]); // ✅ run only when this id changes
+  //////////////////////////////
   const [showEditModal, setShowEditModal] = useState(false);
   return (
     <div className="technical-sheet-container">

@@ -11,7 +11,7 @@ export const getUserById = async (userId) => {
 };
 
 export const getAllUsers = async () => {
-  console.log("Fetching all users from user/service...");
+  console.log("Fetching all users from frontend...");
   try {
     const response = await api.get("/users");
     return response.data;

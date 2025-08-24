@@ -36,22 +36,25 @@ function handleEditSheet(sheet) {
 }
 
 function TechnicalSheet({ sheet, onDelete }) {
+  // console.log("TechnicalSheet user id:", sheet.uploadedByUserId);
+  // console.log("####################");
+  // console.log("TechnicalSheet instrument id sheet:", sheet.instrumentId);
+
   //get instrument name and system id using instrumentId
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
   useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
     if (!sheet.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)
       .then((fetchedInstrument) => {
         // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
-
-        if (fetchedInstrument.deletedAt !== null) {
+        instrument && console.log("Instrument set:", instrument.name);
+        if (instrument?.deletedAt != null) {
           setInstrumentIsSoftDeleted(true);
-        } else {
-          setInstrumentIsSoftDeleted(false);
         }
       })
       .catch((error) => {
@@ -62,7 +65,7 @@ function TechnicalSheet({ sheet, onDelete }) {
           console.error(error);
         }
       });
-  }, []); // ✅ run only when this id changes
+  }, [sheet?.instrumentId]); // ✅ run only when this id changes
   //get username and lastname using uploadedByUserId////////////////////
   const [user, setUser] = useState(null);
   useEffect(() => {

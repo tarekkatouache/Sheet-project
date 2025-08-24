@@ -3,7 +3,6 @@ import TechnicalSheet from "./TechnicalSheet";
 import api from "../services/api";
 import { getSystems } from "../services/systems";
 import { deleteTechnicalSheet } from "../services/technicalSheet";
-import { getAllUsers } from "../services/user";
 
 export default function TechnicalPage() {
   const [sheets, setSheets] = useState([]);
@@ -17,24 +16,6 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-
-  // fetch users
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await getAllUsers();
-        setUsers(res);
-        console.log(" all users:", res);
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      }
-    };
-    fetchUsers();
-  }, []);
-
-  ///////////////////////////
   // fetch systems to put them in the filter select
   const [systems, setSystems] = useState([]);
 
@@ -43,6 +24,8 @@ export default function TechnicalPage() {
       try {
         const res = await getSystems();
         setSystems(res);
+        console.log(" system[0]:", res[0].name);
+        console.log(" all systems:", res);
       } catch (err) {
         console.error("Error fetching systems:", err);
       }
@@ -58,6 +41,7 @@ export default function TechnicalPage() {
       try {
         const res = await api.get("/instruments");
         setInstruments(res.data);
+        console.log(" all instruments:", res.data);
       } catch (err) {
         console.error("Error fetching instruments:", err);
       }
@@ -173,13 +157,13 @@ export default function TechnicalPage() {
           ))}
         </select>
 
-        <select>
+        <select
+          value={userFilter}
+          onChange={(e) => setUserFilter(e.target.value)}
+        >
           <option value="">All Users</option>
-          {users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
+          <option value="1">User Zaki</option>
+          <option value="2">User Admin</option>
         </select>
 
         <input

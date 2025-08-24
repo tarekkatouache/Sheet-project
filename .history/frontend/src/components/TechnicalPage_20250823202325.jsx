@@ -3,7 +3,7 @@ import TechnicalSheet from "./TechnicalSheet";
 import api from "../services/api";
 import { getSystems } from "../services/systems";
 import { deleteTechnicalSheet } from "../services/technicalSheet";
-import { getAllUsers } from "../services/user";
+import getuse
 
 export default function TechnicalPage() {
   const [sheets, setSheets] = useState([]);
@@ -24,9 +24,9 @@ export default function TechnicalPage() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await getAllUsers();
-        setUsers(res);
-        console.log(" all users:", res);
+        const res = await api.get("/users");
+        setUsers(res.data);
+        console.log(" all users:", res.data);
       } catch (err) {
         console.error("Error fetching users:", err);
       }
@@ -43,6 +43,8 @@ export default function TechnicalPage() {
       try {
         const res = await getSystems();
         setSystems(res);
+        console.log(" system[0]:", res[0].name);
+        console.log(" all systems:", res);
       } catch (err) {
         console.error("Error fetching systems:", err);
       }
@@ -58,6 +60,7 @@ export default function TechnicalPage() {
       try {
         const res = await api.get("/instruments");
         setInstruments(res.data);
+        console.log(" all instruments:", res.data);
       } catch (err) {
         console.error("Error fetching instruments:", err);
       }

@@ -131,7 +131,6 @@ router.get("/:id", authenticateToken, async (req, res) => {
 
 // get all users
 router.get("/", authenticateToken, async (req, res) => {
-  console.log("Fetching all users...");
   try {
     const users = await User.findAll({
       attributes: { exclude: ["password"] },

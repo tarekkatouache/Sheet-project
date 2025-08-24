@@ -36,11 +36,16 @@ function handleEditSheet(sheet) {
 }
 
 function TechnicalSheet({ sheet, onDelete }) {
+  // console.log("TechnicalSheet user id:", sheet.uploadedByUserId);
+  // console.log("####################");
+  // console.log("TechnicalSheet instrument id sheet:", sheet.instrumentId);
+
   //get instrument name and system id using instrumentId
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
   useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
     if (!sheet.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)

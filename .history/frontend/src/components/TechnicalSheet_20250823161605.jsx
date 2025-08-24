@@ -35,12 +35,19 @@ function handleEditSheet(sheet) {
   // This could be a modal that allows the user to edit the sheet's details
 }
 
-function TechnicalSheet({ sheet, onDelete }) {
+function TechnicalSheet({ sheet }) {
+  // create handleDelete to delete the sheet
+  const handleDelete = async (id) => {
+    // Implement the delete logic here
+    await deleteTechnicalSheet(id);
+  };
+
   //get instrument name and system id using instrumentId
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
   useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
     if (!sheet.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)
@@ -157,7 +164,7 @@ function TechnicalSheet({ sheet, onDelete }) {
                 }}
               />
             </button>
-            <button onClick={() => onDelete(sheet.id)}>
+            <button onClick={() => handleDelete(sheet.id)}>
               <img
                 src="/icons2/delete.png"
                 alt="icon"

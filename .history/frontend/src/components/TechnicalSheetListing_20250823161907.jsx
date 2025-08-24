@@ -30,9 +30,7 @@ export default function TechnicalSheetListing({ instrumentName }) {
   }, [id]);
 
   const handleDelete = async (Id) => {
-    console.log("Deleting sheet with id from techsheetlisting:", Id);
-    //delete sheet only by admin
-    const user = JSON.parse(localStorage.getItem("user"));
+    // condition for admin only
     if (!user || user.role !== "admin") {
       alert(
         "Vous n'êtes pas autorisé à supprimer cette feuille, veuillez contacter l'administrateur"
@@ -42,8 +40,9 @@ export default function TechnicalSheetListing({ instrumentName }) {
     }
 
     await deleteTechnicalSheet(Id);
-    setSheets((prev) => prev.filter((sheet) => sheet.id !== Id)); // optimistically update the state  };
+    setSheets((prev) => prev.filter((sheet) => sheet.id !== Id)); // optimistically update the state
   };
+
   const handleAdd = (uploadedSheet) => {
     setSheets((prev) => [...prev, uploadedSheet]); // no API call here
   };
@@ -78,7 +77,6 @@ export default function TechnicalSheetListing({ instrumentName }) {
               onAdd={handleAdd}
             />
           )}
-          {/* todo and instrument name */}
           <h2>Fiche technique de l'Instrument {instrumentName}</h2>
           {sheets.map((sheet) => (
             <TechnicalSheet

@@ -3,7 +3,6 @@ import TechnicalSheet from "./TechnicalSheet";
 import api from "../services/api";
 import { getSystems } from "../services/systems";
 import { deleteTechnicalSheet } from "../services/technicalSheet";
-import { getAllUsers } from "../services/user";
 
 export default function TechnicalPage() {
   const [sheets, setSheets] = useState([]);
@@ -17,32 +16,15 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-
-  // fetch users
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await getAllUsers();
-        setUsers(res);
-        console.log(" all users:", res);
-      } catch (err) {
-        console.error("Error fetching users:", err);
-      }
-    };
-    fetchUsers();
-  }, []);
-
-  ///////////////////////////
   // fetch systems to put them in the filter select
-  const [systems, setSystems] = useState([]);
+  const [allSystems, setAllSystems] = useState([]);
 
   useEffect(() => {
     const fetchSystems = async () => {
       try {
         const res = await getSystems();
-        setSystems(res);
+        console.log("All systems:", res.id);
+        // setAllSystems(res.data);
       } catch (err) {
         console.error("Error fetching systems:", err);
       }
@@ -50,20 +32,6 @@ export default function TechnicalPage() {
     fetchSystems();
   }, []);
   ////////////////////////fetching systems
-  // fetch all instruments to put them in the filter select
-  const [instruments, setInstruments] = useState([]);
-
-  useEffect(() => {
-    const fetchInstruments = async () => {
-      try {
-        const res = await api.get("/instruments");
-        setInstruments(res.data);
-      } catch (err) {
-        console.error("Error fetching instruments:", err);
-      }
-    };
-    fetchInstruments();
-  }, []);
 
   //////////////////////////////
 
@@ -154,32 +122,26 @@ export default function TechnicalPage() {
           onChange={(e) => setInstrumentFilter(e.target.value)}
         >
           <option value="">All Instruments</option>
-          {instruments.map((inst) => (
-            <option key={inst.id} value={inst.id}>
-              {inst.name}
-            </option>
-          ))}
+          {/* Example: populate dynamically if you have instruments list */}
+          <option value="1">Instrument 1</option>
+          <option value="2">Instrument 2</option>
         </select>
 
         <select
           value={systemFilter}
           onChange={(e) => setSystemFilter(e.target.value)}
         >
-          <option value="">All Systems</option>
-          {systems.map((system) => (
-            <option key={system.id} value={system.id}>
-              {system.name}
-            </option>
-          ))}
+          <option value="">-- Sélectionner un système --</option>
+          {/* {console.log("Allsystems:", Allsystems)} */}
         </select>
 
-        <select>
+        <select
+          value={userFilter}
+          onChange={(e) => setUserFilter(e.target.value)}
+        >
           <option value="">All Users</option>
-          {users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
+          <option value="1">User Zaki</option>
+          <option value="2">User Admin</option>
         </select>
 
         <input

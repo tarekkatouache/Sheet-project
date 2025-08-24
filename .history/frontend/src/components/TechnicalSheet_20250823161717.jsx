@@ -35,12 +35,16 @@ function handleEditSheet(sheet) {
   // This could be a modal that allows the user to edit the sheet's details
 }
 
-function TechnicalSheet({ sheet, onDelete }) {
+function TechnicalSheet({ sheet ,onDelete}) {
+ 
+  };
+
   //get instrument name and system id using instrumentId
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
   useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
     if (!sheet.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)

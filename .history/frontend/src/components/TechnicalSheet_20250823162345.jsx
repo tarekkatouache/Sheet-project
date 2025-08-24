@@ -41,6 +41,7 @@ function TechnicalSheet({ sheet, onDelete }) {
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
   useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
     if (!sheet.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)

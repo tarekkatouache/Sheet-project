@@ -36,11 +36,16 @@ function handleEditSheet(sheet) {
 }
 
 function TechnicalSheet({ sheet, onDelete }) {
+  // console.log("TechnicalSheet user id:", sheet.uploadedByUserId);
+  // console.log("####################");
+  // console.log("TechnicalSheet instrument id sheet:", sheet.instrumentId);
+
   //get instrument name and system id using instrumentId
   const [instrument, setInstrument] = useState(null);
   const [instrumentIsSoftDeleted, setInstrumentIsSoftDeleted] = useState(false);
 
   useEffect(() => {
+    console.log("TechnicalSheet useEffect instrumentId:", sheet.instrumentId);
     if (!sheet.instrumentId) return;
 
     getInstrumentById(sheet.instrumentId)
@@ -48,11 +53,9 @@ function TechnicalSheet({ sheet, onDelete }) {
         // console.log("Fetched instrument:", fetchedInstrument);
         setInstrument(fetchedInstrument);
 
-        if (fetchedInstrument.deletedAt !== null) {
-          setInstrumentIsSoftDeleted(true);
-        } else {
-          setInstrumentIsSoftDeleted(false);
-        }
+        instrument.deletedAt !== null
+          ? setInstrumentIsSoftDeleted(true)
+          : setInstrumentIsSoftDeleted(false);
       })
       .catch((error) => {
         if (error.response?.status === 404) {
