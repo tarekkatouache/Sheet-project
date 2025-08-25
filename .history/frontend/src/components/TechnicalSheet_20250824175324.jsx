@@ -44,11 +44,13 @@ function TechnicalSheet({ sheet, onDelete }) {
   /////////////////////////////// get instrument and system detail at the same time
   const [system, setSystem] = useState(null);
   const [systemIsSoftDeleted, setSystemIsSoftDeleted] = useState(false);
-  //////////get system detail using systemId//////////////
+//////////get system detail using systemId//////////////
   useEffect(() => {
     if (!instrument?.systemId) return;
 
     getSystemById(instrument.systemId)
+                console.log("Fetched system", fetchedInstrument.systemId);
+
       .then((fetchedSystem) => {
         setSystem(fetchedSystem);
         setSystemIsSoftDeleted(fetchedSystem.deletedAt !== null);
@@ -58,7 +60,7 @@ function TechnicalSheet({ sheet, onDelete }) {
       });
   }, [instrument?.systemId]); // ✅ run only when this id changes
 
-  //////////////////
+//////////////////
   useEffect(() => {
     const fetchInstrumentAndSystem = async () => {
       if (!sheet.instrumentId) return;

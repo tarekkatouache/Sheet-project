@@ -17,9 +17,7 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // for th globle search //
 
-  ///////////////////////////
   // fetch users
   const [users, setUsers] = useState([]);
 
@@ -160,7 +158,7 @@ export default function TechnicalPage() {
     <div className="technical-page">
       <h3>Fiches techniques </h3>
 
-      {/* Filters  */}
+      {/* Filters */}
       <div
         className="filters"
         style={{ display: "flex", gap: "10px", marginBottom: "20px" }}
@@ -172,7 +170,7 @@ export default function TechnicalPage() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        {/* <select
+        <select
           value={instrumentFilter}
           onChange={(e) => setInstrumentFilter(e.target.value)}
         >
@@ -182,94 +180,81 @@ export default function TechnicalPage() {
               {inst.name}
             </option>
           ))}
+        </select>
+
+        {/* <select
+          value={systemFilter}
+          onChange={(e) => setSystemFilter(e.target.value)}
+        >
+          <option value="">All Systems</option>
+          {systems.map((system) => (
+            <option key={system.id} value={system.id}>
+              {system.name}
+            </option>
+          ))}
         </select> */}
-        {/* instrument filter with datalist  (searchable + writable)  */}
-        <div>
+        <div style={{ position: "relative", width: "250px" }}>
+          {/* Input is both writable and shows selected option */}
           <input
-            style={{ width: "150px" }}
-            list="instruments"
-            placeholder="All Instruments"
-            onChange={(e) => {
-              const val = e.target.value;
-
-              if (!val) {
-                setInstrumentFilter("");
-                return;
-              }
-
-              // Match name to ID
-              const match = instruments.find(
-                (inst) => inst.name.toLowerCase() === val.toLowerCase()
-              );
-              setInstrumentFilter(match ? String(match.id) : "");
-            }}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search systems..."
+            style={{ width: "100%", padding: "8px" }}
           />
 
-          <datalist id="instruments">
-            {instruments.map((inst) => (
-              <option key={inst.id} value={inst.name} />
-            ))}
-          </datalist>
+          {/* Dropdown list */}
+          {query && (
+            <ul
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                right: 0,
+                background: "white",
+                border: "1px solid #ccc",
+                maxHeight: "150px",
+                overflowY: "auto",
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                zIndex: 10,
+              }}
+            >
+              {filteredSystems.length > 0 ? (
+                filteredSystems.map((s) => (
+                  <li
+                    key={s.id}
+                    onClick={() => {
+                      setSelected(s.id);
+                      setQuery(s.name); // show name in input
+                    }}
+                    style={{ padding: "8px", cursor: "pointer" }}
+                  >
+                    {s.name}
+                  </li>
+                ))
+              ) : (
+                <li style={{ padding: "8px" }}>No results</li>
+              )}
+            </ul>
+          )}
+
+          {/* Hidden real value (id) if you need it */}
+          {selected && <input type="hidden" name="systemId" value={selected} />}
         </div>
 
-        {/* System filter with datalist (searchable + writable) */}
-        <div>
-          <input
-            style={{ width: "150px" }}
-            list="systems"
-            placeholder="All Systems"
-            onChange={(e) => {
-              const val = e.target.value;
-
-              if (!val) {
-                setSystemFilter("");
-                return;
-              }
-
-              // Match name to ID
-              const match = systems.find(
-                (s) => s.name.toLowerCase() === val.toLowerCase()
-              );
-              setSystemFilter(match ? String(match.id) : "");
-            }}
-          />
-
-          <datalist id="systems">
-            {systems.map((system) => (
-              <option key={system.id} value={system.name} />
-            ))}
-          </datalist>
-        </div>
-        {/* users filter with datalist  (searchable + writable)  */}
-        <div>
-          <input
-            style={{ width: "150px" }}
-            list="users"
-            placeholder="All Users"
-            onChange={(e) => {
-              const val = e.target.value;
-
-              if (!val) {
-                setUserFilter("");
-                return;
-              }
-
-              // Match name to ID
-              const match = users.find(
-                (u) => u.name.toLowerCase() === val.toLowerCase()
-              );
-              setUserFilter(match ? String(match.id) : "");
-            }}
-          />
-
-          <datalist id="users">
-            {users.map((u) => (
-              <option key={u.id} value={u.name} />
-            ))}
-          </datalist>
-        </div>
-
-        {/* Date filter */}
+        <select
+          value={userFilter}
+          onChange={(e) => setUserFilter(e.target.value)}
+        >
+          <option value="">All Users</option>
+          {users.map((u) => (
+            <option key={u.id} value={u.id}>
+              {u.name}
+            </option>
+          ))}
+        </select>
 
         <input
           type="date"

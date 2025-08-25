@@ -17,9 +17,7 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // for th globle search //
 
-  ///////////////////////////
   // fetch users
   const [users, setUsers] = useState([]);
 
@@ -104,11 +102,14 @@ export default function TechnicalPage() {
   useEffect(() => {
     let filtered = sheets;
 
-    // Search filter with system description || system name || instrument description || instrument Location ||
-    if (search) {
-      console.log("Applying search filter:", search);
+    // Search filter
+    if (search.trim()) {
       const lowerSearch = search.toLowerCase();
-      filtered = filtered.filter();
+      filtered = filtered.filter(
+        (s) =>
+          s.title?.toLowerCase().includes(lowerSearch) ||
+          s.description?.toLowerCase().includes(lowerSearch)
+      );
     }
 
     // Instrument filter
@@ -131,10 +132,18 @@ export default function TechnicalPage() {
     }
 
     // User filter
+    // if (userFilter) {
+    //   filtered = filtered.filter(
+    //     (s) => String(s.userId) === String(userFilter)
+    //   );
+    // }
     if (userFilter) {
-      filtered = filtered.filter(
-        (s) => String(s.uploadedByUserId) === String(userFilter)
-      );
+      // normalize both sides to Number; falls back across possible field names
+      const target = Number(userFilter);
+      filtered = filtered.filter((s) => {
+        const sid = s.userId ?? s.user_id ?? (s.user && s.user.id) ?? null;
+        return Number(sid) === target;
+      });
     }
 
     // Date filter
@@ -155,12 +164,25 @@ export default function TechnicalPage() {
     instruments,
   ]);
   ///////////////////////
+  // useEffect(() => {
+  //   console.log("userFilter =", userFilter, "type:", typeof userFilter);
+  //   if (sheets.length) {
+  //     console.table(
+  //       sheets.slice(0, 10).map((s) => ({
+  //         sheetId: s.id,
+  //         userId: s.userId,
+  //         user_id: s.user_id,
+  //         userObjId: s.user?.id,
+  //       }))
+  //     );
+  //   }
+  // }, [userFilter, sheets]);
 
   return (
     <div className="technical-page">
       <h3>Fiches techniques </h3>
 
-      {/* Filters  */}
+      {/* Filters */}
       <div
         className="filters"
         style={{ display: "flex", gap: "10px", marginBottom: "20px" }}
@@ -172,7 +194,7 @@ export default function TechnicalPage() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        {/* <select
+        <select
           value={instrumentFilter}
           onChange={(e) => setInstrumentFilter(e.target.value)}
         >
@@ -182,94 +204,31 @@ export default function TechnicalPage() {
               {inst.name}
             </option>
           ))}
-        </select> */}
-        {/* instrument filter with datalist  (searchable + writable)  */}
-        <div>
-          <input
-            style={{ width: "150px" }}
-            list="instruments"
-            placeholder="All Instruments"
-            onChange={(e) => {
-              const val = e.target.value;
+        </select>
 
-              if (!val) {
-                setInstrumentFilter("");
-                return;
-              }
+        <select
+          value={systemFilter}
+          onChange={(e) => setSystemFilter(e.target.value)}
+        >
+          <option value="">All Systems</option>
+          {systems.map((system) => (
+            <option key={system.id} value={system.id}>
+              {system.name}
+            </option>
+          ))}
+        </select>
 
-              // Match name to ID
-              const match = instruments.find(
-                (inst) => inst.name.toLowerCase() === val.toLowerCase()
-              );
-              setInstrumentFilter(match ? String(match.id) : "");
-            }}
-          />
-
-          <datalist id="instruments">
-            {instruments.map((inst) => (
-              <option key={inst.id} value={inst.name} />
-            ))}
-          </datalist>
-        </div>
-
-        {/* System filter with datalist (searchable + writable) */}
-        <div>
-          <input
-            style={{ width: "150px" }}
-            list="systems"
-            placeholder="All Systems"
-            onChange={(e) => {
-              const val = e.target.value;
-
-              if (!val) {
-                setSystemFilter("");
-                return;
-              }
-
-              // Match name to ID
-              const match = systems.find(
-                (s) => s.name.toLowerCase() === val.toLowerCase()
-              );
-              setSystemFilter(match ? String(match.id) : "");
-            }}
-          />
-
-          <datalist id="systems">
-            {systems.map((system) => (
-              <option key={system.id} value={system.name} />
-            ))}
-          </datalist>
-        </div>
-        {/* users filter with datalist  (searchable + writable)  */}
-        <div>
-          <input
-            style={{ width: "150px" }}
-            list="users"
-            placeholder="All Users"
-            onChange={(e) => {
-              const val = e.target.value;
-
-              if (!val) {
-                setUserFilter("");
-                return;
-              }
-
-              // Match name to ID
-              const match = users.find(
-                (u) => u.name.toLowerCase() === val.toLowerCase()
-              );
-              setUserFilter(match ? String(match.id) : "");
-            }}
-          />
-
-          <datalist id="users">
-            {users.map((u) => (
-              <option key={u.id} value={u.name} />
-            ))}
-          </datalist>
-        </div>
-
-        {/* Date filter */}
+        <select
+          value={userFilter}
+          onChange={(e) => setUserFilter(e.target.value)}
+        >
+          <option value="">All Users</option>
+          {users.map((u) => (
+            <option key={u.id} value={u.id}>
+              {u.name}
+            </option>
+          ))}
+        </select>
 
         <input
           type="date"

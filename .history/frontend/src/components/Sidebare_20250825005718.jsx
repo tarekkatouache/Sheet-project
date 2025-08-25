@@ -28,7 +28,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
     {
       rout: "dashboard/Search",
       text: "Search",
-      icon: "icons/paper.png",
+      icon: "icons2/statistic.png",
     },
     {
       rout: "dashboard/systemeContent",
@@ -139,7 +139,9 @@ function Sidebare({ isExpanded, setIsExpanded }) {
               >
                 <img
                   src={`/${item.icon}`}
-                  alt="icon"
+                  alt="icon
+                  
+                  "
                   style={{
                     filter: "invert(1) brightness(1.5) contrast(1.2)",
                     width: "55px",

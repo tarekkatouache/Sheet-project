@@ -17,9 +17,7 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // for th globle search //
 
-  ///////////////////////////
   // fetch users
   const [users, setUsers] = useState([]);
 
@@ -160,7 +158,7 @@ export default function TechnicalPage() {
     <div className="technical-page">
       <h3>Fiches techniques </h3>
 
-      {/* Filters  */}
+      {/* Filters */}
       <div
         className="filters"
         style={{ display: "flex", gap: "10px", marginBottom: "20px" }}
@@ -269,7 +267,17 @@ export default function TechnicalPage() {
           </datalist>
         </div>
 
-        {/* Date filter */}
+        {/* <select
+          value={userFilter}
+          onChange={(e) => setUserFilter(e.target.value)}
+        >
+          <option value="">All Users</option>
+          {users.map((u) => (
+            <option key={u.id} value={u.id}>
+              {u.name}
+            </option>
+          ))}
+        </select> */}
 
         <input
           type="date"

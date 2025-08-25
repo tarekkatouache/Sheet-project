@@ -17,9 +17,7 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // for th globle search //
 
-  ///////////////////////////
   // fetch users
   const [users, setUsers] = useState([]);
 

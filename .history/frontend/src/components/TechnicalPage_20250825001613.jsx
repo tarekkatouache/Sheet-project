@@ -17,8 +17,18 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
 
   ////////////////////////////////////////////
-  // for th globle search //
+  // for the global search //
 
+  const filteredSheets = sheets.filter((sheet) => {
+    const query = search.toLowerCase();
+
+    return (
+      sheet.description?.toLowerCase().includes(query) ||
+      sheet.instrument?.name?.toLowerCase().includes(query) ||
+      sheet.user?.name?.toLowerCase().includes(query) ||
+      sheet.system?.name?.toLowerCase().includes(query)
+    );
+  });
   ///////////////////////////
   // fetch users
   const [users, setUsers] = useState([]);

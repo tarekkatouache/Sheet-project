@@ -44,21 +44,7 @@ function TechnicalSheet({ sheet, onDelete }) {
   /////////////////////////////// get instrument and system detail at the same time
   const [system, setSystem] = useState(null);
   const [systemIsSoftDeleted, setSystemIsSoftDeleted] = useState(false);
-  //////////get system detail using systemId//////////////
-  useEffect(() => {
-    if (!instrument?.systemId) return;
 
-    getSystemById(instrument.systemId)
-      .then((fetchedSystem) => {
-        setSystem(fetchedSystem);
-        setSystemIsSoftDeleted(fetchedSystem.deletedAt !== null);
-      })
-      .catch((error) => {
-        // console.error("Error fetching system:", error);
-      });
-  }, [instrument?.systemId]); // ✅ run only when this id changes
-
-  //////////////////
   useEffect(() => {
     const fetchInstrumentAndSystem = async () => {
       if (!sheet.instrumentId) return;
@@ -140,9 +126,7 @@ function TechnicalSheet({ sheet, onDelete }) {
         className="technical-sheet-card"
       >
         {instrumentIsSoftDeleted ? (
-          <p className="soft-deleted-warning" style={{}}>
-            LEUR INSTRUMENT A ÉTÉ SUPPRIME
-          </p>
+          <p style={{ color: "red" }}> LEUR INSTRUMENT A ETAIT SUPPRIME</p>
         ) : null}
         <div className="technical-sheet">
           <div className="inside-technical-sheet">

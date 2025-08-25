@@ -28,7 +28,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
     {
       rout: "dashboard/Search",
       text: "Search",
-      icon: "icons/paper.png",
+      icon: "icons1/search.png",
     },
     {
       rout: "dashboard/systemeContent",

@@ -44,21 +44,7 @@ function TechnicalSheet({ sheet, onDelete }) {
   /////////////////////////////// get instrument and system detail at the same time
   const [system, setSystem] = useState(null);
   const [systemIsSoftDeleted, setSystemIsSoftDeleted] = useState(false);
-  //////////get system detail using systemId//////////////
-  useEffect(() => {
-    if (!instrument?.systemId) return;
 
-    getSystemById(instrument.systemId)
-      .then((fetchedSystem) => {
-        setSystem(fetchedSystem);
-        setSystemIsSoftDeleted(fetchedSystem.deletedAt !== null);
-      })
-      .catch((error) => {
-        // console.error("Error fetching system:", error);
-      });
-  }, [instrument?.systemId]); // ✅ run only when this id changes
-
-  //////////////////
   useEffect(() => {
     const fetchInstrumentAndSystem = async () => {
       if (!sheet.instrumentId) return;
@@ -73,8 +59,8 @@ function TechnicalSheet({ sheet, onDelete }) {
 
         // 2️⃣ If instrument has a valid systemId and is not soft deleted, fetch system
         if (
-          fetchedInstrument.systemId &&
-          fetchedInstrument.deletedAt !== null
+          (console.log("Fetched system", fetchedInstrument.systemId),
+          fetchedInstrument.systemId && fetchedInstrument.deletedAt !== null)
         ) {
           try {
             const fetchedSystem = await getSystemById(
