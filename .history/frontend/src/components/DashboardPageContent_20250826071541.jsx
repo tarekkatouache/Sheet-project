@@ -43,7 +43,7 @@ export default function DashboardPageContent() {
               </div>
               <span className="icon">
                 <img
-                  src="/dashbord_icons/group.png"
+                  src="/dashbord_icons/database.png"
                   alt="icon
                     
                     "

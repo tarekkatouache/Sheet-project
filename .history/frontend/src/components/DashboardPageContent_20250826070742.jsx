@@ -43,7 +43,7 @@ export default function DashboardPageContent() {
               </div>
               <span className="icon">
                 <img
-                  src="/dashbord_icons/group.png"
+                  src="/dashbord_icons/database.png"
                   alt="icon
                     
                     "
@@ -69,13 +69,13 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/document.png"
+                  src="/dashbord_icons/database.png"
                   alt="icon
                     
                     "
                   style={{
                     display: "block",
-                    filter: "invert(1) brightness(1.8) contrast(1.6)",
+                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
                     width: "60px",
                     padding: "2px",
                   }}
@@ -92,21 +92,7 @@ export default function DashboardPageContent() {
               <div>
                 <h2>290</h2>
               </div>
-              <span className="icon">
-                {" "}
-                <img
-                  src="/dashbord_icons/coding.png"
-                  alt="icon
-                    
-                    "
-                  style={{
-                    display: "block",
-                    filter: "invert(1) brightness(1.5) contrast(1.2)",
-                    width: "60px",
-                    padding: "2px",
-                  }}
-                />
-              </span>
+              <span className="icon">📄</span>
             </div>
             <div className="card-footer">
               <p>Instrument</p>
@@ -118,21 +104,7 @@ export default function DashboardPageContent() {
               <div>
                 <h2>500</h2>
               </div>
-              <span className="icon">
-                {" "}
-                <img
-                  src="/dashbord_icons/documentation.png"
-                  alt="icon
-                    
-                    "
-                  style={{
-                    display: "block",
-                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
-                    width: "60px",
-                    padding: "2px",
-                  }}
-                />
-              </span>
+              <span className="icon">👍</span>
             </div>
             <div className="card-footer">le nombre total de vues.</div>
             {/* numbers of downloads word or consulter PDF */}

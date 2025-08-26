@@ -43,7 +43,7 @@ export default function DashboardPageContent() {
               </div>
               <span className="icon">
                 <img
-                  src="/dashbord_icons/group.png"
+                  src="/dashbord_icons/database.png"
                   alt="icon
                     
                     "
@@ -75,7 +75,7 @@ export default function DashboardPageContent() {
                     "
                   style={{
                     display: "block",
-                    filter: "invert(1) brightness(1.8) contrast(1.6)",
+                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
                     width: "60px",
                     padding: "2px",
                   }}
@@ -95,13 +95,13 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/coding.png"
+                  src="/dashbord_icons/document.png"
                   alt="icon
                     
                     "
                   style={{
                     display: "block",
-                    filter: "invert(1) brightness(1.5) contrast(1.2)",
+                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
                     width: "60px",
                     padding: "2px",
                   }}
