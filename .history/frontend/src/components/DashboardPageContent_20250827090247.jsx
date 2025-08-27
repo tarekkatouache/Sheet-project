@@ -2,8 +2,6 @@ import React from "react";
 import "./DashboardPageContent.css";
 import { getUploadFolderSize } from "../services/storege";
 import { getAllUsers } from "../services/user";
-import { getAllTechnicalSheets } from "../services/technicalSheet";
-import { getInstrument } from "../services/instruments";
 import { useEffect } from "react";
 
 // get the upload folder size
@@ -32,26 +30,17 @@ export default function DashboardPageContent() {
   const pct = Math.min(100, Math.round((sizeInBytes / quotaBytes) * 100));
   const quotaFormatted = formatBytes(quotaBytes);
   const status = pct >= 85 ? "danger" : pct >= 65 ? "warn" : "ok"; // pct : pourcentage
-  // get all users ,technical sheets and set user counter
+  // get all users and set user counter
   const [userCount, setUserCount] = React.useState(0);
-  const [sheetCount, setSheetCount] = React.useState(0);
-  const [instrumentCount, setInstrumentCount] = React.useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
       const users = await getAllUsers();
-
       setUserCount(users.length);
-      const sheets = await getAllTechnicalSheets();
-      setSheetCount(sheets.length);
-      const instruments = await getInstrument();
-      setInstrumentCount(instruments.length);
     };
     fetchUsers();
   }, []);
   console.log("User count:", userCount.toString());
-
-  console.log("Sheet count:", sheetCount.toString());
 
   return (
     <div className="ContenT">
@@ -63,7 +52,7 @@ export default function DashboardPageContent() {
           <div className="component-card yellow">
             <div className="card-content">
               <div>
-                <h2>{userCount ? userCount : 0}</h2>
+                <h2>{userCount}</h2>
               </div>
               <span className="icon">
                 <img
@@ -88,7 +77,7 @@ export default function DashboardPageContent() {
           <div className="component-card red">
             <div className="card-content">
               <div>
-                <h2>{sheetCount ? sheetCount : 0}</h2>
+                <h2>145</h2>
               </div>
               <span className="icon">
                 {" "}
@@ -114,7 +103,7 @@ export default function DashboardPageContent() {
           <div className="component-card green">
             <div className="card-content">
               <div>
-                <h2>{instrumentCount ? instrumentCount : 0}</h2>
+                <h2>290</h2>
               </div>
               <span className="icon">
                 {" "}

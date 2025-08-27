@@ -24,7 +24,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
           cupiditate earum inventore ipsum ut illum facere deleniti incidunt qui
           dolores, iure non
           <br />
-          {/* {system.description} */}
+          {system.description}
         </p>
       </div>
       {isAdmin() && (

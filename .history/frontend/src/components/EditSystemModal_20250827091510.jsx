@@ -38,7 +38,7 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
       <div className="modal">
         <h2>Modifier le système</h2>
         <form onSubmit={handleSubmit} className="modal-form">
-          <label>Nom du système:</label>
+          <label>System Name:</label>
           <input
             type="text"
             value={name}
@@ -53,7 +53,7 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
           <div className="modal-buttons">
             <button type="submit">Modifier</button>
             <button type="button" onClick={onClose} className="cancel">
-              Annuler
+              Cancel
             </button>
           </div>
         </form>

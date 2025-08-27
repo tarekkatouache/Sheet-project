@@ -40,7 +40,7 @@ export default function AddSystemModal({ isOpen, onClose, onSystemCreated }) {
       <div className="modal">
         <h2>Créer un nouveau système</h2>
         <form onSubmit={handleSubmit} className="modal-form">
-          <label>Nom du système:</label>
+          <label>System Name:</label>
           <input
             type="text"
             value={name}
@@ -53,9 +53,9 @@ export default function AddSystemModal({ isOpen, onClose, onSystemCreated }) {
             onChange={(e) => setDescription(e.target.value)}
           />
           <div className="modal-buttons">
-            <button type="submit">Créer</button>
+            <button type="submit">Create</button>
             <button type="button" onClick={onClose} className="cancel">
-              Annuler
+              Cancel
             </button>
           </div>
         </form>

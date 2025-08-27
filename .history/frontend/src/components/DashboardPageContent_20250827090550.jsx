@@ -3,7 +3,6 @@ import "./DashboardPageContent.css";
 import { getUploadFolderSize } from "../services/storege";
 import { getAllUsers } from "../services/user";
 import { getAllTechnicalSheets } from "../services/technicalSheet";
-import { getInstrument } from "../services/instruments";
 import { useEffect } from "react";
 
 // get the upload folder size
@@ -35,7 +34,6 @@ export default function DashboardPageContent() {
   // get all users ,technical sheets and set user counter
   const [userCount, setUserCount] = React.useState(0);
   const [sheetCount, setSheetCount] = React.useState(0);
-  const [instrumentCount, setInstrumentCount] = React.useState(0);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -44,8 +42,6 @@ export default function DashboardPageContent() {
       setUserCount(users.length);
       const sheets = await getAllTechnicalSheets();
       setSheetCount(sheets.length);
-      const instruments = await getInstrument();
-      setInstrumentCount(instruments.length);
     };
     fetchUsers();
   }, []);
@@ -88,7 +84,7 @@ export default function DashboardPageContent() {
           <div className="component-card red">
             <div className="card-content">
               <div>
-                <h2>{sheetCount ? sheetCount : 0}</h2>
+                <h2>145</h2>
               </div>
               <span className="icon">
                 {" "}
@@ -114,7 +110,7 @@ export default function DashboardPageContent() {
           <div className="component-card green">
             <div className="card-content">
               <div>
-                <h2>{instrumentCount ? instrumentCount : 0}</h2>
+                <h2>290</h2>
               </div>
               <span className="icon">
                 {" "}

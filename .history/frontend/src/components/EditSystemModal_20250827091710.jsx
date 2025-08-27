@@ -53,7 +53,7 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
           <div className="modal-buttons">
             <button type="submit">Modifier</button>
             <button type="button" onClick={onClose} className="cancel">
-              Annuler
+              <Annuler>Annuler</Annuler>
             </button>
           </div>
         </form>

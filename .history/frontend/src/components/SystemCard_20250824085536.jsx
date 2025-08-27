@@ -23,8 +23,6 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
           eveniet ratione, iste repellat consequuntur porro delectus, excepturi
           cupiditate earum inventore ipsum ut illum facere deleniti incidunt qui
           dolores, iure non
-          <br />
-          {/* {system.description} */}
         </p>
       </div>
       {isAdmin() && (
