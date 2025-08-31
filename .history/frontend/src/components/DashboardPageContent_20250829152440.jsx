@@ -13,6 +13,7 @@ const fetchUploadFolderSize = async () => {
 };
 const siz = await fetchUploadFolderSize();
 
+console.log("Upload folder siz :", siz);
 ///////////////////////
 function formatBytes(bytes) {
   if (bytes === 0) return "0 B";

@@ -105,9 +105,8 @@ export default function TechnicalPage() {
         setFilteredSheets(res.data);
         // Log all references from sheets using map
         res.data.forEach((s) => {
-          // console.log(`Sheet ID references: ${s.reference}`);
-          setReferences((prev) => [...prev, s.reference]);
-          console.log(`Updated references state: ${s.reference}`);
+          const refs = s.references.map((ref) => ref.name).join(", ");
+          console.log(`Sheet ID references: `);
         });
       } catch (err) {
         console.error("Error fetching sheets:", err);
@@ -115,7 +114,6 @@ export default function TechnicalPage() {
     };
     fetchSheets();
   }, []);
-  // Log the updated references state after 1 second
 
   // apply filters whenever search or filters change
   useEffect(() => {

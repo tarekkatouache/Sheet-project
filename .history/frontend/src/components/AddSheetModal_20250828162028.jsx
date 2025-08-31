@@ -11,7 +11,7 @@ export default function AddSheetModal({ onClose, onAdd }) {
   const token = localStorage.getItem("token");
   const [instrument, setInstrument] = useState(null);
   const [fileError, setFileError] = useState("");
-  const [reference, setReference] = useState("");
+  const [reference, setReference] = useState("ref123");
   //////////////////////////
 
   const MIME = {

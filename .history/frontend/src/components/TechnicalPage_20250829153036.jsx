@@ -103,11 +103,10 @@ export default function TechnicalPage() {
         const res = await api.get("/technical-sheets");
         setSheets(res.data);
         setFilteredSheets(res.data);
-        // Log all references from sheets using map
-        res.data.forEach((s) => {
-          // console.log(`Sheet ID references: ${s.reference}`);
-          setReferences((prev) => [...prev, s.reference]);
-          console.log(`Updated references state: ${s.reference}`);
+        // Log all references using map
+        res.data.forEach((sheet) => {
+          const refs = sheet.references.map((ref) => ref.name).join(", ");
+          console.log(`Sheet ID ${sheet.id} references: ${}`);
         });
       } catch (err) {
         console.error("Error fetching sheets:", err);
@@ -115,7 +114,6 @@ export default function TechnicalPage() {
     };
     fetchSheets();
   }, []);
-  // Log the updated references state after 1 second
 
   // apply filters whenever search or filters change
   useEffect(() => {

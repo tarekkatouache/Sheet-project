@@ -113,7 +113,7 @@ router.post(
     console.log("req.user:", req.user);
     console.log("req.file.type:", req.file.type);
     try {
-      const { instrumentId, reference } = req.body;
+      const { instrumentId } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
@@ -129,7 +129,6 @@ router.post(
       await generatePdfFromOffice(originalFilePath, pdfFilePath);
       const sheet = await TechnicalSheet.create({
         instrumentId,
-        reference,
         // systemId,
         uploadedByUserId: req.user.userId,
         originalFilePath,

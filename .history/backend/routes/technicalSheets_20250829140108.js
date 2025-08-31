@@ -129,7 +129,6 @@ router.post(
       await generatePdfFromOffice(originalFilePath, pdfFilePath);
       const sheet = await TechnicalSheet.create({
         instrumentId,
-        reference,
         // systemId,
         uploadedByUserId: req.user.userId,
         originalFilePath,

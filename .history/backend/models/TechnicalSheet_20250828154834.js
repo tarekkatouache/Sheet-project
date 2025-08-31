@@ -39,7 +39,10 @@ const TechnicalSheet = sequelize.define(
       allowNull: false, // NO NULL
       unique: true, // UNIQUE
     },
-
+    // version: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
     version: {
       type: DataTypes.STRING,
       allowNull: true,

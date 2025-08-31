@@ -116,6 +116,9 @@ export default function TechnicalPage() {
     fetchSheets();
   }, []);
   // Log the updated references state after 1 second
+  setTimeout(() => {
+    console.log(`Updated references state: ${references}`);
+  }, 0);
 
   // apply filters whenever search or filters change
   useEffect(() => {

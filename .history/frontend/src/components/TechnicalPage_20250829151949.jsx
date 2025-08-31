@@ -26,7 +26,7 @@ export default function TechnicalPage() {
   // for th globle search //
 
   ///////////////
-  // fetch all references
+  // fetch references
 
   ////////////
   // fetch users
@@ -37,6 +37,7 @@ export default function TechnicalPage() {
       try {
         const res = await getAllUsers();
         setUsers(res);
+        console.log(" all users:", res);
       } catch (err) {
         console.error("Error fetching users:", err);
       }
@@ -96,26 +97,19 @@ export default function TechnicalPage() {
     // optimistically update the state
     setFilteredSheets((prev) => prev.filter((sheet) => sheet.id !== Id));
   };
-  // fetch sheets
+
   useEffect(() => {
     const fetchSheets = async () => {
       try {
         const res = await api.get("/technical-sheets");
         setSheets(res.data);
         setFilteredSheets(res.data);
-        // Log all references from sheets using map
-        res.data.forEach((s) => {
-          // console.log(`Sheet ID references: ${s.reference}`);
-          setReferences((prev) => [...prev, s.reference]);
-          console.log(`Updated references state: ${s.reference}`);
-        });
       } catch (err) {
         console.error("Error fetching sheets:", err);
       }
     };
     fetchSheets();
   }, []);
-  // Log the updated references state after 1 second
 
   // apply filters whenever search or filters change
   useEffect(() => {

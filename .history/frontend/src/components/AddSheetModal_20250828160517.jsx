@@ -88,21 +88,12 @@ export default function AddSheetModal({ onClose, onAdd }) {
         alert("Please select a file first ❗");
         return;
       }
-      if (!reference) {
-        alert("Please enter a reference ❗");
-        return;
-      }
       if (!id) {
         alert("Instrument ID is missing ❗");
         return;
       }
 
-      const uploadedSheet = await uploadTechnicalSheet(
-        file,
-        reference,
-        id,
-        token
-      );
+      const uploadedSheet = await uploadTechnicalSheet(file, id, token);
 
       if (onAdd) onAdd(uploadedSheet.sheet); // pass only the new sheet
       onClose();
