@@ -16,7 +16,11 @@ export default function TechnicalPage() {
   const [userFilter, setUserFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [referenceFilter, setReferenceFilter] = useState("");
-  const [references, setReferences] = useState([]);
+  const [references, setReferences] = useState([
+    { id: 1, name: "Ref 1" },
+    { id: 2, name: "Ref 2" },
+    { id: 3, name: "Ref 3" },
+  ]);
 
   ////////////////////////////////////////////
   // for th globle search //
@@ -101,7 +105,9 @@ export default function TechnicalPage() {
         setFilteredSheets(res.data);
         // Log all references from sheets using map
         res.data.forEach((s) => {
+          // console.log(`Sheet ID references: ${s.reference}`);
           setReferences((prev) => [...prev, s.reference]);
+          console.log(`Updated references state: ${s.reference}`);
         });
       } catch (err) {
         console.error("Error fetching sheets:", err);
@@ -109,7 +115,6 @@ export default function TechnicalPage() {
     };
     fetchSheets();
   }, []);
-  // console.log(`Updated references state:  ${references}`);
   // Log the updated references state after 1 second
 
   // apply filters whenever search or filters change
@@ -284,8 +289,16 @@ export default function TechnicalPage() {
             style={{ width: "200px" }}
             list="references"
             placeholder="All References"
-            onChange={(e) => setReferenceFilter(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+
+              if (!val) {
+                setReferenceFilter("");
+                return;
+              }
+            }}
           />
+
           <datalist id="references">
             {references.map((ref) => (
               <option key={ref} value={ref} />

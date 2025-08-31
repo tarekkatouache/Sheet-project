@@ -109,7 +109,7 @@ export default function TechnicalPage() {
     };
     fetchSheets();
   }, []);
-  // console.log(`Updated references state:  ${references}`);
+  // console.log(`Updated references state: ${references}`);
   // Log the updated references state after 1 second
 
   // apply filters whenever search or filters change

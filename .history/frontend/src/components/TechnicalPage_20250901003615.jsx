@@ -101,7 +101,9 @@ export default function TechnicalPage() {
         setFilteredSheets(res.data);
         // Log all references from sheets using map
         res.data.forEach((s) => {
+          // console.log(`Sheet ID references: ${s.reference}`);
           setReferences((prev) => [...prev, s.reference]);
+          console.log(`Updated references state: ${s.reference}`);
         });
       } catch (err) {
         console.error("Error fetching sheets:", err);
@@ -109,7 +111,6 @@ export default function TechnicalPage() {
     };
     fetchSheets();
   }, []);
-  // console.log(`Updated references state:  ${references}`);
   // Log the updated references state after 1 second
 
   // apply filters whenever search or filters change
@@ -284,7 +285,20 @@ export default function TechnicalPage() {
             style={{ width: "200px" }}
             list="references"
             placeholder="All References"
-            onChange={(e) => setReferenceFilter(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+
+              if (!val) {
+                setReferenceFilter("");
+                return;
+              }
+
+              // Match name to ID
+              //   const match = references.find(
+              //     (r) => r.name.toLowerCase() === val.toLowerCase()
+              //   );
+              //   setReferenceFilter(match ? String(match.id) : "");
+            }}
           />
           <datalist id="references">
             {references.map((ref) => (
