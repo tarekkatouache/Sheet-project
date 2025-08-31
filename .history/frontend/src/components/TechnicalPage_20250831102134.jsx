@@ -256,7 +256,7 @@ export default function TechnicalPage() {
         {/* users filter with datalist  (searchable + writable)  */}
         <div>
           <input
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             list="users"
             placeholder="All Users"
             onChange={(e) => {
@@ -286,7 +286,7 @@ export default function TechnicalPage() {
 
         <div>
           <input
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             list="references"
             placeholder="All References"
             onChange={(e) => {
@@ -299,11 +299,7 @@ export default function TechnicalPage() {
             }}
           />
 
-          <datalist id="references">
-            {references.map((ref) => (
-              <option key={ref} value={ref} />
-            ))}
-          </datalist>
+          <datalist id="references"></datalist>
         </div>
 
         {/* Date filter */}

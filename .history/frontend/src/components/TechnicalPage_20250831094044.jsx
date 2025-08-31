@@ -189,17 +189,28 @@ export default function TechnicalPage() {
         className="filters"
         style={{ display: "flex", gap: "10px", marginBottom: "20px" }}
       >
-        {/* <input
+        <input
           type="text"
           placeholder="Search by title or description..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        /> */}
+        />
 
+        {/* <select
+          value={instrumentFilter}
+          onChange={(e) => setInstrumentFilter(e.target.value)}
+        >
+          <option value="">All Instruments</option>
+          {instruments.map((inst) => (
+            <option key={inst.id} value={inst.id}>
+              {inst.name}
+            </option>
+          ))}
+        </select> */}
         {/* instrument filter with datalist  (searchable + writable)  */}
         <div>
           <input
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             list="instruments"
             placeholder="All Instruments"
             onChange={(e) => {
@@ -228,7 +239,7 @@ export default function TechnicalPage() {
         {/* System filter with datalist (searchable + writable) */}
         <div>
           <input
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             list="systems"
             placeholder="All Systems"
             onChange={(e) => {
@@ -256,7 +267,7 @@ export default function TechnicalPage() {
         {/* users filter with datalist  (searchable + writable)  */}
         <div>
           <input
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             list="users"
             placeholder="All Users"
             onChange={(e) => {
@@ -286,7 +297,7 @@ export default function TechnicalPage() {
 
         <div>
           <input
-            style={{ width: "200px" }}
+            style={{ width: "150px" }}
             list="references"
             placeholder="All References"
             onChange={(e) => {
@@ -296,12 +307,18 @@ export default function TechnicalPage() {
                 setReferenceFilter("");
                 return;
               }
+
+              const match = references.find(
+                (r) => r.reference.toLowerCase() === val.toLowerCase()
+              );
+
+              setReferenceFilter(match ? String(match.id) : "");
             }}
           />
 
           <datalist id="references">
-            {references.map((ref) => (
-              <option key={ref} value={ref} />
+            {references.map((r, index) => (
+              <option key={index} value={r.reference || r} />
             ))}
           </datalist>
         </div>

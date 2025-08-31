@@ -299,11 +299,7 @@ export default function TechnicalPage() {
             }}
           />
 
-          <datalist id="references">
-            {references.map((ref) => (
-              <option key={ref} value={ref} />
-            ))}
-          </datalist>
+          <datalist id="references"></datalist>
         </div>
 
         {/* Date filter */}

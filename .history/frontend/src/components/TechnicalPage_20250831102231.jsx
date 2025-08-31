@@ -300,8 +300,8 @@ export default function TechnicalPage() {
           />
 
           <datalist id="references">
-            {references.map((ref) => (
-              <option key={ref} value={ref} />
+            {references.map((ref, index) => (
+              <option key={index} value={ref.id} />
             ))}
           </datalist>
         </div>
