@@ -22,7 +22,7 @@ function formatBytes(bytes) {
   return `${val} ${units[i]}`;
 } ////////////////////////////////////
 
-const quotaBytes = 10.24 * 1024 * 1024; // 10 MB quota
+const quotaBytes = 1024 * 1024 * 1024; // 1 GB quota
 // const quotaBytes = 1 * 1024 * 1024 * 1024; // 1 GB quota
 const sizeInBytes = siz; // 1 GB
 const sizeFormatted = formatBytes(sizeInBytes);
