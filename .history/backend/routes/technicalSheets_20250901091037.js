@@ -12,7 +12,6 @@ const logAction = require("../utils/logAction");
 ////////////////////////
 const XLSX = require("xlsx");
 const AuditLog = require("../models/AuditLog");
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 // Upload a technical sheet for an instrument
 // router.post(
@@ -138,10 +137,9 @@ router.post(
         pdfFilePath,
         createdAt: new Date(),
       });
-      console.log("Audit log created for technical sheet upload");
       await AuditLog.create({
         userId: req.user.id, // user performing the action (from JWT)
-        action: "UPLOAD",
+        action: "upload",
         userLogged: req.user.username,
         entity: "TechnicalSheet",
         entityId: sheet.id,
@@ -177,10 +175,9 @@ router.get("/:id/download", async (req, res) => {
 
     const filePath = path.resolve(sheet.originalFilePath); // safely resolves full path
     const fileName = path.basename(sheet.originalFilePath); // gets just the file name
-    console.log("Audit log created for technical sheet download");
     await AuditLog.create({
       userId: req.user.id, // user performing the action (from JWT)
-      action: "DOWNLOAD",
+      action: "download",
       userLogged: req.user.username,
       entity: "TechnicalSheet",
       entityId: sheet.id,

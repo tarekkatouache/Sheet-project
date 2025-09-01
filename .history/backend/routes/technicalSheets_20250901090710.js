@@ -11,8 +11,6 @@ const {
 const logAction = require("../utils/logAction");
 ////////////////////////
 const XLSX = require("xlsx");
-const AuditLog = require("../models/AuditLog");
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 // Upload a technical sheet for an instrument
 // router.post(
@@ -138,16 +136,7 @@ router.post(
         pdfFilePath,
         createdAt: new Date(),
       });
-      console.log("Audit log created for technical sheet upload");
-      await AuditLog.create({
-        userId: req.user.id, // user performing the action (from JWT)
-        action: "UPLOAD",
-        userLogged: req.user.username,
-        entity: "TechnicalSheet",
-        entityId: sheet.id,
-        createdAt: new Date(),
-        description: `Technical sheet ${sheet.id} uploaded by ${req.user.name} ${req.user.lastName}`,
-      });
+      await c
 
       res.status(201).json({
         message: "Technical sheet uploaded & vertical data saved",
@@ -177,15 +166,11 @@ router.get("/:id/download", async (req, res) => {
 
     const filePath = path.resolve(sheet.originalFilePath); // safely resolves full path
     const fileName = path.basename(sheet.originalFilePath); // gets just the file name
-    console.log("Audit log created for technical sheet download");
     await AuditLog.create({
-      userId: req.user.id, // user performing the action (from JWT)
-      action: "DOWNLOAD",
-      userLogged: req.user.username,
-      entity: "TechnicalSheet",
-      entityId: sheet.id,
+      action: "download",
+      userId: req.user.userId,
+      technicalSheetId: sheet.id,
       createdAt: new Date(),
-      description: `Technical sheet ${sheet.id} downloaded by ${req.user.name} ${req.user.lastName}`,
     });
 
     res.download(filePath, fileName, (err) => {
