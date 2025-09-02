@@ -26,22 +26,12 @@ export const getUserById = async (userId) => {
 //   }
 // };
 export const getAllUsers = async () => {
-  const token = localStorage.getItem("token");
-  const response = await api.get("/users", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await api.get("/users");
   return response.data;
 };
 export const getUploadFolderSize = async () => {
   console.log("Fetching upload folder size from frontend/services/user.js...");
-  const token = localStorage.getItem("token");
-  const response = await api.get("/users/upload-folder-size", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await api.get("/users/upload-folder-size");
   console.log("Upload folder size response:", response);
   return response.data;
 };
