@@ -137,7 +137,7 @@ export default function InstrumentContent() {
 
     <div className="instruments-container">
       <h1 style={{ margin: "auto auto", justifySelf: "center" }}>
-        Structures Systemes et Composants
+        Structures Systems and Components
       </h1>
 
       <button onClick={() => setShowModal(true)}>Ajouter Instrument</button>

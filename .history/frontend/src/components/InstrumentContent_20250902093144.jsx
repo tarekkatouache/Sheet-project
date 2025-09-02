@@ -27,8 +27,7 @@ export default function InstrumentContent() {
   const [instruments, setInstruments] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // just for the input value
-  const [filteredInstruments, setFilteredInstruments] = useState(instruments); // store filtered data
+  const [filteredInstruments, setFilteredInstruments] = useState([]);
   useEffect(() => {
     const fetchInstruments = async () => {
       try {
@@ -77,72 +76,13 @@ export default function InstrumentContent() {
   };
 
   return (
-    //   <div className="instruments-container">
-    //     <h1 style={{ margin: "auto auto", justifySelf: "center" }}>
-    //       Instruments
-    //     </h1>
-
-    //     <button onClick={() => setShowModal(true)}>Ajouter Instrument</button>
-    //     {/* search instrument by name , location, description */}
-    //     <input
-    //       type="text"
-    //       placeholder="Rechercher un instrument"
-    //       style={{
-    //         margin: "10px 0",
-    //         padding: "8px",
-    //         borderRadius: "4px",
-    //         border: "1px solid #ccc",
-    //       }}
-    //       onChange={(e) => {
-    //         const query = e.target.value.toLowerCase();
-    //         setSearchQuery(query);
-
-    //         // filter instruments
-    //         const filtered = instruments.filter(
-    //           (instrument) =>
-    //             instrument.name.toLowerCase().includes(query) ||
-    //             instrument.location?.toLowerCase().includes(query) ||
-    //             instrument.description?.toLowerCase().includes(query)
-    //         );
-    //         setFilteredInstruments(filtered);
-    //       }}
-    //     />
-
-    //     <datalist>
-    //       {filteredInstruments.map((filteredInstrument) => (
-    //         <option key={filteredInstrument.id} value={filteredInstrument.name} />
-    //       ))}
-    //     </datalist>
-
-    //     {showModal && (
-    //       <AddInstrumentModal
-    //         onClose={() => setShowModal(false)}
-    //         onAdd={handleAdd}
-    //       />
-    //     )}
-
-    //     <div className="instruments-grid">
-    //       {instruments.map((instrument) => (
-    //         <Instrument
-    //           key={instrument.id}
-    //           instrument={instrument}
-    //           systems={systems}
-    //           onDelete={handleDeleteInstrument}
-    //           handleInstrumentUpdated={handleUpdateInstrument} // 👈 add this
-    //         />
-    //       ))}
-    //     </div>
-    //   </div>
-    // );
-
     <div className="instruments-container">
       <h1 style={{ margin: "auto auto", justifySelf: "center" }}>
-        Structures Systemes et Composants
+        Instruments
       </h1>
 
       <button onClick={() => setShowModal(true)}>Ajouter Instrument</button>
-
-      {/* search instrument by name , location, description */}
+      {/*  search instrument by name , location, description */}
       <input
         type="text"
         placeholder="Rechercher un instrument"
@@ -153,25 +93,22 @@ export default function InstrumentContent() {
           border: "1px solid #ccc",
         }}
         onChange={(e) => {
-          const query = e.target.value.toLowerCase();
-          setSearchQuery(query);
-
-          // filter instruments
-          const filtered = instruments.filter(
-            (instrument) =>
-              instrument.name.toLowerCase().includes(query) ||
-              instrument.location?.toLowerCase().includes(query) ||
-              instrument.description?.toLowerCase().includes(query)
-          );
-          setFilteredInstruments(filtered);
+          setFilteredInstruments(e.target.value);
         }}
       />
-
-      {/* ✅ link the input to datalist */}
-      <datalist id="instrument-options">
-        {filteredInstruments.map((filteredInstrument) => (
-          <option key={filteredInstrument.id} value={filteredInstrument.name} />
-        ))}
+      <datalist>
+        {instruments
+          .filter((instrument) =>
+            instrument.name
+              .toLowerCase()
+              .includes(filteredInstruments.toLowerCase())
+          )
+          .map((filteredInstrument) => (
+            <option
+              key={filteredInstrument.id}
+              value={filteredInstrument.name}
+            />
+          ))}
       </datalist>
 
       {showModal && (
@@ -182,13 +119,13 @@ export default function InstrumentContent() {
       )}
 
       <div className="instruments-grid">
-        {filteredInstruments.map((instrument) => (
+        {instruments.map((instrument) => (
           <Instrument
             key={instrument.id}
             instrument={instrument}
             systems={systems}
             onDelete={handleDeleteInstrument}
-            handleInstrumentUpdated={handleUpdateInstrument}
+            handleInstrumentUpdated={handleUpdateInstrument} // 👈 add this
           />
         ))}
       </div>

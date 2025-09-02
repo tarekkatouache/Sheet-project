@@ -137,7 +137,7 @@ export default function InstrumentContent() {
 
     <div className="instruments-container">
       <h1 style={{ margin: "auto auto", justifySelf: "center" }}>
-        Structures Systemes et Composants
+        Instruments
       </h1>
 
       <button onClick={() => setShowModal(true)}>Ajouter Instrument</button>
@@ -168,11 +168,11 @@ export default function InstrumentContent() {
       />
 
       {/* ✅ link the input to datalist */}
-      <datalist id="instrument-options">
+      {/* <datalist id="instrument-options">
         {filteredInstruments.map((filteredInstrument) => (
           <option key={filteredInstrument.id} value={filteredInstrument.name} />
         ))}
-      </datalist>
+      </datalist> */}
 
       {showModal && (
         <AddInstrumentModal

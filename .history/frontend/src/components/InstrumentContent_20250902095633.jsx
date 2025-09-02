@@ -137,7 +137,7 @@ export default function InstrumentContent() {
 
     <div className="instruments-container">
       <h1 style={{ margin: "auto auto", justifySelf: "center" }}>
-        Structures Systemes et Composants
+        Instruments
       </h1>
 
       <button onClick={() => setShowModal(true)}>Ajouter Instrument</button>
@@ -153,25 +153,22 @@ export default function InstrumentContent() {
           border: "1px solid #ccc",
         }}
         onChange={(e) => {
-          const query = e.target.value.toLowerCase();
-          setSearchQuery(query);
-
-          // filter instruments
-          const filtered = instruments.filter(
-            (instrument) =>
-              instrument.name.toLowerCase().includes(query) ||
-              instrument.location?.toLowerCase().includes(query) ||
-              instrument.description?.toLowerCase().includes(query)
-          );
-          setFilteredInstruments(filtered);
+          setFilteredInstruments(e.target.value);
         }}
       />
 
-      {/* ✅ link the input to datalist */}
-      <datalist id="instrument-options">
-        {filteredInstruments.map((filteredInstrument) => (
-          <option key={filteredInstrument.id} value={filteredInstrument.name} />
-        ))}
+      <datalist>
+        {(filteredInstruments
+          ? instruments.filter((instrument) =>
+              instrument.name
+                .toLowerCase()
+                .includes(filteredInstruments.toLowerCase())
+            )
+          : instruments
+        ) // if empty, show all instruments
+          .map((instrument) => (
+            <option key={instrument.id} value={instrument.name} />
+          ))}
       </datalist>
 
       {showModal && (
