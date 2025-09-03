@@ -1,0 +1,12 @@
+.add-sheet-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  border-radius: 50%;
+  position: relative;
+  right: auto;
+  left: 95%;
+  /* margin-bottom: 20px; */
+  z-index: 1000;
+}
