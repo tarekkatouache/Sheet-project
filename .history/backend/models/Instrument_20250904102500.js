@@ -42,20 +42,20 @@ const Instrument = sequelize.define(
       },
       onDelete: "SET NULL",
     },
-    // services: {
-    //   type: DataTypes.ARRAY(
-    //     DataTypes.ENUM(
-    //       "SMICC",
-    //       "SMM",
-    //       "SME",
-    //       "SOR",
-    //       "SOB",
-    //       "Utilitaire",
-    //       "HALL"
-    //     )
-    //   ),
-    //   allowNull: true,
-    // },
+    services: {
+      type: DataTypes.ARRAY(
+        DataTypes.ENUM(
+          "SMICC",
+          "SMM",
+          "SME",
+          "SOR",
+          "SOB",
+          "Utilitaire",
+          "HALL"
+        )
+      ),
+      allowNull: true, // or false if you want it required
+    },
   },
   {
     tableName: "instruments",
