@@ -48,13 +48,12 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
       [e.target.name]: e.target.value,
     }));
   };
-  const handleChangeService = (service) => {
-    setSelectedServices(
-      (prev) =>
-        prev.includes(service)
-          ? prev.filter((s) => s !== service) // remove if already selected
-          : [...prev, service] // add if not selected
+  const handleChangeService = (e) => {
+    const values = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
     );
+    setSelectedServices(values);
   };
 
   const handleSubmit = (e) => {
@@ -109,33 +108,26 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
               </option>
             ))}
           </select>
+
+          <div className="modal-actions">
+            <button type="submit">Ajouter</button>
+            <button type="button" onClick={onClose}>
+              Annuler
+            </button>
+          </div>
         </form>
         {/* add services conserns */}
-        <div className="services-container">
-          <h4>les Services Concerne:</h4>
-          <div className="services-grid">
+        <div>
+          <h3>Select Services:</h3>
+          <select multiple value={selectedServices} onChange={handleChange}>
             {services.map((service) => (
-              <label key={service} className="service-option">
-                <input
-                  type="checkbox"
-                  value={service}
-                  checked={selectedServices.includes(service)}
-                  onChange={() => handleChangeService(service)}
-                />
-                <span>{service}</span>
-              </label>
+              <option key={service} value={service}>
+                {service}
+              </option>
             ))}
-          </div>
+          </select>
 
-          <p className="selected-services">
-            {selectedServices.join(", ") || ""}
-          </p>
-        </div>
-        <div className="modal-actions">
-          <button type="submit">Ajouter</button>
-          <button type="button" onClick={onClose}>
-            Annuler
-          </button>
+          <p>Selected: {selectedServices.join(", ")}</p>
         </div>
       </div>
     </div>,

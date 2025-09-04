@@ -37,36 +37,43 @@
   display: flex;
   justify-content: space-between;
 }
+/* for the services selection */
 .services-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 1.5rem;
   border: 1px solid #ddd;
   border-radius: 12px;
   background: #f9f9f9;
 }
 
 .services-container h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.2rem;
-  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
 }
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
 }
 
 .service-option {
-  width: 65px;
-  height: 60x;
-  padding: 0px 0px;
+  display: flex;
+  flex-direction: column; /* stack checkbox + label */
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  width: 100%;
+  height: 70px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
   background: white;
+  cursor: pointer;
   transition: background 0.3s, border-color 0.3s;
 }
 
@@ -75,15 +82,20 @@
   border-color: #007bff;
 }
 
-.selected-services {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: rgba(0, 0, 0);
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #ffffff;
-  padding: 6px;
+.service-option input[type="checkbox"] {
+  margin-bottom: 0.4rem;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }
-.selected-services strong {
+
+.selected-services {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: #333;
   font-weight: 600;
+  text-align: center;
+}
+.Checkbox {
+  width: 23;
 }

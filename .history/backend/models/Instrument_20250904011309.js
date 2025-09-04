@@ -44,17 +44,7 @@ const Instrument = sequelize.define(
     },
     services: {
       type: DataTypes.ARRAY(
-        DataTypes.ENUM(
-          "SMICC",
-          "SMM",
-          "SME",
-          "SOR",
-          "SOB",
-          "Utilitaire",
-          "HALL",
-          "SOB",
-          "SOR"
-        )
+        DataTypes.ENUM("SMICC", "SMM", "SME", "SOR", "SOB")
       ),
       allowNull: true,
     },

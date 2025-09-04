@@ -66,6 +66,27 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   return ReactDOM.createPortal(
     <div className="modal-backdrop">
       <div className="modal">
+        {/* add services conserns */}
+        <div className="services-container">
+          <h3>Select Services:</h3>
+          <div className="services-grid">
+            {services.map((service) => (
+              <label key={service} className="service-option">
+                <input
+                  type="checkbox"
+                  value={service}
+                  checked={selectedServices.includes(service)}
+                  onChange={() => handleChangeService(service)}
+                />
+                <span>{service}</span>
+              </label>
+            ))}
+          </div>
+
+          <p className="selected-services">
+            <strong>Selected:</strong> {selectedServices.join(", ") || "None"}
+          </p>
+        </div>
         <h2>Ajouter un Instrument</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -109,34 +130,14 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
               </option>
             ))}
           </select>
-        </form>
-        {/* add services conserns */}
-        <div className="services-container">
-          <h4>les Services Concerne:</h4>
-          <div className="services-grid">
-            {services.map((service) => (
-              <label key={service} className="service-option">
-                <input
-                  type="checkbox"
-                  value={service}
-                  checked={selectedServices.includes(service)}
-                  onChange={() => handleChangeService(service)}
-                />
-                <span>{service}</span>
-              </label>
-            ))}
-          </div>
 
-          <p className="selected-services">
-            {selectedServices.join(", ") || ""}
-          </p>
-        </div>
-        <div className="modal-actions">
-          <button type="submit">Ajouter</button>
-          <button type="button" onClick={onClose}>
-            Annuler
-          </button>
-        </div>
+          <div className="modal-actions">
+            <button type="submit">Ajouter</button>
+            <button type="button" onClick={onClose}>
+              Annuler
+            </button>
+          </div>
+        </form>
       </div>
     </div>,
     document.getElementById("modal-root") || document.body

@@ -78,11 +78,9 @@
 .selected-services {
   margin-top: 1rem;
   font-size: 0.95rem;
-  color: rgba(0, 0, 0);
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  color: #444;
   background-color: #ffffff;
-  padding: 6px;
+  padding: 10px;
 }
 .selected-services strong {
   font-weight: 600;

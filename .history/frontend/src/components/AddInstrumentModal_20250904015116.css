@@ -59,6 +59,8 @@
 }
 
 .service-option {
+  font-size: 12px;
+  font-weight: 600;
   width: 65px;
   height: 60x;
   padding: 0px 0px;
@@ -72,18 +74,13 @@
 
 .service-option:hover {
   background: #eef6ff;
-  border-color: #007bff;
 }
 
 .selected-services {
   margin-top: 1rem;
-  font-size: 0.95rem;
-  color: rgba(0, 0, 0);
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #ffffff;
-  padding: 6px;
+  font-size: 0.75rem;
+  color: #444;
+  font-weight: 600;
 }
 .selected-services strong {
-  font-weight: 600;
 }

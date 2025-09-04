@@ -54,14 +54,12 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.55rem;
 }
 
 .service-option {
-  width: 65px;
-  height: 60x;
-  padding: 0px 0px;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   text-align: center;
@@ -78,11 +76,7 @@
 .selected-services {
   margin-top: 1rem;
   font-size: 0.95rem;
-  color: rgba(0, 0, 0);
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #ffffff;
-  padding: 6px;
+  color: #444;
 }
 .selected-services strong {
   font-weight: 600;

@@ -112,7 +112,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
         </form>
         {/* add services conserns */}
         <div className="services-container">
-          <h4>les Services Concerne:</h4>
+          <h3>Select Services:</h3>
           <div className="services-grid">
             {services.map((service) => (
               <label key={service} className="service-option">
@@ -131,12 +131,12 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             {selectedServices.join(", ") || ""}
           </p>
         </div>
-        <div className="modal-actions">
-          <button type="submit">Ajouter</button>
-          <button type="button" onClick={onClose}>
-            Annuler
-          </button>
-        </div>
+      </div>
+      <div className="modal-actions">
+        <button type="submit">Ajouter</button>
+        <button type="button" onClick={onClose}>
+          Annuler
+        </button>
       </div>
     </div>,
     document.getElementById("modal-root") || document.body
