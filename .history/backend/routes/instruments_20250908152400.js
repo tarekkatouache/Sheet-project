@@ -20,7 +20,6 @@ router.post("/", authenticateToken, async (req, res) => {
       updatedByUserId,
       services: req.body.services || ["##"],
     });
-    console.log("Created instrument:", instrument);
 
     res.status(201).json(instrument);
   } catch (err) {

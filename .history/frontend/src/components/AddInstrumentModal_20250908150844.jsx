@@ -49,8 +49,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   };
 
   const handleSubmit = (e) => {
-    console.log("formData:", formData);
-
+    console.log("formData:");
     e.preventDefault();
     onAdd(formData);
     onClose();
@@ -112,6 +111,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
                     value={service}
                     checked={(formData.services || []).includes(service)}
                     onChange={() => {
+                      console.log("Toggling service:", formData.services);
                       // add service if not present, remove if present to the services in the formdata state
                       setFormData((prev) => {
                         const services = prev.services || [];
@@ -125,7 +125,6 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
                         }
                         // Otherwise add it
                         else {
-                          console.log("Toggling service:", formData.services);
                           return {
                             ...prev,
                             services: [...services, service],

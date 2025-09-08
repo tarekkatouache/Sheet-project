@@ -49,8 +49,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   };
 
   const handleSubmit = (e) => {
-    console.log("formData:", formData);
-
+    console.log("formData:");
     e.preventDefault();
     onAdd(formData);
     onClose();

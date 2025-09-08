@@ -43,17 +43,7 @@ const Instrument = sequelize.define(
       onDelete: "SET NULL",
     },
     services: {
-      type: DataTypes.ARRAY(
-        DataTypes.ENUM(
-          "SMICC",
-          "SMM",
-          "SME",
-          "SOR",
-          "SOB",
-          "Utilitaire",
-          "HALL"
-        )
-      ),
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: true,
     },
   },

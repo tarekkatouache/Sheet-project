@@ -49,8 +49,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   };
 
   const handleSubmit = (e) => {
-    console.log("formData:", formData);
-
+    console.log("formData:");
     e.preventDefault();
     onAdd(formData);
     onClose();
@@ -125,13 +124,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
                         }
                         // Otherwise add it
                         else {
-                          console.log("Toggling service:", formData.services);
                           return {
                             ...prev,
                             services: [...services, service],
                           };
                         }
                       });
+                      console.log("Toggling service:", formData.services);
                     }}
                   />
                   <span>{service}</span>

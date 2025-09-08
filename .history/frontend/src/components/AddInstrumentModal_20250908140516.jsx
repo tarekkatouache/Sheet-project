@@ -17,7 +17,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
 
   ///////////////
   const [systems, setSystems] = useState([]);
-  // const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
 
   const services = ["SMICC", "SMM", "SME", "Utilitaire", "HALL", "SOB", "SOR"];
 
@@ -35,22 +35,25 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   }, []);
   ////////////////////////////
   const handleChange = (e) => {
-    console.log(
-      "Changing formData:",
-      e.target.name,
-      e.target.value,
-      "formData",
-      formData
-    );
+    console.log("Changing formData:", e.target.name, e.target.value);
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+  const handleChangeService = (service) => {
+    console.log("Toggling service:", service);
+    setSelectedServices(
+      (prev) =>
+        prev.includes(service)
+          ? prev.filter((s) => s !== service) // remove if already selected
+          : [...prev, service] // add if not selected
+    );
+  };
 
   const handleSubmit = (e) => {
-    console.log("formData:", formData);
-
+    console.log("formData:");
+    formData.services = selectedServices;
     e.preventDefault();
     onAdd(formData);
     onClose();
@@ -110,29 +113,8 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
                   <input
                     type="checkbox"
                     value={service}
-                    checked={(formData.services || []).includes(service)}
-                    onChange={() => {
-                      // add service if not present, remove if present to the services in the formdata state
-                      setFormData((prev) => {
-                        const services = prev.services || [];
-
-                        // If service is already checked, remove it
-                        if (services.includes(service)) {
-                          return {
-                            ...prev,
-                            services: services.filter((s) => s !== service),
-                          };
-                        }
-                        // Otherwise add it
-                        else {
-                          console.log("Toggling service:", formData.services);
-                          return {
-                            ...prev,
-                            services: [...services, service],
-                          };
-                        }
-                      });
-                    }}
+                    checked={(selectedServices || []).includes(service)}
+                    onChange={() => handleChangeService(service)}
                   />
                   <span>{service}</span>
                 </label>
@@ -140,7 +122,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             </div>
 
             <p className="selected-services">
-              {formData.services.join(", ") || ""}
+              {selectedServices.join(", ") || ""}
             </p>
           </div>
           <div className="modal-actions">

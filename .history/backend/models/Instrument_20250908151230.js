@@ -44,7 +44,7 @@ const Instrument = sequelize.define(
     },
     services: {
       type: DataTypes.ARRAY(
-        DataTypes.ENUM(
+        DataTypes.TEXT(
           "SMICC",
           "SMM",
           "SME",

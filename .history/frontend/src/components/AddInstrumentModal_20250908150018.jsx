@@ -49,8 +49,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   };
 
   const handleSubmit = (e) => {
-    console.log("formData:", formData);
-
+    console.log("formData:");
     e.preventDefault();
     onAdd(formData);
     onClose();
@@ -110,29 +109,8 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
                   <input
                     type="checkbox"
                     value={service}
-                    checked={(formData.services || []).includes(service)}
-                    onChange={() => {
-                      // add service if not present, remove if present to the services in the formdata state
-                      setFormData((prev) => {
-                        const services = prev.services || [];
-
-                        // If service is already checked, remove it
-                        if (services.includes(service)) {
-                          return {
-                            ...prev,
-                            services: services.filter((s) => s !== service),
-                          };
-                        }
-                        // Otherwise add it
-                        else {
-                          console.log("Toggling service:", formData.services);
-                          return {
-                            ...prev,
-                            services: [...services, service],
-                          };
-                        }
-                      });
-                    }}
+                    checked={(selectedServices || []).includes(service)}
+                    onChange={() => handleChangeService(service)}
                   />
                   <span>{service}</span>
                 </label>
@@ -140,7 +118,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             </div>
 
             <p className="selected-services">
-              {formData.services.join(", ") || ""}
+              {selectedServices.join(", ") || ""}
             </p>
           </div>
           <div className="modal-actions">
