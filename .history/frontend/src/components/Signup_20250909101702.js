@@ -171,6 +171,7 @@ export default function Signup() {
               <option value="SMICC">SMICC</option>
               <option value="SMM">SMM</option>
               <option value="SME">SME</option>
+
               <option value="Utilitaire">Utilitaire</option>
               <option value="HALL">HALL</option>
               <option value="SOB">SOB</option>

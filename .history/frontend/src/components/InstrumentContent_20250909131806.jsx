@@ -40,7 +40,7 @@ export default function InstrumentContent() {
   const [searchQuery, setSearchQuery] = useState(""); // just for the input value
   const [filteredInstruments, setFilteredInstruments] = useState(instruments); // store filtered data
   useEffect(() => {
-    if (isAdmin()) {
+    if (isAdmin() || isSuperuser()) {
       console.log("User is admin or superuser");
       const fetchInstruments = async () => {
         try {
@@ -53,6 +53,7 @@ export default function InstrumentContent() {
       fetchInstruments();
     } else {
       const fetchData = async () => {
+        e;
         try {
           const data = await getInstrumentsByUserService();
           setInstruments(data);
@@ -62,7 +63,7 @@ export default function InstrumentContent() {
             error
           );
         } finally {
-          console.log();
+          console.log("done");
         }
       };
 

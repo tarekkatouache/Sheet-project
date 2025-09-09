@@ -87,7 +87,7 @@ router.post("/login", async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        service: user.service,
+        service:
       },
 
       process.env.JWT_SECRET,

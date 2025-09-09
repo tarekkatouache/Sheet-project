@@ -3,7 +3,6 @@ const Instrument = require("../models/Instrument");
 const authenticateToken = require("../middleware/auth");
 const logAction = require("../utils/logAction");
 const authorizeRole = require("../middleware/authorizeRole");
-const { Op } = require("sequelize"); // for advanced queries like array contains
 
 const router = express.Router();
 
@@ -11,7 +10,7 @@ const router = express.Router();
 router.get("/by-service", authenticateToken, async (req, res) => {
   console.log("User info from token:", req.user);
   try {
-    const userService = req.user.service; // e.g. "SMICC"
+    const userService = req.user.service; // e.g., "SMICC"
 
     if (!userService) {
       return res.status(400).json({ message: "User has no service assigned." });
@@ -20,7 +19,7 @@ router.get("/by-service", authenticateToken, async (req, res) => {
     const instruments = await Instrument.findAll({
       where: {
         services: {
-          [Op.contains]: [userService], // <-- very likely the issue
+          [Op.contains]: [userService], // Postgres array operator
         },
       },
     });
@@ -29,6 +28,19 @@ router.get("/by-service", authenticateToken, async (req, res) => {
   } catch (error) {
     console.error("Error fetching instruments by service:", error);
     res.status(500).json({ message: "Server error." });
+  }
+});
+
+// ⚠️ This must come last
+router.get("/:id", async (req, res) => {
+  try {
+    const instrument = await Instrument.findByPk(req.params.id);
+    if (!instrument) {
+      return res.status(404).json({ message: "Instrument not found" });
+    }
+    res.json(instrument);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

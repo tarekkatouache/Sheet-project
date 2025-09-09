@@ -39,36 +39,21 @@ export default function InstrumentContent() {
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState(""); // just for the input value
   const [filteredInstruments, setFilteredInstruments] = useState(instruments); // store filtered data
+  if (isAdmin() || isSuperuser()) {
+    console.log("User is admin or superuser");
+  } else {
+    console.log("User is not admin or superuser");
+  }
   useEffect(() => {
-    if (isAdmin()) {
-      console.log("User is admin or superuser");
-      const fetchInstruments = async () => {
-        try {
-          const response = await api.get("/instruments");
-          setInstruments(response.data);
-        } catch (error) {
-          console.error("Failed to fetch instruments:", error);
-        }
-      };
-      fetchInstruments();
-    } else {
-      const fetchData = async () => {
-        try {
-          const data = await getInstrumentsByUserService();
-          setInstruments(data);
-        } catch (error) {
-          console.error(
-            "❌ Error fetching instruments by user service:",
-            error
-          );
-        } finally {
-          console.log();
-        }
-      };
-
-      fetchData();
-      console.log("User is not admin or superuser");
-    }
+    const fetchInstruments = async () => {
+      try {
+        const response = await api.get("/instruments");
+        setInstruments(response.data);
+      } catch (error) {
+        console.error("Failed to fetch instruments:", error);
+      }
+    };
+    fetchInstruments();
   }, []);
   /////////////////////
   const handleUpdateInstrument = (updatedInstrument) => {
@@ -193,7 +178,8 @@ export default function InstrumentContent() {
             (instrument) =>
               instrument.name.toLowerCase().includes(query) ||
               instrument.location?.toLowerCase().includes(query) ||
-              instrument.description?.toLowerCase().includes(query)
+              instrument.description?.toLowerCase().includes(query) ||
+              instrument.sys
           );
           setFilteredInstruments(filtered);
         }}

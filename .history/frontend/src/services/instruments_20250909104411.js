@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const getInstruments = async () => {
+export const getInstrument = async () => {
   const response = await api.get("/instruments");
   return response.data;
 };

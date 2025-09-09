@@ -3,7 +3,7 @@ const Instrument = require("../models/Instrument");
 const authenticateToken = require("../middleware/auth");
 const logAction = require("../utils/logAction");
 const authorizeRole = require("../middleware/authorizeRole");
-const { Op } = require("sequelize"); // for advanced queries like array contains
+const { Op } = require("sequelize"); // for advanced queries
 
 const router = express.Router();
 

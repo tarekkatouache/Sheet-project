@@ -39,37 +39,24 @@ export default function InstrumentContent() {
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState(""); // just for the input value
   const [filteredInstruments, setFilteredInstruments] = useState(instruments); // store filtered data
+  if (isAdmin() || isSuperuser()) {
+    // fetch all instruments for admin and superuser
   useEffect(() => {
-    if (isAdmin()) {
-      console.log("User is admin or superuser");
-      const fetchInstruments = async () => {
-        try {
-          const response = await api.get("/instruments");
-          setInstruments(response.data);
-        } catch (error) {
-          console.error("Failed to fetch instruments:", error);
-        }
-      };
-      fetchInstruments();
-    } else {
-      const fetchData = async () => {
-        try {
-          const data = await getInstrumentsByUserService();
-          setInstruments(data);
-        } catch (error) {
-          console.error(
-            "❌ Error fetching instruments by user service:",
-            error
-          );
-        } finally {
-          console.log();
-        }
-      };
-
-      fetchData();
-      console.log("User is not admin or superuser");
-    }
+    const fetchInstruments = async () => {
+      try {
+        const response = await api.get("/instruments");
+        setInstruments(response.data);
+      } catch (error) {
+        console.error("Failed to fetch instruments:", error);
+      }
+    };
+    fetchInstruments();
   }, []);
+  } else {
+    // fetch instruments by user service for other users
+    useEffect(() => {
+  }
+
   /////////////////////
   const handleUpdateInstrument = (updatedInstrument) => {
     setInstruments((prev) =>

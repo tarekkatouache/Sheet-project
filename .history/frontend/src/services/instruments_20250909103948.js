@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const getInstruments = async () => {
+export const getInstrument = async () => {
   const response = await api.get("/instruments");
   return response.data;
 };
@@ -25,7 +25,3 @@ export const getInstrumentById = async (id) => {
 };
 //////////
 // Get instrument by service same as user service
-export const getInstrumentsByUserService = async () => {
-  const response = await api.get(`/instruments/by-service`);
-  return response.data;
-};
