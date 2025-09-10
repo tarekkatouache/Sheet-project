@@ -12,7 +12,6 @@ export default function AddSheetModal({ onClose, onAdd }) {
   const [instrument, setInstrument] = useState(null);
   const [fileError, setFileError] = useState("");
   const [reference, setReference] = useState("");
-  const [refKeywords, setKeywords] = useState(""); // new state for keywords
   //////////////////////////
 
   const MIME = {
@@ -130,9 +129,9 @@ export default function AddSheetModal({ onClose, onAdd }) {
           />
           <input
             type="text"
-            value={refKeywords}
-            onChange={(e) => setKeywords(e.target.value)}
-            placeholder="Ajouter des mots-clés (séparés par des virgules)"
+            value={reference}
+            onChange={(e) => setReference(e.target.value)}
+            placeholder="Reference"
           />
 
           <div className="modal-actions">
