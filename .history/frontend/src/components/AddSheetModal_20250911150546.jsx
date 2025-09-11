@@ -108,10 +108,9 @@ export default function AddSheetModal({ onClose, onAdd }) {
         id,
         key_words
       );
-      console.log("Uploaded keywords from AddSheetModal:", key_words);
+      console.log("Uploaded sheet from AddSheetModal:", uploadedSheet);
       if (onAdd) onAdd(uploadedSheet.sheet); // pass only the new sheet
       onClose();
-      console.log("Uploaded sheet from AddSheetModal:", uploadedSheet);
     } catch (err) {
       console.error("Error uploading:", err);
     }
@@ -136,10 +135,8 @@ export default function AddSheetModal({ onClose, onAdd }) {
           <input
             type="text"
             value={key_words}
-            // fill keywords state table from input
-            onChange={(e) =>
-              setKey_words(e.target.value.split(",").map((kw) => kw.trim()))
-            }
+            // append keywords input
+            onChange={(e) => setKey_words(e.target.value.split(","))}
             placeholder="Ajouter des mots-clés (séparés par des virgules)"
           />
 

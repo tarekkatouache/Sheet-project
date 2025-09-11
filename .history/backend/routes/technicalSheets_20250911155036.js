@@ -131,6 +131,7 @@ router.post(
         `${filenameWithoutExt}.pdf`
       );
       //////////////////////////////////////////////////////
+      let key_words = [];
       if (req.body.key_words) {
         try {
           key_words = JSON.parse(req.body.key_words); // parse the string into a real array
@@ -138,8 +139,6 @@ router.post(
           console.error("Failed to parse key_words:", err);
         }
       }
-      console.log("Parsed key_words:", key_words);
-
       //////////////////////////////////////////////////////
 
       await generatePdfFromOffice(originalFilePath, pdfFilePath);

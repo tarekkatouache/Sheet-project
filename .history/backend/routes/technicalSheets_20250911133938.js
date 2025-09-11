@@ -114,10 +114,8 @@ router.post(
     console.log("req.body:", req.body);
     console.log("req.user:", req.user);
     console.log("req.file.type:", req.file.type);
-    // console.log("keys words:", req.body.key_words);
-
     try {
-      const { instrumentId, reference, key_words } = req.body;
+      const { instrumentId, reference } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
@@ -130,18 +128,6 @@ router.post(
         "uploads/technical_pdf_sheets",
         `${filenameWithoutExt}.pdf`
       );
-      //////////////////////////////////////////////////////
-      if (req.body.key_words) {
-        try {
-          key_words = JSON.parse(req.body.key_words); // parse the string into a real array
-        } catch (err) {
-          console.error("Failed to parse key_words:", err);
-        }
-      }
-      console.log("Parsed key_words:", key_words);
-
-      //////////////////////////////////////////////////////
-
       await generatePdfFromOffice(originalFilePath, pdfFilePath);
       const sheet = await TechnicalSheet.create({
         instrumentId,
@@ -151,7 +137,6 @@ router.post(
         originalFilePath,
         pdfFilePath,
         createdAt: new Date(),
-        key_words, // save keywords
       });
       console.log("Audit log created for technical sheet upload");
       await AuditLog.create({
@@ -181,7 +166,9 @@ router.post(
 router.get("/:id/download", async (req, res) => {
   try {
     const { id } = req.params;
+
     const sheet = await TechnicalSheet.findByPk(id);
+
     if (!sheet || !sheet.originalFilePath) {
       return res
         .status(404)

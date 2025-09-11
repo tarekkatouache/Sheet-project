@@ -32,14 +32,19 @@ export const uploadTechnicalSheet = async (
   instrumentId,
   key_words
 ) => {
+  // console.log("📂 File selected for upload:", file);
+  // console.log("📄 File name:", file?.name);
+  // console.log("📏 File size (bytes):", file?.size);
+  // console.log("📑 File type:", file?.type);
+  // console.log("🔖 Reference:", reference);
+
   const formData = new FormData();
   formData.append("file", file); // must match multer field name
   if (instrumentId) formData.append("instrumentId", instrumentId);
   if (reference) formData.append("reference", reference);
-  if (key_words) formData.append("key_words", JSON.stringify(key_words)); // append keywords
+  if (key_words) formData.append("key_words", key_words); // append keywords
 
   const response = await apiMultipart.post("/technicalSheets/upload", formData);
-  console.log("Upload response:", response.data);
   return response.data;
 };
 

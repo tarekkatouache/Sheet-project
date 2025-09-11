@@ -108,10 +108,9 @@ export default function AddSheetModal({ onClose, onAdd }) {
         id,
         key_words
       );
-      console.log("Uploaded keywords from AddSheetModal:", key_words);
+      console.log("Uploaded sheet from AddSheetModal:", uploadedSheet);
       if (onAdd) onAdd(uploadedSheet.sheet); // pass only the new sheet
       onClose();
-      console.log("Uploaded sheet from AddSheetModal:", uploadedSheet);
     } catch (err) {
       console.error("Error uploading:", err);
     }

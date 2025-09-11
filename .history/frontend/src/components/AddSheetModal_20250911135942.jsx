@@ -12,7 +12,7 @@ export default function AddSheetModal({ onClose, onAdd }) {
   const [instrument, setInstrument] = useState(null);
   const [fileError, setFileError] = useState("");
   const [reference, setReference] = useState("");
-  const [key_words, setKey_words] = useState([]); // new state for keywords
+  const [key_words, setKey_words] = useState(""); // new state for keywords
   //////////////////////////
 
   const MIME = {
@@ -97,21 +97,17 @@ export default function AddSheetModal({ onClose, onAdd }) {
         alert("Instrument ID is missing ❗");
         return;
       }
-      if (!key_words) {
-        alert("Please enter keywords ❗");
-        return;
-      }
 
       const uploadedSheet = await uploadTechnicalSheet(
         file,
         reference,
+        key_words,
         id,
-        key_words
+        token
       );
-      console.log("Uploaded keywords from AddSheetModal:", key_words);
+
       if (onAdd) onAdd(uploadedSheet.sheet); // pass only the new sheet
       onClose();
-      console.log("Uploaded sheet from AddSheetModal:", uploadedSheet);
     } catch (err) {
       console.error("Error uploading:", err);
     }
@@ -136,10 +132,7 @@ export default function AddSheetModal({ onClose, onAdd }) {
           <input
             type="text"
             value={key_words}
-            // fill keywords state table from input
-            onChange={(e) =>
-              setKey_words(e.target.value.split(",").map((kw) => kw.trim()))
-            }
+            onChange={(e) => setKey_words(e.target.value)}
             placeholder="Ajouter des mots-clés (séparés par des virgules)"
           />
 
