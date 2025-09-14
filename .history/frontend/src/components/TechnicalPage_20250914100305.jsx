@@ -106,18 +106,13 @@ export default function TechnicalPage() {
           setReferences((prev) => [...prev, s.reference]);
         });
         // log keywords from all sheets
-        let allKeywords = [];
-
         res.data.forEach((s) => {
           if (s.key_words && Array.isArray(s.key_words)) {
-            allKeywords = [...allKeywords, ...s.key_words];
+            s.key_words.forEach((kw) => {
+              setKeywords((prev) => [...prev, kw]);
+            });
           }
         });
-
-        // Remove duplicates if needed
-        allKeywords = [...new Set(allKeywords)];
-
-        setKeywords(allKeywords);
       } catch (err) {
         console.error("Error fetching sheets:", err);
       }
@@ -178,7 +173,6 @@ export default function TechnicalPage() {
     }
     // Keywords filter
     if (keywordFilter) {
-      console.log("Applying keyword filter:", keywordFilter);
       filtered = filtered.filter(
         (s) =>
           s.key_words &&

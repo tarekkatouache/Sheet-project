@@ -151,7 +151,7 @@ router.post(
         originalFilePath,
         pdfFilePath,
         createdAt: new Date(),
-        key_words,
+        key_words: [],
       });
       console.log("Audit log created for technical sheet upload");
       await AuditLog.create({

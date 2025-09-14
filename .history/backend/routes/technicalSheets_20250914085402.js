@@ -116,8 +116,7 @@ router.post(
     console.log("keys words:", req.body.key_words);
 
     try {
-      const { instrumentId, reference } = req.body;
-      let key_words = [];
+      const { instrumentId, reference, key_words } = req.body;
       if (!req.file) {
         return res.status(400).json({ message: "File upload failed" });
       }
@@ -151,7 +150,7 @@ router.post(
         originalFilePath,
         pdfFilePath,
         createdAt: new Date(),
-        key_words,
+        // key_words: [],
       });
       console.log("Audit log created for technical sheet upload");
       await AuditLog.create({

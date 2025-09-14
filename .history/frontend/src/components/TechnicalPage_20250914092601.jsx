@@ -17,11 +17,9 @@ export default function TechnicalPage() {
   const [dateFilter, setDateFilter] = useState("");
   const [referenceFilter, setReferenceFilter] = useState("");
   const [references, setReferences] = useState([]);
-  const [keywordFilter, setKeywordFilter] = useState("");
-  const [keywords, setKeywords] = useState([]); // to store all keywords available
 
   ////////////////////////////////////////////
-  // for the global search //
+  // for th globle search //
 
   ///////////////
   // fetch all references
@@ -105,19 +103,6 @@ export default function TechnicalPage() {
         res.data.forEach((s) => {
           setReferences((prev) => [...prev, s.reference]);
         });
-        // log keywords from all sheets
-        let allKeywords = [];
-
-        res.data.forEach((s) => {
-          if (s.key_words && Array.isArray(s.key_words)) {
-            allKeywords = [...allKeywords, ...s.key_words];
-          }
-        });
-
-        // Remove duplicates if needed
-        allKeywords = [...new Set(allKeywords)];
-
-        setKeywords(allKeywords);
       } catch (err) {
         console.error("Error fetching sheets:", err);
       }
@@ -176,17 +161,6 @@ export default function TechnicalPage() {
         (s) => new Date(s.createdAt).toISOString().split("T")[0] === dateFilter
       );
     }
-    // Keywords filter
-    if (keywordFilter) {
-      console.log("Applying keyword filter:", keywordFilter);
-      filtered = filtered.filter(
-        (s) =>
-          s.key_words &&
-          s.key_words.some((kw) =>
-            kw.toLowerCase().includes(keywordFilter.toLowerCase())
-          )
-      );
-    }
 
     setFilteredSheets(filtered);
   }, [
@@ -198,7 +172,6 @@ export default function TechnicalPage() {
     sheets,
     instruments,
     referenceFilter,
-    keywordFilter,
   ]);
   ///////////////////////
 
