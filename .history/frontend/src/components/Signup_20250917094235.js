@@ -197,7 +197,7 @@ export default function Signup() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Créer </button>
+          <button type="submit">Créer</button>
         </form>
 
         <p>
