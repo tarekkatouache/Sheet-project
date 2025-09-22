@@ -103,7 +103,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             ))}
           </select>
           <div className="services-container">
-            <h4>les Services Concernés :</h4>
+            <h4>les Services Concernés:</h4>
             <div className="services-grid">
               {services.map((service) => (
                 <label key={service} className="service-option">

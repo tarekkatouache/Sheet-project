@@ -8,8 +8,6 @@ import api from "../services/api";
 import { uploadTechnicalSheet } from "../services/technicalSheet"; // import the upload function
 import { deleteTechnicalSheet } from "../services/technicalSheet"; // import the delete function
 
-// get oldReference fom the technical sheet with the same instrument id
-
 function isAdmin() {
   const user = JSON.parse(localStorage.getItem("user"));
   return user && user.role === "admin";
@@ -25,26 +23,12 @@ export default function TechnicalSheetListing({ instrumentName }) {
   const [showAddSheetModal, setShowAddSheetModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   const { id } = useParams();
-  // verify if sheets is empty than  set hasSheets to false if not than true
-  const [hasSheets, setHasSheets] = useState(false);
-  const [oldReference, setOldReference] = useState("");
 
   useEffect(() => {
     async function fetchSheets() {
       try {
         const data = await getSheetsByInstrument(id);
         setSheets(data);
-
-        console.log("data of the sheees", data[0].reference);
-
-        if (data.length > 0) {
-          console.log("hasSheets is true");
-          setOldReference(data[0].reference);
-          setHasSheets(true);
-        } else {
-          console.log("hasSheets is false");
-          setHasSheets(false);
-        }
       } catch (error) {
         console.error("Error fetching sheets:", error);
       } finally {
@@ -85,7 +69,7 @@ export default function TechnicalSheetListing({ instrumentName }) {
             src="/sheetIcons/new-document.png"
             alt="icon"
             style={{
-              filter: "invert(1) brightness(1.5) contrast(1.2)",
+              filter: "invert(1) brightness(1.5) contrast(1.9)",
               width: "30px",
               height: "26px",
               padding: "2px 2px 2px 2px",
@@ -103,9 +87,6 @@ export default function TechnicalSheetListing({ instrumentName }) {
             <AddSheetModal
               onClose={() => setShowAddSheetModal(false)}
               onAdd={handleAdd}
-              hasSheets={hasSheets}
-              oldReference={oldReference}
-              setOldReference={setOldReference}
             />
           )}
           {/* todo and instrument name */}

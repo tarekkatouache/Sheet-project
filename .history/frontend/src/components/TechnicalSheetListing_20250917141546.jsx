@@ -105,7 +105,6 @@ export default function TechnicalSheetListing({ instrumentName }) {
               onAdd={handleAdd}
               hasSheets={hasSheets}
               oldReference={oldReference}
-              setOldReference={setOldReference}
             />
           )}
           {/* todo and instrument name */}

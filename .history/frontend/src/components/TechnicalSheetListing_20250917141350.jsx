@@ -27,19 +27,16 @@ export default function TechnicalSheetListing({ instrumentName }) {
   const { id } = useParams();
   // verify if sheets is empty than  set hasSheets to false if not than true
   const [hasSheets, setHasSheets] = useState(false);
-  const [oldReference, setOldReference] = useState("");
 
   useEffect(() => {
     async function fetchSheets() {
       try {
         const data = await getSheetsByInstrument(id);
         setSheets(data);
-
         console.log("data of the sheees", data[0].reference);
 
         if (data.length > 0) {
           console.log("hasSheets is true");
-          setOldReference(data[0].reference);
           setHasSheets(true);
         } else {
           console.log("hasSheets is false");
@@ -104,8 +101,7 @@ export default function TechnicalSheetListing({ instrumentName }) {
               onClose={() => setShowAddSheetModal(false)}
               onAdd={handleAdd}
               hasSheets={hasSheets}
-              oldReference={oldReference}
-              setOldReference={setOldReference}
+              // oldReference={}
             />
           )}
           {/* todo and instrument name */}

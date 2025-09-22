@@ -34,12 +34,10 @@ export default function TechnicalSheetListing({ instrumentName }) {
       try {
         const data = await getSheetsByInstrument(id);
         setSheets(data);
-
         console.log("data of the sheees", data[0].reference);
 
         if (data.length > 0) {
           console.log("hasSheets is true");
-          setOldReference(data[0].reference);
           setHasSheets(true);
         } else {
           console.log("hasSheets is false");
@@ -105,7 +103,6 @@ export default function TechnicalSheetListing({ instrumentName }) {
               onAdd={handleAdd}
               hasSheets={hasSheets}
               oldReference={oldReference}
-              setOldReference={setOldReference}
             />
           )}
           {/* todo and instrument name */}

@@ -17,7 +17,7 @@ export default function AddSheetModal({
   const token = localStorage.getItem("token");
   const [instrument, setInstrument] = useState(null);
   const [fileError, setFileError] = useState("");
-  const [newReference, setNewReference] = useState("");
+  const [reference, setReference] = useState("");
   const [key_words, setKey_words] = useState([]); // new state for keywords
   //////////////////////////
 
@@ -89,41 +89,40 @@ export default function AddSheetModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const reference = hasSheets ? oldReference : newReference;
-    console.log("Submitting final reference:", reference);
-    console.log("Submitting new reference:", newReference);
-    console.log("Submitting old reference:", oldReference);
-
-    if (!file) {
-      alert("Please select a file first ❗");
-      return;
-    }
-    if (!reference) {
-      alert("Please enter a reference ❗");
-      return;
-    }
-    if (!id) {
-      alert("Instrument ID is missing ❗");
-      return;
-    }
-    if (!key_words) {
-      alert("Please enter keywords ❗");
-      return;
-    }
+    hasSheets ? setReference(oldReference) : setReference(reference);
+    console.log("oldReference in AddSheetModal before reset:", oldReference);
+    console.log("reference in AddSheetModal before reset:", reference);
 
     try {
+      if (!file) {
+        alert("Please select a file first ❗");
+        return;
+      }
+      if (!reference) {
+        alert("Please enter a reference ❗");
+        return;
+      }
+      if (!id) {
+        alert("Instrument ID is missing ❗");
+        return;
+      }
+      if (!key_words) {
+        alert("Please enter keywords ❗");
+        return;
+      }
+
       const uploadedSheet = await uploadTechnicalSheet(
         file,
-        reference, // 🔑 always send valid reference
+        reference,
         id,
         key_words
       );
-
-      if (onAdd) onAdd(uploadedSheet.sheet);
+      console.log("Uploaded keywords from AddSheetModal:", key_words);
+      if (onAdd) onAdd(uploadedSheet.sheet); // pass only the new sheet
       onClose();
+      console.log("Uploaded sheet from AddSheetModal:", uploadedSheet);
     } catch (err) {
-      console.error("Error uploading:", err.response?.data || err.message);
+      console.error("Error uploading:", err);
     }
   };
 
@@ -140,15 +139,12 @@ export default function AddSheetModal({
 
           <input
             type="text"
-            value={hasSheets ? oldReference : newReference}
-            // only allow changing reference if hasSheets is false
-            style={{ backgroundColor: hasSheets ? "#e0e0e0" : "white" }} // gray out if hasSheets
+            value={hasSheets ? oldReference : reference}
             onChange={(e) => {
-              if (!hasSheets) {
-                setNewReference(e.target.value); // only editable when hasSheets is false
-              }
+              hasSheets
+                ? setReference(oldReference)
+                : setReference(e.target.value);
             }}
-            readOnly={hasSheets} // prevents typing when oldReference is locked
             placeholder="Reference"
           />
 

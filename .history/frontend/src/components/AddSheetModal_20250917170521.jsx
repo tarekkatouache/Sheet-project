@@ -17,7 +17,7 @@ export default function AddSheetModal({
   const token = localStorage.getItem("token");
   const [instrument, setInstrument] = useState(null);
   const [fileError, setFileError] = useState("");
-  const [newReference, setNewReference] = useState("");
+  const [reference, setReference] = useState("");
   const [key_words, setKey_words] = useState([]); // new state for keywords
   //////////////////////////
 
@@ -90,16 +90,16 @@ export default function AddSheetModal({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const reference = hasSheets ? oldReference : newReference;
-    console.log("Submitting final reference:", reference);
-    console.log("Submitting new reference:", newReference);
-    console.log("Submitting old reference:", oldReference);
+    const finalReference = hasSheets ? oldReference : reference;
+    console.log("Submitting final reference:", finalReference);
+    console.log("Submitting reference:", reference);
+    console.log("Submitting reference:", oldReference);
 
     if (!file) {
       alert("Please select a file first ❗");
       return;
     }
-    if (!reference) {
+    if (!finalReference) {
       alert("Please enter a reference ❗");
       return;
     }
@@ -115,7 +115,7 @@ export default function AddSheetModal({
     try {
       const uploadedSheet = await uploadTechnicalSheet(
         file,
-        reference, // 🔑 always send valid reference
+        finalReference, // 🔑 always send valid reference
         id,
         key_words
       );
@@ -140,12 +140,12 @@ export default function AddSheetModal({
 
           <input
             type="text"
-            value={hasSheets ? oldReference : newReference}
+            value={hasSheets ? oldReference : reference}
             // only allow changing reference if hasSheets is false
             style={{ backgroundColor: hasSheets ? "#e0e0e0" : "white" }} // gray out if hasSheets
             onChange={(e) => {
               if (!hasSheets) {
-                setNewReference(e.target.value); // only editable when hasSheets is false
+                setReference(e.target.value); // only editable when hasSheets is false
               }
             }}
             readOnly={hasSheets} // prevents typing when oldReference is locked

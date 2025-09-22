@@ -34,7 +34,7 @@ const TechnicalSheet = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    reference: {
+    finalReference: {
       type: DataTypes.STRING,
       allowNull: false, // NO NULL
       unique: false, // allow duplicates
