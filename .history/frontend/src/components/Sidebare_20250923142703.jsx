@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Sidebare({ isExpanded, setIsExpanded }) {
   const menuItems = [
     {
-      rout: "",
+      rout: "dashboard",
       text: "Dashboard",
       icon: "icons2/dashboard.png",
     },
@@ -21,14 +21,19 @@ function Sidebare({ isExpanded, setIsExpanded }) {
       icon: "icons2/sheet.png",
     },
     {
-      rout: "dashboard/systemeContent",
+      rout: "TechnicalPage",
       text: "Fiches Techniques",
       icon: "icons2/sheet2.png",
     },
     {
-      rout: "dashboard/systemeContent",
-      text: "Titre B",
-      icon: "icons2/statistic.png",
+      rout: "dashboard/AuditLogPage",
+      text: "Audit Log Page",
+      icon: "icons2/technical-writing.png",
+    },
+    {
+      rout: "dashboard/Search",
+      text: "Search",
+      icon: "icons/paper.png",
     },
     {
       rout: "dashboard/systemeContent",
@@ -49,11 +54,6 @@ function Sidebare({ isExpanded, setIsExpanded }) {
       rout: "dashboard/systemeContent",
       text: "Titre F",
       icon: "icons2/systems.png",
-    },
-    {
-      rout: "dashboard/systemeContent",
-      text: "Titre G",
-      icon: "icons2/technical-writing.png",
     },
     {
       rout: "dashboard/systemeContent",
@@ -139,11 +139,9 @@ function Sidebare({ isExpanded, setIsExpanded }) {
               >
                 <img
                   src={`/${item.icon}`}
-                  alt="icon
-                  
-                  "
+                  alt="icon"
                   style={{
-                    filter: "invert(1) brightness(1.5) contrast(1.2)",
+                    filter: "invert(1) brightness(2.5) contrast(1.2)",
                     width: "55px",
                   }}
                 />

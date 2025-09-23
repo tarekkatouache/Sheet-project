@@ -12,7 +12,6 @@ import TechnicalSheetListing from "./TechnicalSheetListing";
 import TechnicalPage from "./TechnicalPage";
 // import { SystemsProvider } from "../Contexts/SystemsContext";
 import DashboardPageContent from "./DashboardPageContent";
-import AuditLogPage from "./AuditLogPage";
 
 export default function Dashboard({
   user,
@@ -71,7 +70,7 @@ export default function Dashboard({
               <Route path="/dashboard" element={<DashboardPageContent />} />
               <Route path="/" element={<DashboardPageContent />} />
               {isAdmin && (
-                <Route path="/AuditLogPage" element={<AuditLogPage />} />
+                <Route path="/AuditLogPage" element={<SystemsPage />} />
               )}
             </Routes>
           </div>

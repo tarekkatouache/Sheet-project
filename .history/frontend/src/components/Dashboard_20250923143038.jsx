@@ -9,7 +9,10 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import SystemsPage from "../pages/SystemsPage";
 import TechnicalSheetListing from "./TechnicalSheetListing";
+import TechnicalPage from "./TechnicalPage";
 // import { SystemsProvider } from "../Contexts/SystemsContext";
+import DashboardPageContent from "./DashboardPageContent";
+import AuditLogPage from "./AuditLogPage";
 
 export default function Dashboard({
   user,
@@ -64,11 +67,12 @@ export default function Dashboard({
               <Route path="/instuments" element={<InstrumentContent />} />
               <Route path="/systems" element={<SystemContent />} />
               <Route path="/Sheets/:id" element={<TechnicalSheetListing />} />
-              <Route path="/Sheets/:id" element={<TechnicalSheetListing />} />
-              {/* <Route
-                path="/dashboard/Sheets/:id"
-                element={<InstrumentSheetListing />}
-              /> */}
+              <Route path="/TechnicalPage" element={<TechnicalPage />} />
+              <Route path="/dashboard" element={<DashboardPageContent />} />
+              <Route path="/" element={<DashboardPageContent />} />
+              {isAdmin && (
+                <Route path="/AuditLogPage" element={<AuditLogPage />} />
+              )}
             </Routes>
           </div>
         </div>

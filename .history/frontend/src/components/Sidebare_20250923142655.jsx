@@ -26,7 +26,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
       icon: "icons2/sheet2.png",
     },
     {
-      rout: "AuditLogPage",
+      rout: "dashboard/AuditLogPage",
       text: "Audit Log Page",
       icon: "icons2/technical-writing.png",
     },
@@ -141,7 +141,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
                   src={`/${item.icon}`}
                   alt="icon"
                   style={{
-                    filter: "invert(1) brightness(2.5) contrast(5.2)",
+                    filter: "invert(1) brightness(1.5) contrast(1.2)",
                     width: "55px",
                   }}
                 />

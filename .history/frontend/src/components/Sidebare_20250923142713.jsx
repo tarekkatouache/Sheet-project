@@ -26,7 +26,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
       icon: "icons2/sheet2.png",
     },
     {
-      rout: "AuditLogPage",
+      rout: "dashboard/AuditLogPage",
       text: "Audit Log Page",
       icon: "icons2/technical-writing.png",
     },
