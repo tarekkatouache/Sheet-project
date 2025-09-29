@@ -17,6 +17,7 @@ export default function Signup() {
     password: "",
     email: "",
     role: "user",
+    profileImage,
   });
   const handleFileChange = (e) => {
     setProfileImage(e.target.files[0]);
@@ -55,7 +56,6 @@ export default function Signup() {
         profileImage: profileImage,
       });
       console.log("Form data to submit:", formData);
-      console.log("Profile image to submit:", profileImage);
 
       const res = await axios.post(
         "http://localhost:5000/api/auth/register",

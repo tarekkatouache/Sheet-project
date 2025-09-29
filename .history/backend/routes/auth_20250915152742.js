@@ -13,7 +13,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // secret ke
 router.post(
   "/register",
   uploadProfileImage.single("profileImage"),
-
   async (req, res) => {
     console.log("Received registration data:", req.file);
     //
@@ -48,9 +47,9 @@ router.post(
         password: hashedPassword,
         email,
         role,
-        image: imagePath,
+        image: req.file ? req.file.filename : null,
       });
-      console.log("New user created:", newUser);
+
       res
         .status(201)
         .json({ message: "User registered successfully", user: newUser });

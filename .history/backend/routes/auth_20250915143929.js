@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 // const logAction = require("../utils/logAction");
 const uploadProfileImage = require("../middleware/uploadProfileImage");
-const upload = require("../middleware/upload");
 
 const router = express.Router(); // create a new router instance
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // secret key for JWT signing
@@ -13,7 +12,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // secret ke
 router.post(
   "/register",
   uploadProfileImage.single("profileImage"),
-
   async (req, res) => {
     console.log("Received registration data:", req.file);
     //
@@ -48,9 +46,9 @@ router.post(
         password: hashedPassword,
         email,
         role,
-        image: imagePath,
+        profileImage: req.file ? req.file.filename : null,
       });
-      console.log("New user created:", newUser);
+
       res
         .status(201)
         .json({ message: "User registered successfully", user: newUser });

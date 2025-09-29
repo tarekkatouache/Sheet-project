@@ -12,8 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // secret ke
 // Register; // POST /api/auth/register http://localhost:5000/api/auth/register
 router.post(
   "/register",
-  uploadProfileImage.single("profileImage"),
-
+  uploadProfileImage.single("image"),
   async (req, res) => {
     console.log("Received registration data:", req.file);
     //

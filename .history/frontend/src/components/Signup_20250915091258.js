@@ -17,6 +17,7 @@ export default function Signup() {
     password: "",
     email: "",
     role: "user",
+    profileImage: null,
   });
   const handleFileChange = (e) => {
     setProfileImage(e.target.files[0]);
@@ -33,6 +34,7 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const data = new FormData();
       data.append("name", formData.name);
@@ -45,17 +47,6 @@ export default function Signup() {
       if (profileImage) {
         data.append("profileImage", profileImage);
       }
-      console.log("Submitting form data:", {
-        name: formData.name,
-        lastName: formData.lastName,
-        jobTitle: formData.jobTitle,
-        service: formData.service,
-        username: formData.username,
-        email: formData.email,
-        profileImage: profileImage,
-      });
-      console.log("Form data to submit:", formData);
-      console.log("Profile image to submit:", profileImage);
 
       const res = await axios.post(
         "http://localhost:5000/api/auth/register",

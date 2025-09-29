@@ -13,7 +13,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // secret ke
 router.post(
   "/register",
   uploadProfileImage.single("profileImage"),
-
   async (req, res) => {
     console.log("Received registration data:", req.file);
     //

@@ -10,56 +10,51 @@ const router = express.Router(); // create a new router instance
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // secret key for JWT signing
 
 // Register; // POST /api/auth/register http://localhost:5000/api/auth/register
-router.post(
-  "/register",
-  uploadProfileImage.single("profileImage"),
+router.post("/register", upload.single("profileImage"), async (req, res) => {
+  console.log("Received registration data:", req.file);
+  //
+  try {
+    const {
+      name,
+      lastName,
+      jobTitle,
+      service,
+      username,
+      password,
+      email,
+      image,
+      role,
+    } = req.body;
 
-  async (req, res) => {
-    console.log("Received registration data:", req.file);
-    //
-    try {
-      const {
-        name,
-        lastName,
-        jobTitle,
-        service,
-        username,
-        password,
-        email,
-        image,
-        role,
-      } = req.body;
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser)
+      return res.status(400).json({ message: "Username already exists" });
 
-      const existingUser = await User.findOne({ where: { username } });
-      if (existingUser)
-        return res.status(400).json({ message: "Username already exists" });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const imagePath = req.file
+      ? `/uploads/profiles/${req.file.filename}`
+      : null;
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const imagePath = req.file
-        ? `/uploads/profiles/${req.file.filename}`
-        : null;
+    const newUser = await User.create({
+      name,
+      lastName,
+      jobTitle,
+      service,
+      username,
+      password: hashedPassword,
+      email,
+      role,
+      image: req.file ? req.file.filename : null,
+    });
 
-      const newUser = await User.create({
-        name,
-        lastName,
-        jobTitle,
-        service,
-        username,
-        password: hashedPassword,
-        email,
-        role,
-        image: imagePath,
-      });
-      console.log("New user created:", newUser);
-      res
-        .status(201)
-        .json({ message: "User registered successfully", user: newUser });
-    } catch (err) {
-      console.error("Registration error:", err);
-      res.status(500).json({ error: err.message });
-    }
+    res
+      .status(201)
+      .json({ message: "User registered successfully", user: newUser });
+  } catch (err) {
+    console.error("Registration error:", err);
+    res.status(500).json({ error: err.message });
   }
-);
+});
 
 // Login //post /   http://localhost:5000/api/auth/login
 router.post("/login", async (req, res) => {
