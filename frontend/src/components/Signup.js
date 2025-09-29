@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [profileImage, setProfileImage] = useState(null);
+  const [image, setImage] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,7 +19,7 @@ export default function Signup() {
     role: "user",
   });
   const handleFileChange = (e) => {
-    setProfileImage(e.target.files[0]);
+    setImage(e.target.files[0]);
   };
 
   const [error, setError] = useState("");
@@ -42,8 +42,8 @@ export default function Signup() {
       data.append("username", formData.username);
       data.append("password", formData.password);
       data.append("email", formData.email);
-      if (profileImage) {
-        data.append("profileImage", profileImage);
+      if (setImage) {
+        data.append("image", image);
       }
       console.log("Submitting form data:", {
         name: formData.name,
@@ -192,7 +192,7 @@ export default function Signup() {
             <input
               type="file"
               accept="image/*"
-              name="profileImage"
+              name="image"
               onChange={handleFileChange}
             />
           </div>
@@ -207,7 +207,7 @@ export default function Signup() {
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Créer</button>
+          <button type="submit">Créer </button>
         </form>
 
         <p>
