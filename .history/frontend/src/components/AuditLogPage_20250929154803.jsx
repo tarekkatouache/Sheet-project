@@ -189,13 +189,7 @@ const AuditLogsPage = () => {
 
           {/* Simple page number buttons */}
           <div
-            style={{
-              marginTop: 10,
-              display: "flex",
-              gap: 6,
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
+            style={{  display:"block" marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}
           >
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
               const active = p === currentPage;

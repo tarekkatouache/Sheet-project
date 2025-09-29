@@ -24,7 +24,6 @@ const instrumentsRoutes = require("./routes/instruments"); // import instruments
 const technicalSheetsRoutes = require("./routes/technicalSheets"); // import technical sheets routes
 const userRoutes = require("./routes/users"); // import user routes
 const storageRoutes = require("./routes/storage"); // import storage routes
-const auditLogsRoutes = require("./routes/auditlogs"); // import audit logs routes
 
 // Mount routes:
 app.use("/api/auth", authRoutes);
@@ -36,7 +35,6 @@ app.use("/api/technical-sheets", require("./routes/technicalSheets"));
 app.use("/api/technicalSheets", require("./routes/technicalSheets"));
 app.use("/api/storage", storageRoutes);
 app.use("/api", storageRoutes);
-app.use("/api/auditlogs", auditLogsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 

@@ -102,11 +102,3 @@ td:last-child {
   font-size: 13px;
   color: #666;
 }
-.item-page {
-  font-size: 9px;
-  color: #6b6a6a;
-  /* center the text */
-  display: block;
-  text-align: center;
-  margin-top: 0%;
-}

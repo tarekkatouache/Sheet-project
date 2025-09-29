@@ -33,7 +33,6 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const data = new FormData();
       data.append("name", formData.name);
@@ -46,6 +45,8 @@ export default function Signup() {
       if (setImage) {
         data.append("image", image);
       }
+
+      console.log("Form data to submit:", formData);
 
       const res = await axios.post(
         "http://localhost:5000/api/auth/register",

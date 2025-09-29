@@ -1,6 +1,5 @@
-import "./AuditLogPage.css"; // optional, if you want to add custom styles
 import React, { useEffect, useMemo, useState } from "react";
-import { getAuditLogs } from "../services/auditLogs"; // adjust import path if needed
+import { getAuditLogs } from "./api"; // adjust import path if needed
 
 const AuditLogsPage = () => {
   const [data, setData] = useState([]);
@@ -62,10 +61,6 @@ const AuditLogsPage = () => {
     <div
       style={{ padding: 16, fontFamily: "Segoe UI, Roboto, Arial, sans-serif" }}
     >
-      <span className="item-page">
-        {totalItems} item{totalItems !== 1 ? "s" : ""} — page {currentPage} /{" "}
-        {totalPages}
-      </span>
       <h2>Audit Logs</h2>
 
       {loading ? (
@@ -96,6 +91,10 @@ const AuditLogsPage = () => {
                   <option value={50}>50</option>
                 </select>
               </label>
+              <span style={{ color: "#555" }}>
+                {totalItems} item{totalItems !== 1 ? "s" : ""} — page{" "}
+                {currentPage} / {totalPages}
+              </span>
             </div>
 
             <div>
@@ -189,13 +188,7 @@ const AuditLogsPage = () => {
 
           {/* Simple page number buttons */}
           <div
-            style={{
-              marginTop: 10,
-              display: "flex",
-              gap: 6,
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
+            style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}
           >
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
               const active = p === currentPage;

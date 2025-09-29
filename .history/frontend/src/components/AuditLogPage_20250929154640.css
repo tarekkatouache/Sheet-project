@@ -99,11 +99,11 @@ td {
 
 /* Date Column Style */
 td:last-child {
-  font-size: 13px;
+  font-size: 8px;
   color: #666;
 }
 .item-page {
-  font-size: 9px;
+  font-size: 13px;
   color: #6b6a6a;
   /* center the text */
   display: block;

@@ -1,4 +1,3 @@
-import "./AuditLogPage.css"; // optional, if you want to add custom styles
 import React, { useEffect, useMemo, useState } from "react";
 import { getAuditLogs } from "../services/auditLogs"; // adjust import path if needed
 
@@ -189,13 +188,7 @@ const AuditLogsPage = () => {
 
           {/* Simple page number buttons */}
           <div
-            style={{
-              marginTop: 10,
-              display: "flex",
-              gap: 6,
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
+            style={{ marginTop: 10, display: "flex", gap: 6, flexWrap: "wrap" }}
           >
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
               const active = p === currentPage;

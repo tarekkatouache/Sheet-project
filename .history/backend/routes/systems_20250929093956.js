@@ -1,11 +1,11 @@
 const express = require("express");
-const router = express.Router();
 // const System = require("../models/System");
 const authenticateToken = require("../middleware/auth");
 const authorizeRole = require("../middleware/authorizeRole"); // custom middleware to check admin role
 const logAction = require("../utils/logAction");
 const AuditLog = require("../models/AuditLog");
 const System = require("../models/System");
+const router = express.Router();
 
 // Create new system (protected)
 router.post("/", authenticateToken, async (req, res) => {
