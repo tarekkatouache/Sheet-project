@@ -119,23 +119,7 @@ router.post("/login", async (req, res) => {
     });
 
     // Protect login flow from audit failures: create audit in its own try/catch
-    try {
-      await AuditLog.create(auditPayload);
-      console.log("[AUDIT] created successfully for userId:", user?.id);
-    } catch (auditErr) {
-      // More detailed logging for Sequelize/Postgres
-      console.error(
-        "[AUDIT] failed to create audit log:",
-        auditErr && (auditErr.stack || auditErr.toString())
-      );
-      // Additional useful properties (may be undefined for some errors)
-      console.error("[AUDIT] err.message:", auditErr?.message);
-      console.error("[AUDIT] err.name:", auditErr?.name);
-      console.error("[AUDIT] err.parent (pg error):", auditErr?.parent); // contains code/detail in PG
-      console.error("[AUDIT] err.original:", auditErr?.original);
-      if (auditErr?.errors)
-        console.error("[AUDIT] sequelize errors array:", auditErr.errors);
-    }
+
     //// audit log //////////////////////////
     res.json({ message: "Login successful", token, user });
     // console.log("login successful", user);

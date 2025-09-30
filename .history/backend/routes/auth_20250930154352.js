@@ -52,6 +52,14 @@ router.post(
         image: imagePath,
       });
       console.log("New user created:", newUser);
+      await AuditLog.create({
+        action: `logged`,
+        userId: newUser.id,
+        description: `New user registered: ${newUser.username}`,
+        userLogged: newUser.username,
+        entity: "User",
+        createdAt: new Date(),
+      });
 
       res
         .status(201)
@@ -99,44 +107,16 @@ router.post("/login", async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    //// audit log //////////////////////////
-    // Prepare audit payload
-    const auditPayload = {
-      userId: user?.id ?? null,
+    console.log("Audit log created for user login");
+    await AuditLog.create({
+      userId: user.id, // user performing the action (from JWT)
       action: "LOGIN",
-      userLogged: user?.username ?? "unknown",
+      userLogged: user.username,
       entity: "User",
-      entityId: user?.id ?? null,
-      description: `User ${user?.username ?? "unknown"} logged in`,
-      // don't set createdAt unless your model requires it; Sequelize will handle it if timestamps: true
+      entityId: user.id,
       createdAt: new Date(),
-    };
-
-    // Log diagnostic info (will appear in server console)
-    console.log("[AUDIT] Payload:", {
-      ...auditPayload,
-      descriptionLen: (auditPayload.description || "").length,
+      description: `User ${user.name} ${user.lastName} logged in`,
     });
-
-    // Protect login flow from audit failures: create audit in its own try/catch
-    try {
-      await AuditLog.create(auditPayload);
-      console.log("[AUDIT] created successfully for userId:", user?.id);
-    } catch (auditErr) {
-      // More detailed logging for Sequelize/Postgres
-      console.error(
-        "[AUDIT] failed to create audit log:",
-        auditErr && (auditErr.stack || auditErr.toString())
-      );
-      // Additional useful properties (may be undefined for some errors)
-      console.error("[AUDIT] err.message:", auditErr?.message);
-      console.error("[AUDIT] err.name:", auditErr?.name);
-      console.error("[AUDIT] err.parent (pg error):", auditErr?.parent); // contains code/detail in PG
-      console.error("[AUDIT] err.original:", auditErr?.original);
-      if (auditErr?.errors)
-        console.error("[AUDIT] sequelize errors array:", auditErr.errors);
-    }
-    //// audit log //////////////////////////
     res.json({ message: "Login successful", token, user });
     // console.log("login successful", user);
   } catch (err) {
