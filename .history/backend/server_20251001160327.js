@@ -40,7 +40,7 @@ app.use("/api/technicalSheets", require("./routes/technicalSheets"));
 app.use("/api/storage", storageRoutes);
 app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
-app.use("/api/subSystems", subSystemsRoutes);
+app.use("/api/subsystems", subSystemsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 

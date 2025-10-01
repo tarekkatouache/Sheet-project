@@ -25,9 +25,6 @@ const technicalSheetsRoutes = require("./routes/technicalSheets"); // import tec
 const userRoutes = require("./routes/users"); // import user routes
 const storageRoutes = require("./routes/storage"); // import storage routes
 const auditLogsRoutes = require("./routes/auditlogs"); // import audit logs routes
-const subSystemsRoutes = require("./routes/subSystems"); // import subsystems routes
-
-//////////////////////////////
 
 // Mount routes:
 app.use("/api/auth", authRoutes);
@@ -40,7 +37,6 @@ app.use("/api/technicalSheets", require("./routes/technicalSheets"));
 app.use("/api/storage", storageRoutes);
 app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
-app.use("/api/subSystems", subSystemsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
@@ -55,7 +51,6 @@ const System = require("./models/System");
 const Instrument = require("./models/Instrument");
 const TechnicalSheet = require("./models/TechnicalSheet");
 const AuditLog = require("./models/AuditLog");
-const SubSystem = require("./models/SubSystem");
 
 // Sync database
 sequelize

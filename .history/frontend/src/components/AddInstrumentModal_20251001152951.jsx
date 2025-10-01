@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./AddInstrumentModal.css";
 import axios from "axios";
-import { getSubSystems } from "../services/subSytems";
+import { getSystems } from "../services/systems";
 import ReactDOM from "react-dom";
 
 export default function AddInstrumentModal({ onClose, onAdd }) {
   const [formData, setFormData] = useState({
     name: "",
     instrumentId: "",
-    room: "",
-    building: "",
+    location: "",
     description: "",
-    subSystemId: "",
+    systemId: "",
     services: [],
   });
   /////// fetching systems
 
   ///////////////
   const [systems, setSystems] = useState([]);
-  const [subSystem, setSubSystem] = useState("");
   // const [selectedServices, setSelectedServices] = useState([]);
 
   const services = ["SMICC", "SMM", "SME", "Utilitaire", "HALL", "SOB", "SOR"];
@@ -26,8 +24,8 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   useEffect(() => {
     const fetchSystems = async () => {
       try {
-        const data = await getSubSystems();
-        setSubSystems(data);
+        const data = await getSystems();
+        setSystems(data);
       } catch (err) {
         console.error("Error fetching systems:", err);
       }
@@ -105,7 +103,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             onChange={handleChange}
             required
           >
-            <option value="">-- Sélectionner un sous-système --</option>
+            <option value="">-- Sélectionner un système --</option>
             {systems.map((system) => (
               <option key={system.id} value={system.id}>
                 {system.name}

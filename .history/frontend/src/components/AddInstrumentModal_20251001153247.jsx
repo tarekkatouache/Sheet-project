@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./AddInstrumentModal.css";
 import axios from "axios";
-import { getSubSystems } from "../services/subSytems";
+import { getSubSystems } from "../services/subSytem";
 import ReactDOM from "react-dom";
 
 export default function AddInstrumentModal({ onClose, onAdd }) {

@@ -1,0 +1,31 @@
+const express = require("express");
+const router = express.Router();
+const authenticateToken = require("../middleware/auth");
+const AuditLog = require("../models/AuditLog");
+const SubSystem = require("../models/SubSystem");
+
+// Create new subsystem (protected)
+router.post("/", authenticateToken, async (req, res) => {
+  try {
+    const { name, code, description, systemId, createdby_user_id } = req.body;
+
+    const subSystem = await SubSystem.create({
+      name,
+      code,
+      description,
+    });
+
+    // await AuditLog.create({
+    //   userId: req.user.id,
+    //   action: "CREATE",
+    //   userLogged: req.user.username,
+    //   entity: "SubSystem",
+    //   entityId: subSystem.id,
+    //   description: `SubSystem created with ${subSystem.name} by ${req.user.name} ${req.user.lastName}`,
+    // });
+
+    res.status(201).json(subSystem);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
