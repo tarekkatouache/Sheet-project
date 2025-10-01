@@ -24,6 +24,12 @@ const Instrument = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: true,
     },
+    //subsystemId: {
+    //  type: DataTypes.INTEGER,
+    //  allowNull: false,
+    //  references: {
+    //    model: Subsystem,
+    //    key: "id",
     systemId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -42,6 +48,10 @@ const Instrument = sequelize.define(
       },
       onDelete: "SET NULL",
     },
+    services: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+    },
   },
   {
     tableName: "instruments",
@@ -56,8 +66,10 @@ const Instrument = sequelize.define(
   }
 );
 
-// Set up associations
+// Associations
 Instrument.belongsTo(System, { foreignKey: "systemId" });
-Instrument.belongsTo(User, { foreignKey: "updatedByUserId", as: "updatedBy" });
+System.hasMany(Instrument, { foreignKey: "systemId" });
+
+//  associations
 
 module.exports = Instrument;

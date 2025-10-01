@@ -24,6 +24,13 @@ const Instrument = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: true,
     },
+    //subsystemId: {
+    //  type: DataTypes.INTEGER,
+    //  allowNull: false,
+    //  references: {
+    //    model: Subsystem,
+    //    key: "id",
+    //  },
     systemId: {
       type: DataTypes.INTEGER,
       allowNull: false,
