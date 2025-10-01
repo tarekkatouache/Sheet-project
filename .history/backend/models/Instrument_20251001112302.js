@@ -32,6 +32,7 @@ const Instrument = sequelize.define(
     createdByUserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+
       references: {
         model: User,
         key: "id",

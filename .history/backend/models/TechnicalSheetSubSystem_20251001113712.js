@@ -2,11 +2,10 @@ const { DataTypes } = require("sequelize"); // import DataTypes from sequelize
 const sequelize = require("../db"); // import the sequelize connection
 const User = require("./User"); // import User model
 const System = require("./System"); // import System model
-const SubSystem = require("./SubSystem");
 
-const Instrument = sequelize.define(
-  // define the Instrument model
-  "Instrument",
+const TechnicalSheetSubSystem = sequelize.define(
+  // define the TechnicalSheetSubSystem model
+  "sub_system_technical_sheets",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -21,27 +20,15 @@ const Instrument = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    room: {
+    location: {
       type: DataTypes.STRING(100),
       allowNull: true,
-    },
-    building: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
-    },
-    createdByUserId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: User,
-        key: "id",
-      },
     },
     subSystemId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: SubSystem,
+        model: Subsystem,
         key: "id",
       },
       onDelete: "CASCADE",
@@ -55,7 +42,6 @@ const Instrument = sequelize.define(
       },
       onDelete: "CASCADE",
     },
-
     updatedByUserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -64,6 +50,16 @@ const Instrument = sequelize.define(
         key: "id",
       },
       onDelete: "SET NULL",
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     services: {
       type: DataTypes.ARRAY(DataTypes.STRING),

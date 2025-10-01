@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js"); // this  point tp db.js file
 const TechnicalSheetData = require("./TechnicalSheetData");
+const SubSystem = require("./SubSystem.js");
 
 const TechnicalSheet = sequelize.define(
   "TechnicalSheet",
@@ -15,6 +16,14 @@ const TechnicalSheet = sequelize.define(
       allowNull: false,
       references: {
         model: "instruments",
+        key: "id",
+      },
+    },
+    subSystemId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: SubSystem,
         key: "id",
       },
     },
@@ -37,12 +46,10 @@ const TechnicalSheet = sequelize.define(
     reference: {
       type: DataTypes.STRING,
       allowNull: false, // NO NULL
-      unique: true, // UNIQUE
+      unique: false, // allow duplicates
     },
-    // version: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
+    //
+
     version: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -60,6 +67,11 @@ const TechnicalSheet = sequelize.define(
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+    },
+    key_words: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: true,
+      defaultValue: [],
     },
   },
   {

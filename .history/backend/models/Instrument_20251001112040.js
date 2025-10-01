@@ -29,14 +29,7 @@ const Instrument = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: true,
     },
-    createdByUserId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: User,
-        key: "id",
-      },
-    },
+
     subSystemId: {
       type: DataTypes.INTEGER,
       allowNull: false,

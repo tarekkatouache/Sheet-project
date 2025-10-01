@@ -2,7 +2,6 @@ const { DataTypes } = require("sequelize"); // import DataTypes from sequelize
 const sequelize = require("../db"); // import the sequelize connection
 const User = require("./User"); // import User model
 const System = require("./System"); // import System model
-const SubSystem = require("./SubSystem");
 
 const Instrument = sequelize.define(
   // define the Instrument model
@@ -21,27 +20,15 @@ const Instrument = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    room: {
+    location: {
       type: DataTypes.STRING(100),
       allowNull: true,
     },
-    building: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
-    },
-    createdByUserId: {
+    subsystemId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: User,
-        key: "id",
-      },
-    },
-    subSystemId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: SubSystem,
+        model: Subsystem,
         key: "id",
       },
       onDelete: "CASCADE",

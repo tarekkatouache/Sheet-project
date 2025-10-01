@@ -3,22 +3,53 @@ const Instrument = require("../models/Instrument");
 const authenticateToken = require("../middleware/auth");
 const logAction = require("../utils/logAction");
 const authorizeRole = require("../middleware/authorizeRole");
+const { Op } = require("sequelize"); // for advanced queries like array contains
 
 const router = express.Router();
 
+///////////////////////////////////////////////////////////////////////////////////////////
+router.get("/by-service", authenticateToken, async (req, res) => {
+  console.log("User info from token:", req.user);
+  try {
+    const userService = req.user.service; // e.g. "SMICC"
+
+    if (!userService) {
+      return res.status(400).json({ message: "User has no service assigned." });
+    }
+
+    const instruments = await Instrument.findAll({
+      where: {
+        services: {
+          [Op.contains]: [userService], // <-- very likely the issue
+        },
+      },
+    });
+
+    res.json(instruments);
+  } catch (error) {
+    console.error("Error fetching instruments by service:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////
 // CREATE: Add new instrument
 router.post("/", authenticateToken, async (req, res) => {
   try {
-    const { name, description, location, systemId } = req.body;
+    const { name, description, location, systemId, services } = req.body;
     const updatedByUserId = req.user.userId;
 
     const instrument = await Instrument.create({
       name,
       description,
-      location,
+      room,
+      building,
       systemId,
       updatedByUserId,
+      services: req.body.services || ["##"],
+      subSystemId,
     });
+    console.log("Created instrument:", req.body);
 
     res.status(201).json(instrument);
   } catch (err) {
@@ -49,7 +80,7 @@ router.get("/", async (req, res) => {
 router.put("/:id", authenticateToken, async (req, res) => {
   try {
     const { id } = req.params; // Get instrument ID from request parameters
-    const { name, description, location, systemId } = req.body;
+    const { name, description, location, systemId, services } = req.body;
 
     const instrument = await Instrument.findByPk(id);
     if (!instrument)

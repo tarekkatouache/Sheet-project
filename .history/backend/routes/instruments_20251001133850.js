@@ -33,78 +33,32 @@ router.get("/by-service", authenticateToken, async (req, res) => {
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// // CREATE: Add new instrument
-// router.post("/", authenticateToken, async (req, res) => {
-//   try {
-//     const {
-//       name,
-//       description,
-//       room,
-//       building,
-//       systemId,
-//       services,
-//       subSystemId,
-//     } = req.body;
-//     const updatedByUserId = req.user.userId;
-
-//     const instrument = await Instrument.create({
-//       name,
-//       description,
-//       room,
-//       building,
-//       systemId,
-//       updatedByUserId,
-//       services: req.body.services || ["##"],
-//       subSystemId,
-//     });
-//     console.log("Created instrument:", req.body);
-
-//     res.status(201).json(instrument);
-//   } catch (err) {
-//     if (err.name === "SequelizeUniqueConstraintError") {
-//       return res
-//         .status(400)
-//         .json({ message: "Instrument name must be unique per system." });
-//     }
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-router.post("/", async (req, res) => {
+// CREATE: Add new instrument
+router.post("/", authenticateToken, async (req, res) => {
   try {
-    console.log("Incoming body:", req.body);
-
-    const {
-      name,
-      description,
-      room,
-      building,
-      createdByUserId,
-      updatedByUserId,
-      systemId,
-      subSystemId,
-      services,
-    } = req.body;
-
-    if (!name || !createdByUserId || !systemId || !subSystemId) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
+    const { name, description, location, systemId, services } = req.body;
+    const updatedByUserId = req.user.userId;
 
     const instrument = await Instrument.create({
       name,
       description,
       room,
       building,
-      createdByUserId,
-      updatedByUserId,
+      subsystemid,
       systemId,
-      subSystemId,
-      services,
+      updatedByUserId,
+      services: req.body.services || ["##"],
     });
+    console.log("Created instrument:", instrument);
 
-    res.status(201).json({ message: "Instrument created", instrument });
-  } catch (error) {
-    console.error("Error creating instrument:", error);
-    res.status(500).json({ error: error.message });
+    res.status(201).json(instrument);
+  } catch (err) {
+    if (err.name === "SequelizeUniqueConstraintError") {
+      return res
+        .status(400)
+        .json({ message: "Instrument name must be unique per system." });
+    }
+    res.status(500).json({ error: err.message });
   }
 });
 

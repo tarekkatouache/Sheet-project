@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js"); // this  point tp db.js file
 const TechnicalSheetData = require("./TechnicalSheetData");
+const SubSystem = require("./SubSystem.js");
 
 const TechnicalSheet = sequelize.define(
   "TechnicalSheet",
@@ -15,6 +16,14 @@ const TechnicalSheet = sequelize.define(
       allowNull: false,
       references: {
         model: "instruments",
+        key: "id",
+      },
+    },
+    subSystemId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: SubSystem,
         key: "id",
       },
     },
