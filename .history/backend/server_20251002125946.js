@@ -29,6 +29,75 @@ const auditLogsRoutes = require("./routes/auditlogs"); // import audit logs rout
 const subSystemsRoutes = require("./routes/subSystems"); // import subsystems routes
 
 ///////////////////
+// --- diagnostic: require and inspect route modules ---
+const routeFiles = {
+  auth: "./routes/auth",
+  systems: "./routes/systems",
+  instruments: "./routes/instruments",
+  technicalSheets: "./routes/technicalSheets",
+  users: "./routes/users",
+  storage: "./routes/storage",
+  auditlogs: "./routes/auditlogs",
+  subSystems: "./routes/subSystems",
+};
+
+const loadedRoutes = {};
+for (const [name, relPath] of Object.entries(routeFiles)) {
+  try {
+    const mod = require(relPath);
+    const t = typeof mod;
+    const looksLikeRouter =
+      !!mod &&
+      (typeof mod === "function" ||
+        (typeof mod === "object" && (mod.use || mod.stack)));
+    console.log(`${name} => typeof: ${t}, looksLikeRouter: ${looksLikeRouter}`);
+    // if it exported an object with a "router" property, show that too
+    if (mod && typeof mod === "object" && mod.router) {
+      console.log(`  ${name}.router => typeof: ${typeof mod.router}`);
+    }
+    loadedRoutes[name] = mod;
+  } catch (err) {
+    console.error(
+      `${name} => require FAILED:`,
+      err && err.message ? err.message : err
+    );
+    loadedRoutes[name] = undefined;
+  }
+}
+
+// attach them to app (temporarily comment out the real app.use lines and use this block to mount if they look OK)
+for (const [name, mod] of Object.entries(loadedRoutes)) {
+  if (!mod) continue;
+  const mountPath = {
+    auth: "/api/auth",
+    systems: "/api/systems",
+    instruments: "/api/instruments",
+    technicalSheets: "/api/technicalSheets",
+    users: "/api/users",
+    storage: "/api/storage",
+    auditlogs: "/api/auditlogs",
+    subSystems: "/api/subSystems",
+  }[name];
+
+  // If someone exported { router: router } or {default: router}, try to use that
+  const candidate = (mod && mod.router) || (mod && mod.default) || mod;
+
+  const looksLikeRouter =
+    !!candidate &&
+    (typeof candidate === "function" ||
+      (typeof candidate === "object" && (candidate.use || candidate.stack)));
+
+  if (looksLikeRouter) {
+    console.log(`Mounting ${name} at ${mountPath}`);
+    app.use(mountPath, candidate);
+  } else {
+    console.warn(
+      `${name} does not look like a router. candidate typeof: ${typeof candidate}. You probably need to export the router as module.exports = router`
+    );
+  }
+}
+
+//////////////////////
 
 // Mount routes:
 app.use("/api/auth", authRoutes);
@@ -39,7 +108,6 @@ app.use("/api/users", userRoutes); // mount user routes
 app.use("/api/technical-sheets", require("./routes/technicalSheets"));
 app.use("/api/technicalSheets", require("./routes/technicalSheets"));
 app.use("/api/storage", storageRoutes);
-app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 ///////////////////
 
@@ -47,8 +115,6 @@ app.use("/api/subSystems", subSystemsRoutes);
 ///////////////////////////
 
 app.use("/uploads", express.static("uploads"));
-
-// app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // serve static files from the uploads directory
 
 const PORT = process.env.PORT || 5000; // set the port from environment variable or default to 5000
 

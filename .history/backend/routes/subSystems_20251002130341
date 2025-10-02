@@ -1,0 +1,44 @@
+// const express = require("express");
+// const router = express.Router();
+// const authenticateToken = require("../middleware/auth");
+// const AuditLog = require("../models/AuditLog");
+// const SubSystem = require("../models/SubSystem");
+
+// // Create new subsystem (protected)
+// router.post("/", authenticateToken, async (req, res) => {
+//   try {
+//     const { system_id, name, code, description, createby_user_id } = req.body;
+
+//     const subSystem = await SubSystem.create({
+//       system_id,
+//       name,
+//       code,
+//       description,
+//       createby_user_id,
+//     });
+
+//     // await AuditLog.create({
+//     //   userId: req.user.id,
+//     //   action: "CREATE",
+//     //   userLogged: req.user.username,
+//     //   entity: "SubSystem",
+//     //   entityId: subSystem.id,
+//     //   description: `SubSystem created with ${subSystem.name} by ${req.user.name} ${req.user.lastName}`,
+//     // });
+
+//     res.status(201).json(subSystem);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+// // Get all subsystems (protected)
+// router.get("/", authenticateToken, async (req, res) => {
+//   try {
+//     const subSystems = await SubSystem.findAll();
+//     res.json(subSystems);
+//   } catch (error) {
+//     console.error("Error fetching subsystems:", error);
+//     res.status(500).json({ message: "Server error while fetching subsystems." });
+//   }
+// });
+// module.exports = router;

@@ -78,4 +78,6 @@ router.get("/:id", authenticateToken, async (req, res) => {
   }
 });
 
+// get all subsystems
+
 module.exports = router;

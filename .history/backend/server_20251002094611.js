@@ -4,7 +4,6 @@ require("dotenv").config(); // load environment variables from .env file
 const app = express(); // create an express application
 app.use(express.json()); // parse JSON requests
 const path = require("path");
-const router = express.Router();
 
 app.use(cors()); // use cors middleware to allow cross-origin requests
 //////////////////////////////
@@ -29,6 +28,16 @@ const auditLogsRoutes = require("./routes/auditlogs"); // import audit logs rout
 const subSystemsRoutes = require("./routes/subSystems"); // import subsystems routes
 
 ///////////////////
+//
+inspect("authRoutes", authRoutes);
+inspect("systemsRoutes", systemsRoutes);
+inspect("instrumentsRoutes", instrumentsRoutes);
+inspect("technicalSheetsRoutes", technicalSheetsRoutes);
+inspect("userRoutes", userRoutes);
+inspect("storageRoutes", storageRoutes);
+inspect("auditLogsRoutes", auditLogsRoutes);
+inspect("subSystemsRoutes", subSystemsRoutes);
+///////////
 
 // Mount routes:
 app.use("/api/auth", authRoutes);
@@ -43,8 +52,8 @@ app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 ///////////////////
 
-app.use("/api/subSystems", subSystemsRoutes);
 ///////////////////////////
+app.use("/api/subSystems", subSystemsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 

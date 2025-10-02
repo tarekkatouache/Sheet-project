@@ -44,38 +44,6 @@ router.get("/", authenticateToken, async (req, res) => {
   }
 });
 //GET SUBSYSTEMS BY SYSTEM ID with route /api/subSystems/by-system/:systemId
-router.get("/by-system/:system_id", authenticateToken, async (req, res) => {
-  try {
-    const system_id = req.params.system_id;
-    if (!system_id) {
-      return res
-        .status(400)
-        .json({ message: "systemId query parameter is required." });
-    }
-    const subSystems = await SubSystem.findAll({ where: { system_id } });
-    res.json(subSystems);
-  } catch (error) {
-    console.error("Error fetching subsystems by system ID:", error);
-    res.status(500).json({
-      message: "Server error while fetching subsystems by system ID.",
-    });
-  }
-});
-// get SUBSYSTEM BY ID
-router.get("/:id", authenticateToken, async (req, res) => {
-  try {
-    const { id } = req.params;
-    const subSystem = await SubSystem.findByPk(id);
-    if (!subSystem) {
-      return res.status(404).json({ message: "SubSystem not found." });
-    }
-    res.json(subSystem);
-  } catch (error) {
-    console.error("Error fetching subsystem by ID:", error);
-    res.status(500).json({
-      message: "Server error while fetching subsystem by ID.",
-    });
-  }
-});
+// router.get("/by-");
 
 module.exports = router;

@@ -30,6 +30,8 @@ const subSystemsRoutes = require("./routes/subSystems"); // import subsystems ro
 
 ///////////////////
 
+//////////////////////
+
 // Mount routes:
 app.use("/api/auth", authRoutes);
 app.use("/api/systems", systemsRoutes);
@@ -39,7 +41,6 @@ app.use("/api/users", userRoutes); // mount user routes
 app.use("/api/technical-sheets", require("./routes/technicalSheets"));
 app.use("/api/technicalSheets", require("./routes/technicalSheets"));
 app.use("/api/storage", storageRoutes);
-app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 ///////////////////
 
@@ -47,8 +48,6 @@ app.use("/api/subSystems", subSystemsRoutes);
 ///////////////////////////
 
 app.use("/uploads", express.static("uploads"));
-
-// app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // serve static files from the uploads directory
 
 const PORT = process.env.PORT || 5000; // set the port from environment variable or default to 5000
 

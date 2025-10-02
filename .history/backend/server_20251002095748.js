@@ -59,7 +59,7 @@ const System = require("./models/System");
 const Instrument = require("./models/Instrument");
 const TechnicalSheet = require("./models/TechnicalSheet");
 const AuditLog = require("./models/AuditLog");
-const SubSystem = require("./models/SubSystem");
+// const SubSystem = require("./models/SubSystem");
 
 // Sync database
 sequelize

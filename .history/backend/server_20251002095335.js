@@ -4,7 +4,6 @@ require("dotenv").config(); // load environment variables from .env file
 const app = express(); // create an express application
 app.use(express.json()); // parse JSON requests
 const path = require("path");
-const router = express.Router();
 
 app.use(cors()); // use cors middleware to allow cross-origin requests
 //////////////////////////////
@@ -43,8 +42,8 @@ app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 ///////////////////
 
-app.use("/api/subSystems", subSystemsRoutes);
 ///////////////////////////
+// app.use("/api/subSystems", subSystemsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
@@ -59,7 +58,7 @@ const System = require("./models/System");
 const Instrument = require("./models/Instrument");
 const TechnicalSheet = require("./models/TechnicalSheet");
 const AuditLog = require("./models/AuditLog");
-const SubSystem = require("./models/SubSystem");
+// const SubSystem = require("./models/SubSystem");
 
 // Sync database
 sequelize

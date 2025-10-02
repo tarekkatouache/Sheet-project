@@ -46,7 +46,7 @@ router.get("/", authenticateToken, async (req, res) => {
 //GET SUBSYSTEMS BY SYSTEM ID with route /api/subSystems/by-system/:systemId
 router.get("/by-system/:system_id", authenticateToken, async (req, res) => {
   try {
-    const system_id = req.params.system_id;
+    const system_id = req.
     if (!system_id) {
       return res
         .status(400)

@@ -48,8 +48,6 @@ app.use("/api/subSystems", subSystemsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
-// app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // serve static files from the uploads directory
-
 const PORT = process.env.PORT || 5000; // set the port from environment variable or default to 5000
 
 // 💡 DB + Models

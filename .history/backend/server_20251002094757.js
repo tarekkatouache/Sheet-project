@@ -4,7 +4,6 @@ require("dotenv").config(); // load environment variables from .env file
 const app = express(); // create an express application
 app.use(express.json()); // parse JSON requests
 const path = require("path");
-const router = express.Router();
 
 app.use(cors()); // use cors middleware to allow cross-origin requests
 //////////////////////////////
@@ -26,9 +25,31 @@ const technicalSheetsRoutes = require("./routes/technicalSheets"); // import tec
 const userRoutes = require("./routes/users"); // import user routes
 const storageRoutes = require("./routes/storage"); // import storage routes
 const auditLogsRoutes = require("./routes/auditlogs"); // import audit logs routes
-const subSystemsRoutes = require("./routes/subSystems"); // import subsystems routes
+// const subSystemsRoutes = require("./routes/subSystems"); // import subsystems routes
 
 ///////////////////
+// Diagnostic: add before mounting routes
+function inspect(name, value) {
+  try {
+    console.log(
+      `${name} -> type:`,
+      typeof value,
+      "| value:",
+      value && Object.keys(value).length === 0 ? "{}" : value
+    );
+  } catch (err) {
+    console.log(`${name} -> error printing value:`, err.message);
+  }
+}
+inspect("authRoutes", authRoutes);
+inspect("systemsRoutes", systemsRoutes);
+inspect("instrumentsRoutes", instrumentsRoutes);
+inspect("technicalSheetsRoutes", technicalSheetsRoutes);
+inspect("userRoutes", userRoutes);
+inspect("storageRoutes", storageRoutes);
+inspect("auditLogsRoutes", auditLogsRoutes);
+// inspect("subSystemsRoutes", subSystemsRoutes);
+///////////
 
 // Mount routes:
 app.use("/api/auth", authRoutes);
@@ -43,8 +64,8 @@ app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 ///////////////////
 
-app.use("/api/subSystems", subSystemsRoutes);
 ///////////////////////////
+// app.use("/api/subSystems", subSystemsRoutes);
 
 app.use("/uploads", express.static("uploads"));
 
@@ -59,7 +80,7 @@ const System = require("./models/System");
 const Instrument = require("./models/Instrument");
 const TechnicalSheet = require("./models/TechnicalSheet");
 const AuditLog = require("./models/AuditLog");
-const SubSystem = require("./models/SubSystem");
+// const SubSystem = require("./models/SubSystem");
 
 // Sync database
 sequelize

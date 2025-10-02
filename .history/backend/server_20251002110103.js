@@ -43,7 +43,7 @@ app.use("/api", storageRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 ///////////////////
 
-app.use("/api/subSystems", subSystemsRoutes);
+// app.use("/api/subSystems", subSystemsRoutes);
 ///////////////////////////
 
 app.use("/uploads", express.static("uploads"));
