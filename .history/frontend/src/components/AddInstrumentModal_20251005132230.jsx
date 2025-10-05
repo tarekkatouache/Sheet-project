@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AddInstrumentModal.css";
-import axios, { formToJSON } from "axios";
+import axios from "axios";
 import { getSubSystems } from "../services/subSystems";
 import { addInstrument } from "../services/instruments";
 //using portals
@@ -33,6 +33,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   //////////////
 
   const services = ["SMICC", "SMM", "SME", "Utilitaire", "HALL", "SOB", "SOR"];
+
   useEffect(() => {
     const fetchSubSystems = async () => {
       try {
@@ -113,6 +114,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             placeholder="Description"
           />
 
+          {/* <input
+            name="systemId"
+            value={formData.systemId}
+            onChange={handleChange}
+            placeholder="Systeme Id"
+            required
+          /> */}
           {/* ✅ SYSTEM SELECT (shows system names, sends ID) */}
           <select
             name="subSystemId"
@@ -125,7 +133,6 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             {subSystems &&
               subSystems.map((subSystem) => (
                 <option key={subSystem.id} value={subSystem.id}>
-                  {(formData.systemId = subSystem.systemId)}
                   {subSystem.name}
                 </option>
               ))}

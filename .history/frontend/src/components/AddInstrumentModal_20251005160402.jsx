@@ -61,23 +61,60 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     }));
   };
   // TODO : handle the sebmit to add aulomaticly the system id from the selected subsystem
-  const handleSubmit = (e) => {
-    // add createdByUserId and updatedByUserId to formData
-    formData.createdByUserId = userId;
-    formData.updatedByUserId = userId;
-    // add system id to formdata
+  // near top of component
+  import React, { useState } from "react";
+  // ...
 
-    console.log(" form data : ", formData);
+  const [submitting, setSubmitting] = useState(false);
+
+  //-----------------------------
+  // Replace your handleSubmit with this:
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addInstrument(formData)
-      .then((response) => {
-        console.log("Instrument added:", response);
-        onAdd(formData);
-        onClose();
-      })
-      .catch((error) => {
+
+    // prevent double submit
+    if (submitting) return;
+    setSubmitting(true);
+
+    try {
+      // clone formData so we don't accidentally mutate parent state
+      const payload = {
+        ...formData,
+        createdByUserId: userId,
+        updatedByUserId: userId,
+        // ensure numeric IDs are numbers if your backend expects numbers
+        subSystemId: formData.subSystemId ? Number(formData.subSystemId) : null,
+        systemId: formData.systemId ? Number(formData.systemId) : null,
+      };
+
+      console.log("sending instrument payload:", payload);
+
+      // wait for server response
+      const response = await addInstrument(payload);
+
+      // addInstrument might return the created instrument directly or as response.data
+      const created = response && response.data ? response.data : response;
+
+      console.log("Instrument added:", created);
+
+      // pass created instrument back to parent (prefer response from server, not the local payload)
+      onAdd && onAdd(created);
+
+      // close modal
+      onClose && onClose();
+    } catch (error) {
+      // handle duplicate (409) or other server responses
+      if (error?.response && error.response.status === 409) {
+        console.warn("Duplicate instrument:", error.response.data);
+        // show friendly message to user, e.g. toast or set state to show error
+        // toast.error(error.response.data.error || 'Instrument already exists');
+      } else {
         console.error("Error adding instrument:", error);
-      });
+        // show generic error to user
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return ReactDOM.createPortal(

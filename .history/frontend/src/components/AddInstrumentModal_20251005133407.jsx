@@ -20,7 +20,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     createdByUserId: null,
     updatedByUserId: null,
     instrumentId: "",
-    subSystemId: "",
+    subSystemId: 1,
     systemId: "",
   });
   /////// fetching systems

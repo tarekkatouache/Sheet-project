@@ -1,38 +1,29 @@
 import React, { useState, useEffect } from "react";
 import "./AddInstrumentModal.css";
-import axios, { formToJSON } from "axios";
+import axios from "axios";
 import { getSubSystems } from "../services/subSystems";
-import { addInstrument } from "../services/instruments";
-//using portals
-import ReactDOM from "react-dom";
 
-//get user id from local storage
-const user = JSON.parse(localStorage.getItem("user"));
-const userId = user.id;
+import ReactDOM from "react-dom";
 
 export default function AddInstrumentModal({ onClose, onAdd }) {
   const [formData, setFormData] = useState({
     name: "",
-    description: "",
+    instrumentId: "",
     room: "",
     building: "",
-    services: [],
-    createdByUserId: null,
-    updatedByUserId: null,
-    instrumentId: "",
+    description: "",
     subSystemId: "",
-    systemId: "",
+    services: [],
   });
   /////// fetching systems
 
   ///////////////
-
   const [systems, setSystems] = useState([]);
   const [subSystems, setSubSystems] = useState("");
-
-  //////////////
+  // const [selectedServices, setSelectedServices] = useState([]);
 
   const services = ["SMICC", "SMM", "SME", "Utilitaire", "HALL", "SOB", "SOR"];
+
   useEffect(() => {
     const fetchSubSystems = async () => {
       try {
@@ -60,24 +51,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
       [e.target.name]: e.target.value,
     }));
   };
-  // TODO : handle the sebmit to add aulomaticly the system id from the selected subsystem
-  const handleSubmit = (e) => {
-    // add createdByUserId and updatedByUserId to formData
-    formData.createdByUserId = userId;
-    formData.updatedByUserId = userId;
-    // add system id to formdata
 
-    console.log(" form data : ", formData);
+  const handleSubmit = (e) => {
+    console.log("formData:", formData);
+
     e.preventDefault();
-    addInstrument(formData)
-      .then((response) => {
-        console.log("Instrument added:", response);
-        onAdd(formData);
-        onClose();
-      })
-      .catch((error) => {
-        console.error("Error adding instrument:", error);
-      });
+    onAdd(formData);
+    onClose();
   };
 
   return ReactDOM.createPortal(
@@ -113,6 +93,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             placeholder="Description"
           />
 
+          {/* <input
+            name="systemId"
+            value={formData.systemId}
+            onChange={handleChange}
+            placeholder="Systeme Id"
+            required
+          /> */}
           {/* ✅ SYSTEM SELECT (shows system names, sends ID) */}
           <select
             name="subSystemId"
@@ -125,7 +112,6 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             {subSystems &&
               subSystems.map((subSystem) => (
                 <option key={subSystem.id} value={subSystem.id}>
-                  {(formData.systemId = subSystem.systemId)}
                   {subSystem.name}
                 </option>
               ))}
