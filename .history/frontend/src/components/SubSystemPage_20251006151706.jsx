@@ -1,8 +1,6 @@
 import React from "react";
 import "./SubSystemPage.css";
 import SubSystemCard from "./SubSystemCard";
-import AddSubSystemModal from "./AddSubSystemModal";
-
 //fetch all subsystems from the backend
 import { getSubSystems } from "../services/subSystems";
 import { useState, useEffect } from "react";
@@ -24,7 +22,7 @@ export default function SubSystemPage() {
         Sous-systèmes
       </h1>
       <button
-        style={{ marginBottom: "16px", marginTop: "-12px", marginLeft: "84%" }}
+        style={{ marginBottom: "16px", marginLeft: "80%" }}
         className="add-button"
       >
         Ajoute un sous-système

@@ -1,8 +1,6 @@
 import React from "react";
 import "./SubSystemPage.css";
 import SubSystemCard from "./SubSystemCard";
-import AddSubSystemModal from "./AddSubSystemModal";
-
 //fetch all subsystems from the backend
 import { getSubSystems } from "../services/subSystems";
 import { useState, useEffect } from "react";
@@ -20,15 +18,21 @@ export default function SubSystemPage() {
   console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">
-      <h1 style={{ textAlign: "center", marginBottom: "-12px" }}>
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "-12px",
+          position: "relative",
+          zIndex: "1",
+          backgroundColor: "#f0f0f0",
+          padding: "0 8px",
+          width: "fit-content",
+          margin: "0 auto",
+        }}
+      >
         Sous-systèmes
       </h1>
-      <button
-        style={{ marginBottom: "16px", marginTop: "-12px", marginLeft: "84%" }}
-        className="add-button"
-      >
-        Ajoute un sous-système
-      </button>
+      <button style={{ marginBottom: "16px" }}>Ajoute un sous-système</button>
       <div className="card-container">
         {subSystems.map((subSystem) => (
           <SubSystemCard

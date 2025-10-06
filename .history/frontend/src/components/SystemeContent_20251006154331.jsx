@@ -10,6 +10,7 @@ function SystemContent() {
   function isAdmin() {
     return user?.role === "admin";
   }
+
   const cardData = [
     { title: "System 1", content: "Details about system 1" },
     { title: "System 2", content: "Details about system 2" },
@@ -72,7 +73,7 @@ function SystemContent() {
             key={system.id}
             system={system}
             onDelete={handleDelete}
-            onEdit={(sys) => handleSystemUpdated}
+            onEdit={handleSystemUpdated}
           />
         ))}
       </div>

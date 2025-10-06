@@ -27,8 +27,8 @@ export default function SubSystemCard({
   name = "Sub System",
   description = "Description du sous systeme",
   salle = "—",
-  Batiment = "42",
-  system = [],
+  Batiment = 42,
+  infoLines = [],
   showSlots = true,
 }) {
   // build an array representing U slots (top-to-bottom visual)

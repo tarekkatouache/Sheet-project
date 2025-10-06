@@ -25,10 +25,9 @@ import "./SubSystemCard.css";
 
 export default function SubSystemCard({
   name = "Sub System",
-  description = "Description du sous systeme",
-  salle = "—",
-  Batiment = "42",
-  system = [],
+  location = "—",
+  uCount = 42,
+  infoLines = [],
   showSlots = true,
 }) {
   // build an array representing U slots (top-to-bottom visual)
@@ -77,7 +76,7 @@ export default function SubSystemCard({
               </div>
             </div>
             <div className="rack-visual" aria-hidden>
-              <p>{description}</p>
+              <p>description</p>
             </div>
           </div>
         </div>

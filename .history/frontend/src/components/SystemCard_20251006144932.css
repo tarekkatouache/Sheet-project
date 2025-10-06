@@ -60,7 +60,7 @@
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(56, 57, 58, 0.6);
-  background-color: #e7e7e0;
+  background-color: #f0f0f0;
 }
 .card:active {
   /* transform: translateY(0);
