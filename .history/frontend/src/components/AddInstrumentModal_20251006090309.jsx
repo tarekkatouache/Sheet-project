@@ -72,6 +72,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
         console.log("Instrument added:", response);
         onAdd(formData);
         onClose();
+        e.preventDefault();
       })
       .catch((error) => {
         console.error("Error adding instrument:", error);

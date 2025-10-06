@@ -13,12 +13,12 @@ function Sidebare({ isExpanded, setIsExpanded }) {
     {
       rout: "systems",
       text: "Systemes",
-      icon: "icons2/systems2.svg",
+      icon: "T:\\myRepositories\\Sheet-project\\frontend\\public\\icons2\\icons8-sub-64.png",
     },
     {
       rout: "subSystems",
       text: "Sous Systemes",
-      icon: "icons2/computer.png",
+      icon: "icons2/systems2.svg",
     },
     {
       rout: "instuments",

@@ -18,7 +18,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
     {
       rout: "subSystems",
       text: "Sous Systemes",
-      icon: "icons2/computer.png",
+      icon: "icons2/systems2.svg",
     },
     {
       rout: "instuments",

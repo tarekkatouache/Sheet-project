@@ -65,6 +65,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     // add createdByUserId and updatedByUserId to formData
     formData.createdByUserId = userId;
     formData.updatedByUserId = userId;
+    // add system id to formdata
 
     console.log(" form data : ", formData);
     addInstrument(formData)

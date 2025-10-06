@@ -62,9 +62,11 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   };
   // TODO : handle the sebmit to add aulomaticly the system id from the selected subsystem
   const handleSubmit = (e) => {
+    // e.preventDefault();
     // add createdByUserId and updatedByUserId to formData
     formData.createdByUserId = userId;
     formData.updatedByUserId = userId;
+    // add system id to formdata
 
     console.log(" form data : ", formData);
     addInstrument(formData)
