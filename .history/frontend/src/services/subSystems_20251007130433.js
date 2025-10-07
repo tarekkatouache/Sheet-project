@@ -6,6 +6,5 @@ export const getSubSystems = async () => {
 };
 export const addSubSystem = async (data) => {
   const response = await api.post("/subSystems", data);
-  console.log("adding subsystem : ", data);
   return response.data;
 };

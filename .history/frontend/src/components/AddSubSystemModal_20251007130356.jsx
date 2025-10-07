@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./AddInstrumentModal.css";
 import ReactDOM from "react-dom";
 import { addSubSystem } from "../services/subSystems";
-import { data } from "react-router-dom";
 
 //get user id from local storage
 const user = JSON.parse(localStorage.getItem("user"));
@@ -41,16 +40,18 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
       [e.target.name]: e.target.value,
     }));
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     formData.createdby_user_id = userId;
     try {
-      const uploadedSubSystem = await addSubSystem(data);
-
-      if (onAdd) onAdd(uploadedSubSystem);
-      onClose();
-    } catch (err) {
-      console.error("Error uploading:", err.response?.data || err.message);
-    }
+          const uploadedSheet = await addSubSystem(formData
+          );
+    
+          if (onAdd) onAdd(uploadedSheet.sheet);
+          onClose();
+        } catch (err) {
+          console.error("Error uploading:", err.response?.data || err.message);
+        }
+      };
 
     // add subsystem
   };

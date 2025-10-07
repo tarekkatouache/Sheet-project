@@ -44,9 +44,9 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   const handleSubmit = async (e) => {
     formData.createdby_user_id = userId;
     try {
-      const uploadedSubSystem = await addSubSystem(data);
+      const uploadedSheet = await addSubSystem(data);
 
-      if (onAdd) onAdd(uploadedSubSystem);
+      if (onAdd) onAdd(uploadedSheet.sheet);
       onClose();
     } catch (err) {
       console.error("Error uploading:", err.response?.data || err.message);
