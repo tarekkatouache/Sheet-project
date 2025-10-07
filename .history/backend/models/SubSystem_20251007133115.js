@@ -20,6 +20,7 @@ const SubSystem = sequelize.define(
     code: {
       type: DataTypes.STRING(50),
       allowNull: true,
+      unique: true,
     },
     room: {
       type: DataTypes.STRING(50),

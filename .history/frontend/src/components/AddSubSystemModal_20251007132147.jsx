@@ -42,7 +42,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
     }));
   };
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.pre;
     formData.createdby_user_id = userId;
     try {
       const uploadedSubSystem = await addSubSystem(data);
