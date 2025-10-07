@@ -1,7 +1,7 @@
 import React from "react";
 import "./SubSystemPage.css";
 import SubSystemCard from "./SubSystemCard";
-import AddSubSystemModal from "./AddSubSystemModal";
+import AddSubSystemModal from "./AddInstrumentModal";
 
 //fetch all subsystems from the backend
 import { getSubSystems } from "../services/subSystems";

@@ -3,8 +3,6 @@ import SystemCard from "./SystemCard";
 import React, { useEffect, useState } from "react";
 import { getSystems, deleteSystem } from "../services/systems";
 import AddSystemModal from "./AddSystemModal";
-import AddInstrumentModal from "./AddInstrumentModal";
-
 // import { SystemsProvider } from "./contexts/SystemsContext";
 
 function SystemContent() {

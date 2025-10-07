@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 
 export default function SubSystemPage() {
   const [subSystems, setSubSystems] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -27,14 +26,13 @@ export default function SubSystemPage() {
       <button
         style={{ marginBottom: "16px", marginTop: "-12px", marginLeft: "84%" }}
         className="add-button"
-        onClick={() => setShowModal(true)}
       >
         Ajoute un sous-système
       </button>
       {showModal && (
-        <AddSubSystemModal
+        <AddInstrumentModal
           onClose={() => setShowModal(false)}
-          // onAdd={handleAdd}
+          onAdd={handleAdd}
         />
       )}
       <div className="card-container">

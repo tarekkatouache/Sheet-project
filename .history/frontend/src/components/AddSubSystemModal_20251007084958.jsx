@@ -80,7 +80,7 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
   return ReactDOM.createPortal(
     <div className="modal-backdrop">
       <div className="modal">
-        <h2>Ajouter un Instrument</h2>
+        <h2>Ajouter un Sous Système</h2>
         <form onSubmit={handleSubmit}>
           <input
             name="name"
