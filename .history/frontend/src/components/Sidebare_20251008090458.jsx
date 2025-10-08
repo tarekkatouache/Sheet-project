@@ -42,34 +42,34 @@ function Sidebare({ isExpanded, setIsExpanded }) {
     },
     {
       rout: "dashboard/systemeContent",
-      text: "#####",
+      text: "Titre C",
       icon: "icons2/statistic2.png",
     },
-    // {
-    //   rout: "dashboard/systemeContent",
-    //   text: "Titre D",
-    //   icon: "icons2/innovation.png",
-    // },
-    // {
-    //   rout: "dashboard/systemeContent",
-    //   text: "Titre E",
-    //   icon: "icons2/proton.svg",
-    // },
-    // {
-    //   rout: "dashboard/systemeContent",
-    //   text: "Titre F",
-    //   icon: "icons2/systems.png",
-    // },
-    // {
-    //   rout: "dashboard/systemeContent",
-    //   text: "Titre H",
-    //   icon: "icons2/users.png",
-    // },
-    // {
-    //   rout: "dashboard/systemeContent",
-    //   text: "Titre I",
-    //   icon: "icons2/users2.png",
-    // },
+    {
+      rout: "dashboard/systemeContent",
+      text: "Titre D",
+      icon: "icons2/innovation.png",
+    },
+    {
+      rout: "dashboard/systemeContent",
+      text: "Titre E",
+      icon: "icons2/proton.svg",
+    },
+    {
+      rout: "dashboard/systemeContent",
+      text: "Titre F",
+      icon: "icons2/systems.png",
+    },
+    {
+      rout: "dashboard/systemeContent",
+      text: "Titre H",
+      icon: "icons2/users.png",
+    },
+    {
+      rout: "dashboard/systemeContent",
+      text: "Titre I",
+      icon: "icons2/users2.png",
+    },
     // { text: "Profile", icon: "icons/search.svg" },
     // { text: "Profile", icon: "icons/logout.svg" },
     // { text: "Profile", icon: "icons/folder.svg" },

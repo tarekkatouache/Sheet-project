@@ -2,7 +2,6 @@ import React from "react";
 import "./SystemCard.css";
 import EditSystemModal from "./EditSystemModal";
 import { useState } from "react";
-import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 function SystemCard({ system, onDelete, handleSystemUpdated }) {
@@ -16,9 +15,6 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
     return user?.role === "superuser";
   }
   const handleCardClick = (systemId) => {
-    navigate(`/dashboard/subSystemsPerSystem`);
-
-    // navigate
     // Redirect to the system detail page
     // window.location.href = `/dashboard/systems/${systemId}`;
     // navigate(`/subsystems/${system.id}`);
@@ -29,7 +25,8 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
       key={system.id}
       className="card"
       type="button"
-      onClick={() => handleCardClick(system.id)}
+      onClick={() => navigate(`/systems/${system.id}/subSystems`)}
+      onClick={() => navigate(`/systems/${system.id}/subSystems`)}
     >
       <div className="title">{system.name}</div>
       <div className="icon">
@@ -69,7 +66,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
 
           <button
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation(); // Prevent triggering the card click
               onDelete(system.id);
             }}
             className="card_button"

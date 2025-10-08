@@ -42,7 +42,7 @@ function Sidebare({ isExpanded, setIsExpanded }) {
     },
     {
       rout: "dashboard/systemeContent",
-      text: "#####",
+      text: "Titre",
       icon: "icons2/statistic2.png",
     },
     // {

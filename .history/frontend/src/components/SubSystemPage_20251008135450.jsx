@@ -20,6 +20,11 @@ export default function SubSystemPage() {
     }
     fetchData();
   }, []);
+  const filteredSubSystems = systemId
+    ? subSystems.filter(
+        (subSystem) => subSystem.system?.id === parseInt(systemId)
+      )
+    : subSystems;
   console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">

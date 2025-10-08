@@ -3,10 +3,8 @@ import "./SystemCard.css";
 import EditSystemModal from "./EditSystemModal";
 import { useState } from "react";
 import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 
 function SystemCard({ system, onDelete, handleSystemUpdated }) {
-  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   function isAdmin() {
@@ -15,18 +13,9 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
   function isSuperuser() {
     return user?.role === "superuser";
   }
-  const handleCardClick = (systemId) => {
-    navigate(`/dashboard/subSystemsPerSystem`);
-
-    // navigate
-    // Redirect to the system detail page
-    // window.location.href = `/dashboard/systems/${systemId}`;
-    // navigate(`/subsystems/${system.id}`);
-  };
 
   return (
     <div
-      key={system.id}
       className="card"
       type="button"
       onClick={() => handleCardClick(system.id)}
@@ -47,13 +36,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
       </div>
       {isAdmin() && (
         <div className="div-button">
-          <button
-            className="card_button"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering the card click
-              setIsEditing(true);
-            }}
-          >
+          <button className="card_button" onClick={() => setIsEditing(true)}>
             <img
               src="/icons2/compose.png"
               alt="icon
@@ -67,13 +50,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
             />
           </button>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(system.id);
-            }}
-            className="card_button"
-          >
+          <button onClick={() => onDelete(system.id)} className="card_button">
             <img
               src="/icons2/delete.png"
               alt="icon

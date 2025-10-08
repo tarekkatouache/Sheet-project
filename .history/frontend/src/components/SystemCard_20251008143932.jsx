@@ -16,9 +16,6 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
     return user?.role === "superuser";
   }
   const handleCardClick = (systemId) => {
-    navigate(`/dashboard/subSystemsPerSystem`);
-
-    // navigate
     // Redirect to the system detail page
     // window.location.href = `/dashboard/systems/${systemId}`;
     // navigate(`/subsystems/${system.id}`);
@@ -29,7 +26,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
       key={system.id}
       className="card"
       type="button"
-      onClick={() => handleCardClick(system.id)}
+      onClick={() => handleCardClick}
     >
       <div className="title">{system.name}</div>
       <div className="icon">

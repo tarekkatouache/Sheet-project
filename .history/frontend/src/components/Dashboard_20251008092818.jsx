@@ -4,7 +4,6 @@ import "./Dashboard.css";
 import SystemContent from "./SystemeContent";
 import InstrumentContent from "./InstrumentContent";
 import { jwtDecode } from "jwt-decode";
-import SubsystemsPerSystem from "./SubsystemsPerSystem";
 
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -73,10 +72,9 @@ export default function Dashboard({
               <Route path="/dashboard" element={<DashboardPageContent />} />
               <Route path="/subSystems" element={<SubSystemPage />} />
               <Route
-                path="/subSystemsPerSystem"
-                element={<SubsystemsPerSystem />}
+                path="/subSystems/:id"
+                element={<SubSystemPerSystem systemId={id} />}
               />
-
               <Route path="/" element={<DashboardPageContent />} />
               {isAdmin && (
                 <Route path="/AuditLogPage" element={<AuditLogPage />} />

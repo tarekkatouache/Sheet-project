@@ -72,10 +72,7 @@ export default function Dashboard({
               <Route path="/TechnicalPage" element={<TechnicalPage />} />
               <Route path="/dashboard" element={<DashboardPageContent />} />
               <Route path="/subSystems" element={<SubSystemPage />} />
-              <Route
-                path="/subSystemsPerSystem"
-                element={<SubsystemsPerSystem />}
-              />
+              <Route path="/subSystems" element={<SubsystemsPerSystem />} />
 
               <Route path="/" element={<DashboardPageContent />} />
               {isAdmin && (

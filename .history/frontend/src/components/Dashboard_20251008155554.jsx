@@ -73,7 +73,7 @@ export default function Dashboard({
               <Route path="/dashboard" element={<DashboardPageContent />} />
               <Route path="/subSystems" element={<SubSystemPage />} />
               <Route
-                path="/subSystemsPerSystem"
+                path="/subSystemsPerSystem/:systemId"
                 element={<SubsystemsPerSystem />}
               />
 

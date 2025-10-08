@@ -16,7 +16,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
     return user?.role === "superuser";
   }
   const handleCardClick = (systemId) => {
-    navigate(`/dashboard/subSystemsPerSystem`);
+    navigate(`/subSystems/:${systemId}`);
 
     // navigate
     // Redirect to the system detail page

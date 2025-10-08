@@ -20,7 +20,14 @@ export default function SubSystemPage() {
     }
     fetchData();
   }, []);
+  const filteredSubSystems = systemId
+    ? subSystems.filter(
+        (subSystem) => subSystem.system?.id === parseInt(systemId)
+      )
+    : subSystems;
   console.log("subSystems:", subSystems);
+  console.log("systemId:", systemId);
+  console.log("filteredSubSystems:", filteredSubSystems);
   return (
     <div className="sub-system-page">
       <h1 style={{ textAlign: "center", marginBottom: "-12px" }}>
@@ -40,7 +47,7 @@ export default function SubSystemPage() {
         />
       )}
       <div className="card-container">
-        {subSystems.map((subSystem) => (
+        {filteredSubSystems.map((subSystem) => (
           <SubSystemCard
             key={subSystem.id}
             name={subSystem.name}

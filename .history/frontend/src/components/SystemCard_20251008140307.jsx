@@ -16,9 +16,6 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
     return user?.role === "superuser";
   }
   const handleCardClick = (systemId) => {
-    navigate(`/dashboard/subSystemsPerSystem`);
-
-    // navigate
     // Redirect to the system detail page
     // window.location.href = `/dashboard/systems/${systemId}`;
     // navigate(`/subsystems/${system.id}`);
@@ -29,7 +26,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
       key={system.id}
       className="card"
       type="button"
-      onClick={() => handleCardClick(system.id)}
+      onClick={() => navigate(`/systems/${system.id}/subSystems`)}
     >
       <div className="title">{system.name}</div>
       <div className="icon">
@@ -47,13 +44,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
       </div>
       {isAdmin() && (
         <div className="div-button">
-          <button
-            className="card_button"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering the card click
-              setIsEditing(true);
-            }}
-          >
+          <button className="card_button" onClick={() => setIsEditing(true)}>
             <img
               src="/icons2/compose.png"
               alt="icon
@@ -67,13 +58,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
             />
           </button>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(system.id);
-            }}
-            className="card_button"
-          >
+          <button onClick={() => onDelete(system.id)} className="card_button">
             <img
               src="/icons2/delete.png"
               alt="icon

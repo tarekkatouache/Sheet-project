@@ -3,6 +3,7 @@ import "./SubSystemPage.css";
 import SubSystemCard from "./SubSystemCard";
 import AddSubSystemModal from "./AddSubSystemModal";
 import { useParams } from "react-router-dom";
+import SubsystemsPerSystem from "./SubsystemsPerSystem";
 
 //fetch all subsystems from the backend
 import { getSubSystems } from "../services/subSystems";
@@ -20,6 +21,7 @@ export default function SubSystemPage() {
     }
     fetchData();
   }, []);
+
   console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">
@@ -50,6 +52,7 @@ export default function SubSystemPage() {
             system={subSystem.system}
           />
         ))}
+        <SubsystemsPerSystem />
       </div>
     </div>
   );

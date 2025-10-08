@@ -20,6 +20,7 @@ export default function SubSystemPage() {
     }
     fetchData();
   }, []);
+
   console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">

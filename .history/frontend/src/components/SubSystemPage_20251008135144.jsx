@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 export default function SubSystemPage() {
   const [subSystems, setSubSystems] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const { systemId } = useParams();
 
   useEffect(() => {
     async function fetchData() {
