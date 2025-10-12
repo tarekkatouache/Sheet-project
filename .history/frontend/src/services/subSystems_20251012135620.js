@@ -11,7 +11,7 @@ export const addSubSystem = async (data) => {
 };
 //GET SUBSYSTEMS BY SYSTEM ID with route /api/subSystems/by-system/:systemId
 export const getSubSystemsBySystemId = async (systemId) => {
-  const response = await api.get(`/subSystems/by-system/${systemId}`);
+  const response = await api.get(`/subSystems`);
   return response.data;
 };
 // get SUBSYSTEM BY ID

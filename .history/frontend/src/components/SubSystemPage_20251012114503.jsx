@@ -23,7 +23,7 @@ export default function SubSystemPage() {
   console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">
-      <h1 style={{ textAlign: "center", marginBottom: "12px" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "-12px" }}>
         Tous les sous-systèmes
       </h1>
       {/* <button

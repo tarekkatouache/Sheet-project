@@ -7,7 +7,6 @@ const SubSystem = require("../models/SubSystem");
 // Create new subsystem (protected)
 router.post("/", authenticateToken, async (req, res) => {
   console.log(req.headers);
-  console.log(req.body);
   try {
     const {
       systemId,

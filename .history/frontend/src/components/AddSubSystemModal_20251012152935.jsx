@@ -3,7 +3,6 @@ import "./AddInstrumentModal.css";
 import ReactDOM from "react-dom";
 import { addSubSystem } from "../services/subSystems";
 import { data } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 //get user id from local storage
 const user = JSON.parse(localStorage.getItem("user"));
@@ -22,7 +21,6 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   /////// fetching systems
 
   ///////////////
-  // get systemId from params url
 
   const [systems, setSystems] = useState([]);
   const [subSystems, setSubSystems] = useState("");
@@ -35,16 +33,9 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   //   console.log("Selected systemId:", e.target.value);
   // };
   //////////////
-  const { systemId } = useParams();
-  console.log("system id  :", systemId);
-  // turn systemId to integer
-  const systemIdInt = parseInt(systemId);
-  //   add systemId to formdata
 
   ////////////////////////////
   const handleChange = (e) => {
-    formData.createdby_user_id = userId;
-    formData.systemId = systemIdInt;
     console.log(
       "Changing formData:",
       e.target.name,
@@ -59,6 +50,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formData.createdby_user_id = userId;
     try {
       const uploadedSubSystem = await addSubSystem(data);
 

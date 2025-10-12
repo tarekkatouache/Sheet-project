@@ -23,16 +23,16 @@ export default function SubSystemPage() {
   console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">
-      <h1 style={{ textAlign: "center", marginBottom: "12px" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "-12px" }}>
         Tous les sous-systèmes
       </h1>
-      {/* <button
+      <button
         style={{ marginBottom: "16px", marginTop: "-12px", marginLeft: "84%" }}
         className="add-button"
         onClick={() => setShowModal(true)}
       >
         Ajoute un sous-système
-      </button> */}
+      </button>
       {showModal && (
         <AddSubSystemModal
           onClose={() => setShowModal(false)}

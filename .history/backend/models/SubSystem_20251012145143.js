@@ -16,8 +16,7 @@ const SubSystem = sequelize.define(
     name: {
       type: DataTypes.STRING(100),
       allowNull: true,
-
-      unique: true,
+      allowNull: false,
     },
     code: {
       type: DataTypes.STRING(50),

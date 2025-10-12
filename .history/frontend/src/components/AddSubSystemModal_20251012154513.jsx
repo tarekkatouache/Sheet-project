@@ -44,7 +44,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   ////////////////////////////
   const handleChange = (e) => {
     formData.createdby_user_id = userId;
-    formData.systemId = systemIdInt;
+    formData.systemId = systemId;
     console.log(
       "Changing formData:",
       e.target.name,

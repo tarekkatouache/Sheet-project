@@ -7,32 +7,34 @@ import { useParams } from "react-router-dom";
 //fetch all subsystems from the backend
 import { getSubSystems } from "../services/subSystems";
 import { useState, useEffect } from "react";
+import { getSubSystemsBySystemId } from "../services/subSystems";
 
-export default function SubSystemPage() {
+export default function SubsystemsPerSystem() {
   const [subSystems, setSubSystems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const { systemId } = useParams();
 
+  // get systemid from params of url
   useEffect(() => {
     async function fetchData() {
-      const data = await getSubSystems();
+      const data = await getSubSystemsBySystemId(systemId);
       setSubSystems(data);
     }
     fetchData();
   }, []);
-  console.log("subSystems:", subSystems);
+  // console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">
-      <h1 style={{ textAlign: "center", marginBottom: "12px" }}>
-        Tous les sous-systèmes
+      <h1 style={{ textAlign: "center", marginBottom: "-12px" }}>
+        Sous-systèmes de systeme {systemId}
       </h1>
-      {/* <button
+      <button
         style={{ marginBottom: "16px", marginTop: "-12px", marginLeft: "84%" }}
         className="add-button"
         onClick={() => setShowModal(true)}
       >
         Ajoute un sous-système
-      </button> */}
+      </button>
       {showModal && (
         <AddSubSystemModal
           onClose={() => setShowModal(false)}

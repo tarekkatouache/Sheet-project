@@ -16,10 +16,13 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
     return user?.role === "superuser";
   }
   const handleCardClick = (systemId) => {
+    // Pass the systemId as state
+    navigate(`/dashboard/subSystemsPerSystem`, { state: { systemId } });
     console.log("Navigating to system with ID:", systemId);
-    // navigate to subsystemPerSystem with systemId parameter
-    console.log("system name:", system.name);
-    navigate(`/dashboard/subSystemsPerSystem/${systemId}/${system.name}`);
+    // navigate
+    // Redirect to the system detail page
+    // window.location.href = `/dashboard/systems/${systemId}`;
+    // navigate(`/subsystems/${system.id}`);
   };
 
   return (
@@ -27,8 +30,8 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
       key={system.id}
       className="card"
       type="button"
+
       onClick={() => handleCardClick(system.id)}
-    >
       <div className="title">{system.name}</div>
       <div className="icon">
         <i className="fa-thin fa-shield-check"></i>

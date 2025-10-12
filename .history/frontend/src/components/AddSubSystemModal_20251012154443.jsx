@@ -35,16 +35,16 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   //   console.log("Selected systemId:", e.target.value);
   // };
   //////////////
-  const { systemId } = useParams();
+  const { systemId } = parseInt(useParams());
   console.log("system id  :", systemId);
   // turn systemId to integer
-  const systemIdInt = parseInt(systemId);
+
   //   add systemId to formdata
 
   ////////////////////////////
   const handleChange = (e) => {
     formData.createdby_user_id = userId;
-    formData.systemId = systemIdInt;
+    formData.systemId = systemId;
     console.log(
       "Changing formData:",
       e.target.name,

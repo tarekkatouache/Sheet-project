@@ -17,9 +17,7 @@ function SystemCard({ system, onDelete, handleSystemUpdated }) {
   }
   const handleCardClick = (systemId) => {
     console.log("Navigating to system with ID:", systemId);
-    // navigate to subsystemPerSystem with systemId parameter
-    console.log("system name:", system.name);
-    navigate(`/dashboard/subSystemsPerSystem/${systemId}/${system.name}`);
+    navigate(`/dashboard/subsystemsPerSystem/${systemId}`);
   };
 
   return (

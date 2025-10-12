@@ -37,14 +37,10 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   //////////////
   const { systemId } = useParams();
   console.log("system id  :", systemId);
-  // turn systemId to integer
-  const systemIdInt = parseInt(systemId);
   //   add systemId to formdata
 
   ////////////////////////////
   const handleChange = (e) => {
-    formData.createdby_user_id = userId;
-    formData.systemId = systemIdInt;
     console.log(
       "Changing formData:",
       e.target.name,
@@ -59,6 +55,8 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formData.createdby_user_id = userId;
+    formData.systemId = systemId;
     try {
       const uploadedSubSystem = await addSubSystem(data);
 
