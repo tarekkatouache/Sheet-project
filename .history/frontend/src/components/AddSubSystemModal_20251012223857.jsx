@@ -16,7 +16,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
     room: "",
     building: "",
     code: "",
-    createdbyUserId: null,
+    createdby_user_id: null,
     systemId: "",
   });
   /////// fetching systems
@@ -43,7 +43,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
 
   ////////////////////////////
   const handleChange = (e) => {
-    formData.createdbyUserId = userId;
+    formData.createdby_user_id = userId;
     formData.systemId = systemIdInt;
     console.log(
       "Changing formData:",
@@ -57,8 +57,6 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
       [e.target.name]: e.target.value,
     }));
   };
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

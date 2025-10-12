@@ -1,11 +1,11 @@
 const express = require("express"); // import express
+app.use(express.json()); // parse JSON requests
+app.use(express.urlencoded({ extended: true }));
 const cors = require("cors"); // import cors for CORS issues and it  is a middleware for express to allow cross-origin requests which is useful for APIs
 require("dotenv").config(); // load environment variables from .env file
 const app = express(); // create an express application
-app.use(express.json()); // parse JSON requests
 const path = require("path");
 const router = express.Router();
-app.use(express.urlencoded({ extended: true }));
 
 app.use(cors()); // use cors middleware to allow cross-origin requests
 //////////////////////////////

@@ -18,10 +18,6 @@ router.post("/", authenticateToken, async (req, res) => {
       description,
       createdbyUserId,
     } = req.body;
-    // Basic validation:
-    if (!systemId || !name) {
-      return res.status(400).json({ error: "systemId and name are required" });
-    }
     console.log("Creating subsystem with data:", req.body);
 
     const subSystem = await SubSystem.create({

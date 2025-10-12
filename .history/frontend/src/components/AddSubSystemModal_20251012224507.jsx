@@ -57,7 +57,18 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
       [e.target.name]: e.target.value,
     }));
   };
-
+  // use effect when adding a new subsystem to reset the form
+  useEffect(() => {
+    setFormData({
+      name: "",
+      description: "",
+      room: "",
+      building: "",
+      code: "",
+      createdbyUserId: userId,
+      systemId: systemIdInt,
+    });
+  }, [onClose]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

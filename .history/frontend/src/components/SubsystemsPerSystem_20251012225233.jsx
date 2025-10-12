@@ -19,9 +19,13 @@ export default function SubsystemsPerSystem() {
   // create handleAdd function and to use in useEffect to update the subsystems list when a new subsystem is added
 
   // use effect to fetch subsystems when OnAdd in AddSubSystemModal is triggered and show the new subsystem in the list
-  const handleAdd = (newSubSystem) => {
-    setSubSystems((prevSubSystems) => [...prevSubSystems, newSubSystem]);
-  };
+  useEffect(() => {
+    if (showModal) {
+      const handleAdd = (newSubSystem) => {
+        setSubSystems((prevSubSystems) => [...prevSubSystems, newSubSystem]);
+      };
+    }
+  }, [showModal]);
   //use handleAdd in AddSubSystemModal`s onAdd prop
   // get systemid from params of url
   useEffect(() => {
@@ -48,7 +52,7 @@ export default function SubsystemsPerSystem() {
       {showModal && (
         <AddSubSystemModal
           onClose={() => setShowModal(false)}
-          onAdd={handleAdd}
+          // onAdd={handleAdd}
         />
       )}
       <div className="card-container">
