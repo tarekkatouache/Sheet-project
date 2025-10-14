@@ -43,9 +43,8 @@ export default function SubSystemCard({
     <div
       className="rack-card"
       onClick={() => {
-        console.log("click sub system card 1");
         handleCardClick();
-        console.log("click sub system card 2");
+        console.log("click sub system card");
       }}
     >
       <style>{}</style>

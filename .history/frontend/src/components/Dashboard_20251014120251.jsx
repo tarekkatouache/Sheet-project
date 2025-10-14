@@ -78,7 +78,7 @@ export default function Dashboard({
                 element={<SubsystemsPerSystem />}
               />
               <Route
-                path="/instrumentsPerSubSystem/:SubSystemId/:subSystemName"
+                path="/instrumentsPerSubSystem/:\SubSystemId/:subSystemName"
                 element={<InstrumentsPerSubSystem />}
               />
 

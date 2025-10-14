@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { getSubSystemsBySystemId } from "../services/subSystems";
 
 export default function SubsystemsPerSystem() {
+  console.log("In SubsystemsPerSystem component");
   const [subSystems, setSubSystems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const { systemId } = useParams();
@@ -26,10 +27,12 @@ export default function SubsystemsPerSystem() {
   useEffect(() => {
     async function fetchData() {
       const data = await getSubSystemsBySystemId(systemId);
+      console.log("Fetched subsystems for systemId", systemId, data);
       setSubSystems(data);
     }
     fetchData();
   }, []);
+  // console.log("subSystems:", subSystems);
   return (
     <div className="sub-system-page">
       <h1 style={{ textAlign: "center", marginBottom: "-12px" }}>
@@ -52,8 +55,8 @@ export default function SubsystemsPerSystem() {
         {subSystems.map((subSystem) => (
           <SubSystemCard
             key={subSystem.id}
-            SubSystemId={subSystem.id}
-            name={subSystem.name}
+            subSystemId={subSystem.id}
+            // name={subSystem.name}
             description={subSystem.description}
             salle={subSystem.salle}
             Batiment={subSystem.Batiment}

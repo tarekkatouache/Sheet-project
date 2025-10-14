@@ -37,15 +37,15 @@ export default function SubSystemCard({
   const navigate = useNavigate();
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
+    console.log("Navigating to instruments page of this sub system");
     navigate(`/dashboard/instrumentsPerSubSystem/${SubSystemId}/${name}`);
   };
   return (
     <div
       className="rack-card"
       onClick={() => {
-        console.log("click sub system card 1");
         handleCardClick();
-        console.log("click sub system card 2");
+        console.log("click sub system card");
       }}
     >
       <style>{}</style>

@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
  */
 
 export default function SubSystemCard({
-  SubSystemId = "",
+  SubSystemId = ,
   name = "Sub System",
   description = "Description du sous systeme",
   salle = "—",
@@ -35,17 +35,18 @@ export default function SubSystemCard({
   showSlots = true,
 }) {
   const navigate = useNavigate();
+  console.log("subsystem Id in sub system card:", SubSystemId);
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
+    console.log("Navigating to instruments page of this sub system");
     navigate(`/dashboard/instrumentsPerSubSystem/${SubSystemId}/${name}`);
   };
   return (
     <div
       className="rack-card"
       onClick={() => {
-        console.log("click sub system card 1");
         handleCardClick();
-        console.log("click sub system card 2");
+        console.log("click sub system card");
       }}
     >
       <style>{}</style>
