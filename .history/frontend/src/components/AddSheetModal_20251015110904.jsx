@@ -121,19 +121,14 @@ export default function AddSheetModal({
       alert("Please enter keywords ❗");
       return;
     }
-    console.log("subSystemid:", subSystemid);
-    if (!subSystemid) {
-      alert("subSystemid is missing ❗");
-      return;
-    }
 
     try {
       const uploadedSheet = await uploadTechnicalSheet(
         file,
         reference, // 🔑 always send valid reference
         id,
-        subSystemid,
-        key_words
+        key_words,
+        subSystemid
       );
 
       if (onAdd) onAdd(uploadedSheet.sheet);

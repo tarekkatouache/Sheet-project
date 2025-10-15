@@ -132,8 +132,8 @@ export default function AddSheetModal({
         file,
         reference, // 🔑 always send valid reference
         id,
-        subSystemid,
-        key_words
+        key_words,
+        subSystemid
       );
 
       if (onAdd) onAdd(uploadedSheet.sheet);

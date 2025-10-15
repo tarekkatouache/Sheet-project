@@ -70,7 +70,7 @@ export default function Dashboard({
               <Route path="/instuments" element={<InstrumentContent />} />
               <Route path="/systems" element={<SystemContent />} />
               <Route
-                path="/Sheets/:id/:subSystemid"
+                path="/Sheets/:id/:subSystemId"
                 element={<TechnicalSheetListing />}
               />
               <Route path="/TechnicalPage" element={<TechnicalPage />} />

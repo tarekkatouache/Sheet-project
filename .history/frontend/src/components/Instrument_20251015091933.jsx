@@ -56,7 +56,7 @@ export default function Instrument({
               }}
             >
               <Link
-                to={`/dashboard/Sheets/${instrument.id}/${instrument.subSystemId}`}
+                to={`/dashboard/Sheets/${instrument.id} ${instrument.subSystemId}`}
               >
                 Fiche
               </Link>

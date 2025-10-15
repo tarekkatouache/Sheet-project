@@ -12,7 +12,7 @@ export default function AddSheetModal({
   setOldReference,
 }) {
   const { id } = useParams(); // instrumentId from URL
-  const { subSystemid } = useParams(); // subSystemId from URL
+  const { subSystemId } = useParams(); // subSystemId from URL
   const [file, setFile] = useState(null);
   const [systemId, setSystemId] = useState(null); // ✅ store systemId
   const token = localStorage.getItem("token");
@@ -90,7 +90,7 @@ export default function AddSheetModal({
   };
   // get subSystemId from param url
 
-  console.log("subSystemId from URL:", subSystemid);
+  console.log("subSystemId from URL:", subSystemId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,30 +100,20 @@ export default function AddSheetModal({
     console.log("Submitting new reference:", newReference);
     console.log("Submitting old reference:", oldReference);
 
-    console.log("File to upload:", file);
     if (!file) {
       alert("Please select a file first ❗");
       return;
     }
-    console.log("Reference:", reference);
     if (!reference) {
       alert("Please enter a reference ❗");
       return;
     }
-    console.log("Instrument ID:", id);
     if (!id) {
       alert("Instrument ID is missing ❗");
       return;
     }
-
-    console.log("keywords:", key_words);
     if (!key_words) {
       alert("Please enter keywords ❗");
-      return;
-    }
-    console.log("subSystemid:", subSystemid);
-    if (!subSystemid) {
-      alert("subSystemid is missing ❗");
       return;
     }
 
@@ -132,8 +122,8 @@ export default function AddSheetModal({
         file,
         reference, // 🔑 always send valid reference
         id,
-        subSystemid,
-        key_words
+        key_words,
+        subSystemid
       );
 
       if (onAdd) onAdd(uploadedSheet.sheet);

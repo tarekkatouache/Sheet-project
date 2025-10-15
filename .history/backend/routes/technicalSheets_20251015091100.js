@@ -154,7 +154,7 @@ router.post(
         instrumentId,
         reference,
         // systemId,
-        subSystemid: req.body.subSystemid || null,
+        sub
         uploadedByUserId: req.user.userId,
         originalFilePath,
         pdfFilePath,
