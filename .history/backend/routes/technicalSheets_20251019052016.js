@@ -103,7 +103,7 @@ router.delete("/:id", authenticateToken, async (req, res) => {
 //     res.status(500).json({ message: "Server error", error: error.message });
 //   }
 // });
-//  // ✅ Upload a technical sheet and
+//  // ✅ Upload a technical sheet and save data to TechnicalSheetData table
 router.post(
   "/upload",
   authenticateToken,

@@ -105,7 +105,6 @@ export default function SubSystemCard({
           }}
         >
           <button
-            style={{ marginRight: "1a50px" }}
             onClick={(e) => {
               e.stopPropagation();
               console.log("click fiche sub system button ");

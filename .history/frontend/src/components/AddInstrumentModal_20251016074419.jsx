@@ -8,7 +8,11 @@ import ReactDOM from "react-dom";
 
 //get user id from local storage
 const user = JSON.parse(localStorage.getItem("user"));
-const userId = user?.id || null;
+if (!user) {
+  console.error("User not found in local storage");
+  return null;
+}
+const userId = user.id;
 
 export default function AddInstrumentModal({ onClose, onAdd }) {
   const [formData, setFormData] = useState({

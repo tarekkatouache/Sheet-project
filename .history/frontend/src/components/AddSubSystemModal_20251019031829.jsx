@@ -22,14 +22,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
   const [file, setFile] = useState(null);
   const [fileError, setFileError] = useState("");
 
-  ////////
-  const MIME = {
-    DOC: "application/msword",
-    DOCX: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    XLS: "application/vnd.ms-excel",
-    XLSX: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  };
-  /////////////////////
+  ///////////////////////////
   const isLegacyDoc = (file) =>
     file?.type === MIME.DOC || /\.doc$/i.test(file?.name || "");
   const isLegacyXls = (file) =>

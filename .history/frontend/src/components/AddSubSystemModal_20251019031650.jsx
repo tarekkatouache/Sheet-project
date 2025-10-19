@@ -19,42 +19,9 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
     createdbyUserId: null,
     systemId: "",
   });
-  const [file, setFile] = useState(null);
-  const [fileError, setFileError] = useState("");
-
-  ////////
-  const MIME = {
-    DOC: "application/msword",
-    DOCX: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    XLS: "application/vnd.ms-excel",
-    XLSX: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  };
-  /////////////////////
-  const isLegacyDoc = (file) =>
-    file?.type === MIME.DOC || /\.doc$/i.test(file?.name || "");
-  const isLegacyXls = (file) =>
-    file?.type === MIME.XLS || /\.xls$/i.test(file?.name || "");
-
-  const isAllowedFile = (file) => {
-    if (!file) return false;
-    const name = file.name || "";
-    const type = file.type || "";
-
-    // block legacy .doc specifically
-    if (isLegacyDoc(file)) return false;
-    if (isLegacyXls(file)) return false;
-
-    // allow docx/xls/xlsx (by mime or extension)
-    const ok =
-      type === MIME.DOCX ||
-      type === MIME.XLSX ||
-      /\.docx$/i.test(name) ||
-      /\.xlsx?$/i.test(name); // .xls or .xlsx
-
-    return ok;
-  };
-  ///////////////////////////////////////
-  const handleFileChange = (e) => {
+  const []
+  //////////
+const handleFileChange = (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
 
@@ -85,7 +52,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
 
     setFileError("");
     setFile(f);
-  }; //////////
+  };  //////////
   /////// fetching systems
 
   ///////////////

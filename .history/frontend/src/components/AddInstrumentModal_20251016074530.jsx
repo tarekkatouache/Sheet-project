@@ -6,10 +6,6 @@ import { addInstrument } from "../services/instruments";
 //using portals
 import ReactDOM from "react-dom";
 
-//get user id from local storage
-const user = JSON.parse(localStorage.getItem("user"));
-const userId = user?.id || null;
-
 export default function AddInstrumentModal({ onClose, onAdd }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +19,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     subSystemId: "",
     systemId: "",
   });
+  //get user id from local storage
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    console.error("User not found in local storage");
+    return null;
+  }
+  const userId = user.id;
   /////// fetching systems
 
   ///////////////
