@@ -30,16 +30,13 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 16px;
   border-radius: 10px;
   background-color: rgb(68, 60, 60);
-  background-image: url("/public/background_IMGs/Hailuo_Video.mp4");
+  background-image: url("/public/background_IMGs/TechnicalCard2.jpg");
   background-size: cover; /* ensures the image covers the card */
   background-position: center; /* centers the image */
   background-repeat: no-repeat; /* prevents tiling */
-  background-size: 1250px;
+  background-size: 1200px;
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); */
-  /* background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)),
-    url("./images/card-bg.jpg") center/cover no-repeat; */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(2px);
 
   opacity: 0.2;

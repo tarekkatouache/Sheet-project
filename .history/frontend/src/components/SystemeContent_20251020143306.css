@@ -1,7 +1,8 @@
 .card-container {
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-  /* gap: 29px; */
+  background-color: #4caf50;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 29px;
 }
 .add_buttom {
   position: absolute;

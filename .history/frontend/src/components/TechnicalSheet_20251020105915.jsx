@@ -140,9 +140,7 @@ function TechnicalSheet({ sheet, onDelete }) {
     <div className="technical-sheet-container">
       <div
         style={{
-          backgroundColor: instrumentIsSoftDeleted
-            ? "#b0242fff"
-            : "#transparent",
+          backgroundColor: instrumentIsSoftDeleted ? "#b0242fff" : "#F7F2FA",
           opacity: instrumentIsSoftDeleted ? 0.6 : 1,
           border: systemIsSoftDeleted ? "2px solid red" : "none",
         }}

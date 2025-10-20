@@ -1,7 +1,9 @@
 .card-container {
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-  /* gap: 29px; */
+  background-image: url("/public/background_IMGs/Hailuo_Video.mp4");
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 29px;
 }
 .add_buttom {
   position: absolute;
@@ -18,4 +20,10 @@
   background-color: #4caf50;
   color: white;
   cursor: pointer;
+}
+.back {
+}
+.bg-video {
+}
+.overlay {
 }

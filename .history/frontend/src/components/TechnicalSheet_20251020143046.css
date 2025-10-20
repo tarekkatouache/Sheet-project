@@ -1,5 +1,7 @@
 /* technical-sheet */
 .technical-sheet-container {
+  background-image: url("/public/background_IMGs/Hailuo_Video.mp4");
+
   padding: 0px 35px 2px 0px;
 }
 

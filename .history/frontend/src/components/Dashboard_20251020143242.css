@@ -1,0 +1,85 @@
+@media (max-width: 1367px) {
+  .Content {
+    margin-top: 70px !important;
+  }
+  .expended-cont {
+    top: 0px !important; /* height of Navbar */
+    left: 14.9% !important;
+    width: 83.3% !important;
+    padding: 1rem;
+    /* background-color: #0a171f !important; */
+
+    transition: all 0.9s ease;
+  }
+  .collapsed-cont {
+    left: 6.1% !important;
+    width: 92.7% !important;
+  }
+}
+@media (min-width: 1467px) {
+  .Content {
+    margin-top: 102px !important;
+    /* background-color: rgb(48, 0, 0) !important; */
+    margin-left: 0% !important;
+  }
+  .collapsed-cont {
+    left: 6.1% !important;
+    width: 93.9% !important;
+  }
+}
+.Page {
+  background-color: rgb(255, 255, 222);
+  width: 100hv;
+}
+.Top-Navbar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* width: 100dvh; */
+}
+.Navbar {
+  height: 95px;
+}
+.sideAndContent {
+  flex: 1;
+  display: flex;
+}
+.Sidebar {
+  /* width: 200px; */
+  /* background-color: aqua; */
+  width: 20%;
+}
+.Content {
+  transition: width 0.9s ease, left 0.9s ease;
+  /* height: 100%; */
+  margin-left: 1.1%; /* default for collapsed */
+  margin-right: 1.5%;
+  width: 94.5%; /* default */
+  margin-top: 71px;
+  border-radius: 20px;
+  flex: 1;
+  /* padding: 20px; */
+  /* background-color: rgb(240, 237, 210); */
+  background-color: #ffffff;
+  /* overflow-y: auto; */
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 3px;
+  position: relative;
+  overflow: hidden;
+}
+.collapsed-cont {
+  position: absolute;
+  top: 0px; /* height of Navbar */
+  left: 7.1%;
+  width: 92.9%;
+  padding: 1rem;
+  transition: all 0.9s ease;
+}
+
+.expended-cont {
+  position: absolute;
+  top: 0px; /* height of Navbar */
+  left: 16%;
+  width: 83.5%;
+  padding: 1rem;
+  transition: all 0.9s ease;
+}

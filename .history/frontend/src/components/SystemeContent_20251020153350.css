@@ -19,3 +19,17 @@
   color: white;
   cursor: pointer;
 }
+.back {
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+#background-video {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* cover the container */
+  z-index: -1;
+}

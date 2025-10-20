@@ -1,7 +1,9 @@
 .card-container {
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-  /* gap: 29px; */
+  background-image: url("/public/background_IMGs/Hailuo_Video.mp4");
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 29px;
 }
 .add_buttom {
   position: absolute;

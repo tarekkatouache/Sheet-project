@@ -1,0 +1,33 @@
+.card-container {
+  background-image: url("/public/background_IMGs/Hailuo_Video.mp4");
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 29px;
+}
+.add_buttom {
+  position: absolute;
+  right: 10px;
+  margin-bottom: 200px;
+  font-size: 30px;
+  padding: px;
+  border-radius: 50px;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+.back {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: 360px;
+  border-radius: 12px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}

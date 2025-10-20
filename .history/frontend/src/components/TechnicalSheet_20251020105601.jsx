@@ -142,7 +142,7 @@ function TechnicalSheet({ sheet, onDelete }) {
         style={{
           backgroundColor: instrumentIsSoftDeleted
             ? "#b0242fff"
-            : "#transparent",
+            : "transparent",
           opacity: instrumentIsSoftDeleted ? 0.6 : 1,
           border: systemIsSoftDeleted ? "2px solid red" : "none",
         }}

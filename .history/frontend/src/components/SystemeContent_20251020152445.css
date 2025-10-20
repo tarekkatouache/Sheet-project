@@ -1,7 +1,7 @@
 .card-container {
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-  /* gap: 29px; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 29px;
 }
 .add_buttom {
   position: absolute;
@@ -18,4 +18,13 @@
   background-color: #4caf50;
   color: white;
   cursor: pointer;
+}
+.background-video {
+  height: 100%;
+  width: 100%;
+  float: left;
+  top: 0;
+  padding: none;
+  position: fixed; /* optional depending on what you want to do in your app */
+  z-index: auto;
 }
