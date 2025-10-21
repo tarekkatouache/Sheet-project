@@ -1,0 +1,171 @@
+/* ========== Base Styles ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.wrappersignUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.formsignUp {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  opacity: 0.9;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+}
+
+.headingsignUp {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.formsignUp p {
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+input,
+select {
+  width: 100%;
+  height: 40px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 2px solid #bce0fd;
+  background-color: #f1f9ff;
+  margin-top: 1rem;
+}
+
+button {
+  height: 45px;
+  width: 100%;
+  background-color: #0a171f !important;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  filter: brightness(95%);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.form-gridsignUp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.form-rowsignUp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0rem;
+}
+
+.form-groupsignUp {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  width: 100%;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  padding-right: 10px;
+}
+
+/* ========== Responsive Breakpoints ========== */
+
+/* --- Medium Desktops (901px to 1379px) --- */
+@media (min-width: 901px) and (max-width: 1379px) {
+  .wrappersignUp {
+    padding: 20rem;
+    margin-bottom: -5px;
+    padding: 10px;
+  }
+  .headingsignUp {
+    margin-top: -10px;
+    margin-bottom: -0px;
+    font-size: 1.3rem;
+  }
+
+  .formsignUp {
+    padding: 1.2rem;
+    max-width: 600px;
+    max-height: 100%;
+  }
+
+  .form-gridsignUp {
+    margin-top: 0rem;
+    gap: 0rem;
+  }
+  input,
+  select {
+    width: 90%;
+    height: 37px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid #bce0fd;
+    background-color: #f1f9ff;
+    margin-top: 0.7rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* --- Large Screens (1380px and above) --- */
+@media (min-width: 1380px) {
+  .wrappersignUp {
+    padding: 4rem;
+  }
+
+  .formsignUp {
+    margin: 2rem auto;
+    padding: 3rem;
+    max-width: 700px;
+    padding: 1.2rem;
+    max-width: 1200px;
+    max-height: 100%;
+  }
+
+  .form-gridsignUp {
+    margin: 2rem auto;
+    gap: 1.25rem;
+  }
+  input,
+  select {
+    width: 90%;
+    height: 40px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid #bce0fd;
+    background-color: #f1f9ff;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+}
