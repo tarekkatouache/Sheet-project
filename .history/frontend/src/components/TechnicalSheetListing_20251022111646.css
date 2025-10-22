@@ -1,0 +1,20 @@
+.add-sheet-button {
+  background: none;
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+
+  border-radius: 50%;
+  position: relative;
+  right: auto;
+  left: 80%;
+  /* margin-bottom: 20px; */
+  z-index: 1000;
+}
+.instrument-name-title {
+  font-size: 1.5em;
+  margin: 5px 0px 20px 0px;
+}
+.add-sheet-button {
+}

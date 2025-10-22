@@ -1,0 +1,21 @@
+/* InstrumentsContent.css */
+
+.instruments-container {
+  padding: 0px;
+}
+
+.instruments-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-start; /* or center, space-between, etc. */
+}
+
+/* Optional: Style heading */
+.instruments-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.addinstrument {
+  margin: 20px;
+}

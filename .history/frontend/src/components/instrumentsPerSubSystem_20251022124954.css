@@ -1,0 +1,19 @@
+.addInstrumentButton {
+  /* background-color: #dbebdb; 
+  border: none;
+  color: rgb(219, 26, 26);
+  padding: -10px -10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 0;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 242px;
+  height: 40px; */
+  padding: -10px 0px 0px 0px;
+  width: 190px;
+  height: 34px;
+  margin: 10px;
+}

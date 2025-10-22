@@ -1,0 +1,132 @@
+/* .nav-container {
+  position: absolute;
+  top: 0;
+  height: 10%;
+  background-color: black;
+  display: flex;
+  z-index: 0;
+  transition: width left 0.9s ease;
+}
+.collapsed {
+  width: 94.5%;
+  left: 5%;
+  right: 0.5%;
+}
+.expended {
+  width: 78.5%;
+  left: 21%;
+  right: 0.5%;
+} */
+@media (min-width: 1467px) {
+  .nav-container {
+    margin-left: 0% !important;
+  }
+  .collapsed {
+    left: 6.1% !important;
+    width: 93.9% !important;
+  }
+}
+.nav-container {
+  position: absolute;
+  top: 3px;
+  left: 5%; /* default for collapsed */
+  width: 94.5%; /* default */
+  height: 10%;
+  background-color: #0a171f;
+  display: flex;
+  z-index: 0;
+  border-radius: 20px;
+  transition: width 0.9s ease, left 0.9s ease;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+}
+
+.collapsed {
+  left: 7.1%;
+  width: 92.9%;
+  right: 0.5%;
+}
+
+.expended {
+  /* left: 21%;
+  width: 78.5%; */
+  left: 16%;
+  width: 83.5%;
+}
+/* ////////////////////////////////////////////////////////////// */
+.profile-info {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.admin-border {
+  border-color: #f39c12;
+  box-shadow: 0 0 6px #f39c12;
+}
+.superuser-border {
+  border: 2.5px solid;
+  border-color: #00fd15; /* Purple for superuser */
+  box-shadow: 0 0 6px #59b669;
+}
+
+.user-border {
+  border-color: #3498db; /* Blue for normal user */
+  box-shadow: 0 0 6px #3498db;
+}
+.navbar-content {
+  display: flex;
+
+  align-items: center;
+  justify-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding-right: 10px;
+  height: 100%;
+}
+button {
+}
+
+button:hover {
+  background-color: #c0b62b; /* darker red on hover */
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+.logout-button {
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 10px;
+  background-color: #ee1818;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.logout-Icon {
+  filter: invert(1) brightness(1.5) contrast(1.2);
+  width: 30px;
+  color: white;
+}
+.logout-button p {
+  margin-right: -45px;
+}
