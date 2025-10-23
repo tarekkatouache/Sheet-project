@@ -1,0 +1,210 @@
+/* Instrument Card Container */
+.instrument-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.instrument-card:hover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Instrument Content */
+.instrument {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: 100%;
+  font-size: 0.85rem;
+}
+
+/* Inside Instrument - Main Content */
+.inside-instrument {
+  flex: 1;
+  margin-bottom: 12px;
+}
+
+.inside-instrument h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inside-instrument p {
+  margin: 6px 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.inside-instrument strong {
+  color: #333;
+  font-weight: 600;
+  margin-right: 4px;
+  font-size: 0.82rem;
+}
+
+/* System Info */
+.inside-instrument > strong {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: #f0f4f8;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #2c5aa0;
+}
+
+/* Button Container */
+.instrument-buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.instrument-buttons button,
+.instrument > button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #4a90e2;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.instrument-buttons button {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 6px;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.instrument-buttons button:hover {
+  background: #e9ecef;
+  transform: scale(1.05);
+}
+
+.instrument > button:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
+}
+
+.instrument > button:active,
+.instrument-buttons button:active {
+  transform: translateY(0);
+}
+
+/* Link Styling */
+.instrument-buttons a,
+.instrument a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon Styling */
+.instrument-buttons img {
+  display: block;
+  transition: transform 0.2s ease;
+  width: 20px !important;
+  height: 20px;
+}
+
+.instrument-buttons button:hover img {
+  transform: scale(1.1);
+}
+
+/* Grid Container for Cards (add this to parent container) */
+.instruments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .instruments-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .instruments-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .instrument {
+    padding: 12px;
+  }
+
+  .inside-instrument h3 {
+    font-size: 1rem;
+  }
+
+  .inside-instrument p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .instruments-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .instrument-card {
+    border-radius: 6px;
+  }
+
+  .instrument {
+    padding: 12px;
+  }
+
+  .inside-instrument h3 {
+    font-size: 0.95rem;
+  }
+
+  .instrument-buttons {
+    gap: 4px;
+  }
+
+  .instrument-buttons button,
+  .instrument > button {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 4px;
+  }
+}

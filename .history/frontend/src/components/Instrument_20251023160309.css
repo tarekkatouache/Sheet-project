@@ -142,7 +142,7 @@
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .instrument-buttons button:hover {
-  transform: translateY(-3px) scale(1.12);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0 8px 16px rgba(2, 6, 23, 0.45);
 }
 .instrument-buttons img {

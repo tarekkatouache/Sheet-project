@@ -1,0 +1,160 @@
+/* Instrument Card Container */
+.instrument-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.instrument-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Instrument Content */
+.instrument {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+/* Inside Instrument - Main Content */
+.inside-instrument {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.inside-instrument h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 8px;
+}
+
+.inside-instrument p {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.inside-instrument strong {
+  color: #333;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+/* System Info */
+.inside-instrument > strong {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #f0f4f8;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #2c5aa0;
+}
+
+/* Button Container */
+.instrument-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.instrument-buttons button,
+.instrument button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #4a90e2;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.instrument-buttons button {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}
+
+.instrument-buttons button:hover {
+  background: #e9ecef;
+  transform: scale(1.05);
+}
+
+.instrument button:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.instrument button:active {
+  transform: translateY(0);
+}
+
+/* Link Styling */
+.instrument-buttons a,
+.instrument a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon Styling */
+.instrument-buttons img {
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.instrument-buttons button:hover img {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .instrument {
+    padding: 16px;
+  }
+
+  .inside-instrument h3 {
+    font-size: 1.25rem;
+  }
+
+  .instrument-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .instrument-card {
+    border-radius: 8px;
+  }
+
+  .instrument {
+    padding: 12px;
+  }
+
+  .inside-instrument h3 {
+    font-size: 1.1rem;
+  }
+
+  .inside-instrument p {
+    font-size: 0.9rem;
+  }
+}
