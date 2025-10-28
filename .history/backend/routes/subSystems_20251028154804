@@ -5,7 +5,8 @@ const authenticateToken = require("../middleware/auth");
 const SubSystem = require("../models/SubSystem");
 const upload = require("../middleware/uploadforSubsheet"); // middleware for file upload
 const path = require("path");
-const generatePdfFromOfficeForSubSystemSheet = require("../utils/generatePdfFromOfficeForSubSystemSheet");
+// const generatePdfFromOfficeForSubSystemSheet = require("../utils/generatePdfFromOfficeForSubSystemSheet.js/"); // utility function to generate PDF from Excel
+
 // Create new subsystem with file upload middleware
 router.post(
   "/with-files",

@@ -34,7 +34,7 @@ router.post(
         "uploads/subSys_technical_sheets_pdf",
         `${filenameWithoutExt}.pdf`
       );
-      // await generatePdfFromOffice(originalFilePath, pdfFilePath);
+      await generatePdfFromOffice(originalFilePath, pdfFilePath);
 
       if (!systemId || !name) {
         return res
