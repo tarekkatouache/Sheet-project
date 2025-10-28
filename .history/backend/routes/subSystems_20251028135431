@@ -5,7 +5,7 @@ const authenticateToken = require("../middleware/auth");
 const SubSystem = require("../models/SubSystem");
 const upload = require("../middleware/uploadforSubsheet"); // middleware for file upload
 const path = require("path");
-const generatePdfFromOfficeForSubSystemSheet = require("../utils/generatePdfFromOfficeForSubSystemSheet/"); // utility function to generate PDF from Excel
+const generatePdfFromOffice = require("../utils/generatePdfFromOffice"); // utility function to generate PDF from Excel
 
 // Create new subsystem with file upload middleware
 router.post(
@@ -141,12 +141,11 @@ router.post(
 //   }
 // );
 // Create new subsystem
-
 // Create new subsystem with file upload
 router.post(
   "/createSubSystem",
   authenticateToken,
-  upload.single("technicalSheet"),
+  upload.single("technicalSheet"), // Add multer middleware here
   async (req, res) => {
     console.log("Creating subsystem with data:", req.body);
     console.log("Uploaded file:", req.file);
@@ -164,16 +163,28 @@ router.post(
         return res.status(400).json({ message: "File upload is required" });
       }
 
-      // STEP 1: Handle file upload and PDF generation FIRST
-      const originalPath = req.file.path;
-      console.log("Original path:", originalPath);
+      const {
+        system_id,
+        name,
+        code,
+        room,
+        building,
+        description,
+        createdbyUserId,
+      } = req.body;
 
-      const pdfPath = await generatePdfFromOfficeForSubSystemSheet(
-        originalPath
+      const originalFilePath = req.file.path;
+      const filenameWithoutExt = path.basename(
+        originalFilePath,
+        path.extname(originalFilePath)
       );
-      console.log("Generated PDF path:", pdfPath);
+      const pdfFilePath = path.join(
+        "uploads/subSys_technical_sheets_pdf",
+        `${filenameWithoutExt}.pdf`
+      );
+      await generatePdfFromOffice(originalFilePath, pdfFilePath);
 
-      // STEP 2: Create subsystem with the paths
+      // Create subsystem record
       const newSubsystem = await SubSystem.create({
         system_id: req.body.system_id,
         name: req.body.name,
@@ -182,16 +193,11 @@ router.post(
         building: req.body.building,
         description: req.body.description,
         createdbyUserId: req.body.createdbyUserId,
-        originalPathFile: originalPath,
-        pdfPathFile: pdfPath,
       });
 
-      console.log("Created subsystem:", newSubsystem.toJSON());
-
-      // STEP 3: Return success response
       res.status(201).json({
         message: "Subsystem created successfully",
-        data: newSubsystem, // Changed from 'subSystem' to 'newSubsystem'
+        data: subSystem,
       });
     } catch (error) {
       console.error("Error creating subsystem:", error);

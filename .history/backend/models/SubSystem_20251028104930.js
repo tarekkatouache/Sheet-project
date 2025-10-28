@@ -9,7 +9,7 @@ const SubSystem = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    system_id: {
+    systemId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
   // Storage engine for multer
   destination: function (req, file, cb) {
     // Destination folder for uploaded files
-    cb(null, "uploads/subSys_technical_sheets/"); // Ensure this folder exists or create it
+    cb(null, "uploads/technical_sheets/"); // Ensure this folder exists or create it
   },
   filename: function (req, file, cb) {
     // Filename for the uploaded file

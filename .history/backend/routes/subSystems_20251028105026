@@ -3,9 +3,8 @@ const router = express.Router();
 const authenticateToken = require("../middleware/auth");
 // const AuditLog = require("../models/AuditLog");
 const SubSystem = require("../models/SubSystem");
-const upload = require("../middleware/uploadforSubsheet"); // middleware for file upload
+const upload = require("../middleware/upload"); // middleware for file upload
 const path = require("path");
-const generatePdfFromOfficeForSubSystemSheet = require("../utils/generatePdfFromOfficeForSubSystemSheet/"); // utility function to generate PDF from Excel
 
 // Create new subsystem with file upload middleware
 router.post(
@@ -24,18 +23,11 @@ router.post(
         createdbyUserId,
       } = req.body;
 
-      //       // Get the original file path and generate a PDF file path
-
-      const originalFilePath = req.file.path;
-      const filenameWithoutExt = path.basename(
-        originalFilePath,
-        path.extname(originalFilePath)
-      );
-      const pdfFilePath = path.join(
-        "uploads/subSys_technical_sheets_pdf",
-        `${filenameWithoutExt}.pdf`
-      );
-      // await generatePdfFromOffice(originalFilePath, pdfFilePath);
+      // Get file paths
+      const originalPathFile = req.files?.originalFile
+        ? req.files.originalFile[0].path
+        : null;
+      const pdfPathFile = req.files?.pdfFile ? req.files.pdfFile[0].path : null;
 
       if (!systemId || !name) {
         return res
@@ -48,7 +40,7 @@ router.post(
         name,
         code,
         description,
-        createdbyUserId: req.user.userId,
+        createdbyUserId,
         room,
         building,
         originalPathFile,
@@ -141,76 +133,48 @@ router.post(
 //   }
 // );
 // Create new subsystem
-
-// Create new subsystem with file upload
-router.post(
-  "/createSubSystem",
-  authenticateToken,
-  upload.single("technicalSheet"),
-  async (req, res) => {
-    console.log("Creating subsystem with data:", req.body);
-    console.log("Uploaded file:", req.file);
-
-    try {
-      // Validate required fields
-      if (!req.body.system_id || !req.body.name || !req.body.code) {
-        return res.status(400).json({
-          message: "Missing required fields: system_id, name, or code",
-        });
-      }
-
-      // Check if file was uploaded
-      if (!req.file) {
-        return res.status(400).json({ message: "File upload is required" });
-      }
-
-      // STEP 1: Handle file upload and PDF generation FIRST
-      const originalPath = req.file.path;
-      console.log("Original path:", originalPath);
-
-      const pdfPath = await generatePdfFromOfficeForSubSystemSheet(
-        originalPath
-      );
-      console.log("Generated PDF path:", pdfPath);
-
-      // STEP 2: Create subsystem with the paths
-      const newSubsystem = await SubSystem.create({
-        system_id: req.body.system_id,
-        name: req.body.name,
-        code: req.body.code,
-        room: req.body.room,
-        building: req.body.building,
-        description: req.body.description,
-        createdbyUserId: req.body.createdbyUserId,
-        originalPathFile: originalPath,
-        pdfPathFile: pdfPath,
-      });
-
-      console.log("Created subsystem:", newSubsystem.toJSON());
-
-      // STEP 3: Return success response
-      res.status(201).json({
-        message: "Subsystem created successfully",
-        data: newSubsystem, // Changed from 'subSystem' to 'newSubsystem'
-      });
-    } catch (error) {
-      console.error("Error creating subsystem:", error);
-
-      // Clean up uploaded file if database save fails
-      if (req.file && req.file.path) {
-        const fs = require("fs");
-        fs.unlink(req.file.path, (err) => {
-          if (err) console.error("Error deleting file:", err);
-        });
-      }
-
-      res.status(500).json({
-        message: "Server error while creating subsystem.",
-        error: error.message,
-      });
+router.post("/createSubSystem", authenticateToken, async (req, res) => {
+  console.log("Creating subsystem with data:", req.body);
+  try {
+    const {
+      systemId,
+      name,
+      code,
+      room,
+      building,
+      description,
+      createdbyUserId,
+    } = req.body;
+    if (!req.file) {
+      return res.status(400).json({ message: "File upload failed" });
     }
+    const originalFilePath = req.file.path;
+    const filenameWithoutExt = path.basename(
+      originalFilePath,
+      path.extname(originalFilePath)
+    );
+    const pdfFilePath = path.join(
+      "uploads/subSys_technical_sheets_pdf",
+      `${filenameWithoutExt}.pdf`
+    );
+    const subSystem = await SubSystem.create({
+      systemId,
+      name,
+      code,
+      room,
+      building,
+      description,
+      createdbyUserId,
+      originalFilePath,
+      pdfFilePath,
+    });
+    res.status(201).json(subSystem);
+  } catch (error) {
+    console.error("Error creating subsystem:", error);
+    res.status(500).json({ message: "Server error while creating subsystem." });
   }
-);
+});
+
 // Get all subsystems (protected)
 router.get("/", authenticateToken, async (req, res) => {
   try {
