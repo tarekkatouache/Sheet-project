@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 import mammoth from "mammoth";
 
-export async function generatePdfFromOffice(inputPath) {
+export async function generatePdfFromOfficeForSubSystemSheet(inputPath) {
   try {
     // 1. Define output PDF path
     const filenameWithoutExt = path.basename(
