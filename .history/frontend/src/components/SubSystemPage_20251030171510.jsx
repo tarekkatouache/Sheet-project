@@ -42,7 +42,6 @@ export default function SubSystemPage() {
           // onAdd={handleAdd}
         />
       )}
-      {/* subsystem listing */}
       <div className="card-container">
         {subSystems.map((subSystem) => (
           <SubSystemCard

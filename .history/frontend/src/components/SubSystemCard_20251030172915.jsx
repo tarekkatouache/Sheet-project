@@ -26,6 +26,7 @@ import { useNavigate } from "react-router-dom";
  */
 
 export default function SubSystemCard({ Subsystem, onDelete }) {
+  const [Subsystem, setSubSystem] = React.useState(Subsystem);
   const navigate = useNavigate();
 
   // build an array representing U slots (top-to-bottom visual)

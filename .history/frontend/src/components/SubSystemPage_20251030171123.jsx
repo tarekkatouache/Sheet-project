@@ -21,9 +21,6 @@ export default function SubSystemPage() {
     fetchData();
   }, []);
   console.log("subSystems:", subSystems);
-  const handleDelete = (deletedSubSystemId) => {
-    console.log("Deleting sub system with id:", deletedSubSystemId);
-  };
   return (
     <div className="sub-system-page">
       <h1 style={{ textAlign: "center", marginBottom: "12px" }}>
@@ -42,14 +39,9 @@ export default function SubSystemPage() {
           // onAdd={handleAdd}
         />
       )}
-      {/* subsystem listing */}
       <div className="card-container">
         {subSystems.map((subSystem) => (
-          <SubSystemCard
-            key={subSystem.id}
-            subSystem={subSystem}
-            onDelete={handleDelete}
-          />
+          <SubSystemCard key={subSystem.id} subSystem={subSystem} />
         ))}
       </div>
     </div>

@@ -25,14 +25,11 @@ import { useNavigate } from "react-router-dom";
  *  />
  */
 
-export default function SubSystemCard({ Subsystem, onDelete }) {
+export default function SubSystemCard({ Subsystem }) {
   const navigate = useNavigate();
-
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
-    navigate(
-      `/dashboard/instrumentsPerSubSystem/${Subsystem.pdf_path_file}/${Subsystem.name}`
-    );
+    navigate(`/dashboard/instrumentsPerSubSystem/${subSystemId}/${name}`);
   };
   const handleDisplaySheetSupSystem = (subSystem) => {
     console.log("Opening PDF at path:", subSystem.pdf_path_file);
@@ -79,7 +76,7 @@ export default function SubSystemCard({ Subsystem, onDelete }) {
             <div className="info-block">
               <div className="info-row">
                 <p>sous systeme :</p>
-                <h1>{Subsystem.name}</h1>
+                <h1>{name}</h1>
               </div>
               <div className="info-row" style={{ marginTop: 8 }}>
                 <strong>
@@ -90,7 +87,7 @@ export default function SubSystemCard({ Subsystem, onDelete }) {
               </div>
             </div>
             <div className="rack-visual" aria-hidden>
-              <p>{Subsystem.description}</p>
+              <p>{description}</p>
             </div>
           </div>
         </div>
@@ -109,8 +106,8 @@ export default function SubSystemCard({ Subsystem, onDelete }) {
             onClick={(e) => {
               e.stopPropagation();
               console.log("click fiche sub system button ");
-              console.log("SubSystemId:", Subsystem.id);
-              handleDisplaySheetSupSystem(Subsystem);
+              console.log("SubSystemId:", SubSystemId);
+              handleDisplaySheetSupSystem(SubSystemId);
             }}
           >
             Fiche
