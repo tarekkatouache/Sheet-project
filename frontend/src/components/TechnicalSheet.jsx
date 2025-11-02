@@ -56,7 +56,7 @@ function TechnicalSheet({ sheet, onDelete }) {
   //////////get system detail using systemId//////////////
   useEffect(() => {
     if (!instrument?.systemId) return;
-
+    
     getSystemById(instrument.systemId)
       .then((fetchedSystem) => {
         setSystem(fetchedSystem);
