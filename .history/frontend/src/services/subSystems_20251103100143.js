@@ -26,10 +26,9 @@ export const getSubSystemById = async (id) => {
 // };
 
 export const createSubSystem = async (formData) => {
-  const response = await api.post("/subSystems/createSubSystem", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const response = await apiMultipart.post(
+    "/subSystems/createSubSystem", // Note: baseURL already has /api
+    formData
+  );
   return response.data;
 };

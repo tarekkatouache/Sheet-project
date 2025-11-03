@@ -23,8 +23,8 @@ function SystemCard({ system, onDelete, onEdit }) {
     console.log("card clicked, system id:", systemId);
     navigate(`/dashboard/subSystems/${systemId}/${system.name}`);
   };
-  function handleRefetchSystem() {
-    onEdit();
+  const handleRefetchSystem {
+
   }
 
   return (
@@ -114,7 +114,7 @@ function SystemCard({ system, onDelete, onEdit }) {
         <EditSystemModal
           system={system}
           onClose={() => setIsEditing(false)}
-          onSystemUpdated={handleRefetchSystem}
+          onSystemUpdated={console}
         />
       )}
     </div>

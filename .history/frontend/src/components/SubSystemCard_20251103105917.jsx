@@ -7,9 +7,8 @@ export default function SubSystemCard({ subSystem, onDelete }) {
 
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
-    navigate(
-      `/dashboard/instrumentsPerSubSystem/${subSystem.id}/${subSystem.name}`
-    );
+    // navigate(
+    // `/dashboard/instrumentsPerSubSystem/${Subsystem.pdf_path_file}/${Subsystem.name}`
     console.log("sub system card clicked");
   };
   function handleDisplaySheetSupSystem(subSystem) {
@@ -17,6 +16,15 @@ export default function SubSystemCard({ subSystem, onDelete }) {
     window.open(`http://localhost:5000/${subSystem.pdfPathFile}`, "_blank");
     // console.log("SubSystem $$$$$$$$$", Subsystem);
   }
+  function handleDisplaySheet(sheet) {
+    // Implement the logic to display the technical sheet details depending the pdfFilePath
+    if (sheet.pdfFilePath) {
+      window.open(`http://localhost:5000/${sheet.pdfFilePath}`, "_blank");
+    } else {
+      console.log("No PDF available for sheet:", sheet);
+    }
+  }
+  console.log("sub system card", subSystem);
 
   return (
     <div

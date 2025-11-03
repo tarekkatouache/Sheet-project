@@ -1,4 +1,3 @@
-import { apiMultipart } from "./api";
 import api from "./api";
 
 export const getSubSystems = async () => {
@@ -24,12 +23,3 @@ export const getSubSystemById = async (id) => {
 //   const response = await api.post("/subSystems/createSubSystem", formData);
 //   return response.data;
 // };
-
-export const createSubSystem = async (formData) => {
-  const response = await api.post("/subSystems/createSubSystem", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  return response.data;
-};

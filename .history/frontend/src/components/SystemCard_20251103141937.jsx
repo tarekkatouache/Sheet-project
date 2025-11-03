@@ -5,7 +5,7 @@ import { useState } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-function SystemCard({ system, onDelete, onEdit }) {
+function SystemCard({ system, onDelete, handleSystemUpdated }) {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
@@ -23,9 +23,6 @@ function SystemCard({ system, onDelete, onEdit }) {
     console.log("card clicked, system id:", systemId);
     navigate(`/dashboard/subSystems/${systemId}/${system.name}`);
   };
-  function handleRefetchSystem() {
-    onEdit();
-  }
 
   return (
     <div
@@ -111,11 +108,7 @@ function SystemCard({ system, onDelete, onEdit }) {
       )}
 
       {isEditing && (
-        <EditSystemModal
-          system={system}
-          onClose={() => setIsEditing(false)}
-          onSystemUpdated={handleRefetchSystem}
-        />
+        <EditSystemModal system={system} onClose={() => setIsEditing(false)} />
       )}
     </div>
   );

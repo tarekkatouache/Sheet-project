@@ -1,28 +1,62 @@
 import React from "react";
 import "./SubSystemCard.css";
 import { useNavigate } from "react-router-dom";
+// import SubSystem from "../../../backend/models/SubSystem";
 
-export default function SubSystemCard({ subSystem, onDelete }) {
+/**
+ * ServerRackCard.jsx
+ * A small, self-contained React component (single file) that visually represents
+ * an empty server rack and displays rack name + info. Uses pure CSS (no Tailwind).
+ *
+ * Props:
+ *  - name: string (rack name/title)
+ *  - location: string
+ *  - uCount: number (U size, e.g. 42)
+ *  - infoLines: array of strings (additional lines to show)
+ *  - showSlots: boolean (render empty U slots)
+ *
+ * Usage:
+ *  <ServerRackCard
+ *    name="Rack A1"
+ *    location="Data Center 1 - Row 2"
+ *    uCount={42}
+ *    infoLines={["Owner: Ops Team", "Last Audit: 2025-09-01"]}
+ *    showSlots={true}
+ *  />
+ */
+
+export default function SubSystemCard({ Subsystem, onDelete }) {
   const navigate = useNavigate();
 
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
-    navigate(
-      `/dashboard/instrumentsPerSubSystem/${subSystem.id}/${subSystem.name}`
-    );
+    // navigate(
+    // `/dashboard/instrumentsPerSubSystem/${Subsystem.pdf_path_file}/${Subsystem.name}`
+    // );
     console.log("sub system card clicked");
   };
   function handleDisplaySheetSupSystem(subSystem) {
-    console.log("Opening PDF at path:", subSystem.pdfPathFile);
-    window.open(`http://localhost:5000/${subSystem.pdfPathFile}`, "_blank");
+    // console.log("Opening PDF at path:", subSystem.pdf_path_file);
+    // window.open(`http://localhost:5000/${subSystem.pdf_path_file}`, "_blank");
     // console.log("SubSystem $$$$$$$$$", Subsystem);
   }
+  function handleDisplaySheet(sheet) {
+    // Implement the logic to display the technical sheet details depending the pdfFilePath
+    if (sheet.pdfFilePath) {
+      window.open(`http://localhost:5000/${sheet.pdfFilePath}`, "_blank");
+    } else {
+      console.log("No PDF available for sheet:", sheet);
+    }
+  }
+  console.log("sub system card", Subsystem);
 
   return (
     <div
       className="rack-card"
       onClick={() => {
+        console.log("click sub system card 1");
         handleCardClick();
+        console.log("click sub system card 2");
       }}
     >
       <style>{}</style>
@@ -55,14 +89,14 @@ export default function SubSystemCard({ subSystem, onDelete }) {
           <div className="rack-info">
             <div className="info-block">
               <div className="info-row">
-                <p>sous systeme :{subSystem.name}</p>
+                <p>sous systeme :</p>
                 {/* <h1>{Subsystem.name}</h1> */}
               </div>
               <div className="info-row" style={{ marginTop: 8 }}>
                 <strong>
                   <h2>Localisation </h2>
-                  <p>Batiment : {subSystem.building}</p>
-                  <p>salle : {subSystem.room}</p>
+                  <p>Batiment : ######</p>
+                  <p>salle : ######</p>
                 </strong>
               </div>
             </div>
@@ -86,8 +120,8 @@ export default function SubSystemCard({ subSystem, onDelete }) {
             onClick={(e) => {
               e.stopPropagation();
               console.log("click fiche sub system button ");
-              console.log("SubSystemId:", subSystem.id);
-              handleDisplaySheetSupSystem(subSystem);
+              console.log("SubSystemId:", Subsystem.id);
+              // handleDisplaySheetSupSystem(Subsystem);
             }}
           >
             Fiche

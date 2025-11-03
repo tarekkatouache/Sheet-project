@@ -17,7 +17,6 @@ export default function SubSystemPage() {
     async function fetchData() {
       const data = await getSubSystems();
       setSubSystems(data);
-      console.log("Fetched subsystems:", data);
     }
     fetchData();
   }, []);
@@ -47,7 +46,7 @@ export default function SubSystemPage() {
         {subSystems.map((subSystem) => (
           <SubSystemCard
             key={subSystem.id}
-            subSystem={subSystem}
+            SubSystem={subSystem}
             onDelete={handleDelete}
           />
         ))}

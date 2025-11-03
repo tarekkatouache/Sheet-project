@@ -11,7 +11,7 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.put(
+      await api.put(
         `/systems/${system.id}`,
         { name, description },
         {

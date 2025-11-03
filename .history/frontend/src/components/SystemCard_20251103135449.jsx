@@ -1,46 +1,49 @@
-import React from "react";
-import "./SystemCard.css";
-import EditSystemModal from "./EditSystemModal";
-import { useState } from "react";
-import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-
-function SystemCard({ system, onDelete, onEdit }) {
+function SystemCard({ system, onDelete, handleSystemUpdated }) {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
+  const [currentSystem, setCurrentSystem] = useState(system);
   const user = JSON.parse(localStorage.getItem("user"));
+
+  // Update the card when the system prop changes
+  useEffect(() => {
+    setCurrentSystem(system);
+  }, [system]);
 
   function isAdmin() {
     return user?.role === "admin";
   }
+
   function isSuperuser() {
     return user?.role === "superuser";
   }
+
   const handleCardClick = (systemId) => {
-    // console.log("Navigating to system with ID:", systemId);
-    // navigate to subsystemPerSystem with systemId parameter
-    // console.log("system name:", system.name);
     console.log("card clicked, system id:", systemId);
-    navigate(`/dashboard/subSystems/${systemId}/${system.name}`);
+    navigate(`/dashboard/subSystems/${systemId}/${currentSystem.name}`);
   };
-  function handleRefetchSystem() {
-    onEdit();
-  }
+
+  const handleSystemUpdate = (updatedSystem) => {
+    setCurrentSystem(updatedSystem); // Update local state
+    handleSystemUpdated(updatedSystem); // Notify parent component
+  };
 
   return (
     <div
-      key={system.id}
+      key={currentSystem.id}
       className="card"
-      onClick={() => handleCardClick(system.id)}
+      onClick={() => handleCardClick(currentSystem.id)}
     >
-      <div className="title">{system.name}</div>
+      <div className="title">{currentSystem.name}</div>
       <div className="icon">
         <i className="fa-thin fa-shield-check"></i>
       </div>
       <div className="content">
-        <p>{system.description}</p>
-        <br />
+        <p>
+          {currentSystem.description ||
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit..."}
+        </p>
       </div>
+
       {isAdmin() && (
         <div className="div-button">
           <button
@@ -48,15 +51,13 @@ function SystemCard({ system, onDelete, onEdit }) {
             className="card_button"
             onClick={(e) => {
               e.stopPropagation();
-              e.preventDefault(); // Add this for extra safety
+              e.preventDefault();
               setIsEditing(true);
             }}
           >
             <img
               src="/icons2/compose.png"
-              alt="icon
-                  
-                  "
+              alt="icon"
               style={{
                 filter: "invert(1) brightness(1.5) contrast(1.2)",
                 width: "20px",
@@ -68,15 +69,14 @@ function SystemCard({ system, onDelete, onEdit }) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onDelete(system.id);
+              e.preventDefault();
+              onDelete(currentSystem.id);
             }}
             className="card_button"
           >
             <img
               src="/icons2/delete.png"
-              alt="icon
-                  
-                  "
+              alt="icon"
               style={{
                 filter: "invert(1) brightness(1.5) contrast(1.2)",
                 width: "20px",
@@ -86,20 +86,20 @@ function SystemCard({ system, onDelete, onEdit }) {
           </button>
         </div>
       )}
+
       {isSuperuser() && (
         <div className="div-button">
           <button
             className="card_button"
             onClick={(e) => {
               e.stopPropagation();
+              e.preventDefault();
               setIsEditing(true);
             }}
           >
             <img
               src="/icons2/compose.png"
-              alt="icon
-                  
-                  "
+              alt="icon"
               style={{
                 filter: "invert(1) brightness(1.5) contrast(1.2)",
                 width: "20px",
@@ -112,9 +112,9 @@ function SystemCard({ system, onDelete, onEdit }) {
 
       {isEditing && (
         <EditSystemModal
-          system={system}
+          system={currentSystem}
           onClose={() => setIsEditing(false)}
-          onSystemUpdated={handleRefetchSystem}
+          onSystemUpdated={handleSystemUpdate}
         />
       )}
     </div>

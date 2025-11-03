@@ -20,31 +20,23 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
           },
         }
       );
-      onSystemUpdated(res.data); // Pour recharger la liste après modif
-      onClose(); // Ferme la modale
+      onSystemUpdated(res.data); // Pass the updated system data
+      onClose(); // Close the modal
     } catch (error) {
       console.error("Error updating system:", error);
       alert("Erreur lors de la mise à jour");
     }
   };
-  // useEffect(() => {
-  //   document.body.style.overflow = "hidden";
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, []);
+
   return ReactDOM.createPortal(
     <div
       className="modal-backdrop"
       onClick={(e) => {
-        e.stopPropagation(); // Prevent click from reaching the card
-        onClose(); // Close modal when clicking backdrop
+        e.stopPropagation();
+        onClose();
       }}
     >
-      <div
-        className="modal"
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking modal content
-      >
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h2>Modifier le système</h2>
         <form onSubmit={handleSubmit} className="modal-form">
           <label>Nom du système:</label>

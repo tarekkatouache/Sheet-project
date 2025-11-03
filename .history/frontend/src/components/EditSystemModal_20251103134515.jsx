@@ -11,7 +11,7 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.put(
+      await api.put(
         `/systems/${system.id}`,
         { name, description },
         {
@@ -20,7 +20,7 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
           },
         }
       );
-      onSystemUpdated(res.data); // Pour recharger la liste après modif
+      // onSystemUpdated(res.data); // Pour recharger la liste après modif
       onClose(); // Ferme la modale
     } catch (error) {
       console.error("Error updating system:", error);

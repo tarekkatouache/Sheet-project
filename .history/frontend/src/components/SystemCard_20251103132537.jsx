@@ -5,11 +5,10 @@ import { useState } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-function SystemCard({ system, onDelete, onEdit }) {
+function SystemCard({ system, onDelete, handleSystemUpdated }) {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-
   function isAdmin() {
     return user?.role === "admin";
   }
@@ -23,9 +22,6 @@ function SystemCard({ system, onDelete, onEdit }) {
     console.log("card clicked, system id:", systemId);
     navigate(`/dashboard/subSystems/${systemId}/${system.name}`);
   };
-  function handleRefetchSystem() {
-    onEdit();
-  }
 
   return (
     <div
@@ -38,8 +34,14 @@ function SystemCard({ system, onDelete, onEdit }) {
         <i className="fa-thin fa-shield-check"></i>
       </div>
       <div className="content">
-        <p>{system.description}</p>
-        <br />
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error
+          eveniet ratione, iste repellat consequuntur porro delectus, excepturi
+          cupiditate earum inventore ipsum ut illum facere deleniti incidunt qui
+          dolores, iure non
+          <br />
+          {/* {system.description} */}
+        </p>
       </div>
       {isAdmin() && (
         <div className="div-button">
@@ -47,8 +49,7 @@ function SystemCard({ system, onDelete, onEdit }) {
             type="button"
             className="card_button"
             onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault(); // Add this for extra safety
+              e.stopPropagation(); // Prevent triggering the card click
               setIsEditing(true);
             }}
           >
@@ -111,11 +112,7 @@ function SystemCard({ system, onDelete, onEdit }) {
       )}
 
       {isEditing && (
-        <EditSystemModal
-          system={system}
-          onClose={() => setIsEditing(false)}
-          onSystemUpdated={handleRefetchSystem}
-        />
+        <EditSystemModal system={system} onClose={() => setIsEditing(false)} />
       )}
     </div>
   );

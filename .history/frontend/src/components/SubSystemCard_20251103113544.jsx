@@ -8,7 +8,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
     navigate(
-      `/dashboard/instrumentsPerSubSystem/${subSystem.id}/${subSystem.name}`
+      `/dashboard/instrumentsPerSubSystem/${subSystem.pdfPathFile}/${subSystem.name}`
     );
     console.log("sub system card clicked");
   };

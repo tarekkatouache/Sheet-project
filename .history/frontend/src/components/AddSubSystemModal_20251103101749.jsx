@@ -175,7 +175,7 @@ export default function AddSubSystemModal({ onClose, onAdd }) {
 
       // Append the file (make sure you have a file input in your form)
       if (file) {
-        formDataToSend.append("technicalSheet", file);
+        formDataToSend.append("technicalSheet", formData.technicalSheet);
       }
 
       const uploadedSubSystem = await createSubSystem(formDataToSend);

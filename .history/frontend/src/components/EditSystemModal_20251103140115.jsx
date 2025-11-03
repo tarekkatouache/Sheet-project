@@ -33,17 +33,42 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
   //     document.body.style.overflow = "auto";
   //   };
   // }, []);
+  export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
+  const [name, setName] = useState(system.name || "");
+  const [description, setDescription] = useState(system.description || "");
+  const token = localStorage.getItem("token");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await api.put(
+        `/systems/${system.id}`,
+        { name, description },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      onSystemUpdated(res.data); // Pass the updated system data
+      onClose(); // Close the modal
+    } catch (error) {
+      console.error("Error updating system:", error);
+      alert("Erreur lors de la mise à jour");
+    }
+  };
+
   return ReactDOM.createPortal(
-    <div
+    <div 
       className="modal-backdrop"
       onClick={(e) => {
-        e.stopPropagation(); // Prevent click from reaching the card
-        onClose(); // Close modal when clicking backdrop
+        e.stopPropagation();
+        onClose();
       }}
     >
-      <div
+      <div 
         className="modal"
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking modal content
+        onClick={(e) => e.stopPropagation()}
       >
         <h2>Modifier le système</h2>
         <form onSubmit={handleSubmit} className="modal-form">
@@ -76,4 +101,5 @@ export default function EditSystemModal({ system, onClose, onSystemUpdated }) {
     </div>,
     document.getElementById("modal-root") || document.body
   );
+}
 }

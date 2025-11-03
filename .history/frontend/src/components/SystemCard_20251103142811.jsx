@@ -23,8 +23,8 @@ function SystemCard({ system, onDelete, onEdit }) {
     console.log("card clicked, system id:", systemId);
     navigate(`/dashboard/subSystems/${systemId}/${system.name}`);
   };
-  function handleRefetchSystem() {
-    onEdit();
+  const handleRefetchSystem {
+
   }
 
   return (

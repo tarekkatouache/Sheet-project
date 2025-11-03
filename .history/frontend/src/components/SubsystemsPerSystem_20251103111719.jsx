@@ -54,7 +54,7 @@ export default function SubsystemsPerSystem() {
         {subSystems.map((subSystem) => (
           <SubSystemCard
             key={subSystem.id}
-            subSystem={subSystem}
+            SubSystem={subSystem}
             onDelete={handledelete}
           />
         ))}

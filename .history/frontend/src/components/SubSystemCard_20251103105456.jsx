@@ -7,16 +7,24 @@ export default function SubSystemCard({ subSystem, onDelete }) {
 
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
-    navigate(
-      `/dashboard/instrumentsPerSubSystem/${subSystem.id}/${subSystem.name}`
-    );
+    // navigate(
+    // `/dashboard/instrumentsPerSubSystem/${Subsystem.pdf_path_file}/${Subsystem.name}`
     console.log("sub system card clicked");
   };
   function handleDisplaySheetSupSystem(subSystem) {
-    console.log("Opening PDF at path:", subSystem.pdfPathFile);
-    window.open(`http://localhost:5000/${subSystem.pdfPathFile}`, "_blank");
+    // console.log("Opening PDF at path:", subSystem.pdf_path_file);
+    // window.open(`http://localhost:5000/${subSystem.pdf_path_file}`, "_blank");
     // console.log("SubSystem $$$$$$$$$", Subsystem);
   }
+  function handleDisplaySheet(sheet) {
+    // Implement the logic to display the technical sheet details depending the pdfFilePath
+    if (sheet.pdfFilePath) {
+      window.open(`http://localhost:5000/${sheet.pdfFilePath}`, "_blank");
+    } else {
+      console.log("No PDF available for sheet:", sheet);
+    }
+  }
+  console.log("sub system card", subSystem);
 
   return (
     <div
@@ -55,7 +63,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
           <div className="rack-info">
             <div className="info-block">
               <div className="info-row">
-                <p>sous systeme :{subSystem.name}</p>
+                <p>sous systeme :</p>
                 {/* <h1>{Subsystem.name}</h1> */}
               </div>
               <div className="info-row" style={{ marginTop: 8 }}>
@@ -87,7 +95,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
               e.stopPropagation();
               console.log("click fiche sub system button ");
               console.log("SubSystemId:", subSystem.id);
-              handleDisplaySheetSupSystem(subSystem);
+              // handleDisplaySheetSupSystem(Subsystem);
             }}
           >
             Fiche
