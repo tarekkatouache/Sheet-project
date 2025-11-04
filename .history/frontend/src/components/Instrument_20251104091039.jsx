@@ -35,17 +35,18 @@ export default function Instrument({
           <h3>{instrument.name}</h3>
           <p>
             <strong> Batiment</strong> {instrument.building}
-            <br />
             <strong>salle :</strong> {instrument.room}
-            <br />
-            <strong>
-              Système: {system ? system.name : "Non attribué (supprimé)"}
-            </strong>
           </p>
-          <p>{/* <strong>description:</strong> {instrument.description} */}</p>
+          <p>
+            <strong>description:</strong> {instrument.description}
+          </p>
           {/* <strong>SystèmeId:</strong> 
       
       {instrument.system?.name || "Non attribué"} */}
+
+          <strong>
+            Système: {system ? system.name : "Non attribué (supprimé)"}
+          </strong>
         </div>
         {isAdmin() || isSuperuser() ? (
           <div className="instrument-buttons">

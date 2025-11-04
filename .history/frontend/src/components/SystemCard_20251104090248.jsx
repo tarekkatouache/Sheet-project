@@ -52,7 +52,12 @@ function SystemCard({ system, onDelete, onEdit }) {
               setIsEditing(true);
             }}
           >
-            <p></p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+              corporis voluptas explicabo quo facilis harum veniam reiciendis,
+              eos molestias dolore eius provident modi deleniti alias qui nam
+              labore aspernatur dignissimos?
+            </p>
             <img
               src="/icons2/compose.png"
               alt="icon

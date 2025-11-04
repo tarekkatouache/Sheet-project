@@ -37,7 +37,6 @@ export default function Instrument({
             <strong> Batiment</strong> {instrument.building}
             <br />
             <strong>salle :</strong> {instrument.room}
-            <br />
             <strong>
               Système: {system ? system.name : "Non attribué (supprimé)"}
             </strong>

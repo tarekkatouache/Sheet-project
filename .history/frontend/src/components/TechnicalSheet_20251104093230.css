@@ -23,8 +23,12 @@ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
 .technical-sheet-card {
   background: #616169;
-  background: -o-linear-gradient();
-
+  background: linear-gradient(
+    160deg,
+    rgba(97, 97, 105, 1) 1%,
+    rgba(167, 171, 194, 1) 61%,
+    rgba(255, 255, 255, 1) 100%
+  );
   flex: 1 1 250px;
   min-width: 103.5%;
   box-sizing: border-box;
