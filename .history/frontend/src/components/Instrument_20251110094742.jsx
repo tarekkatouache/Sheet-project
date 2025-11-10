@@ -34,7 +34,6 @@ export default function Instrument({
         <div className="inside-instrument">
           <h3>{instrument.name}</h3>
           <p>
-            <br />
             <strong> Batiment</strong> {instrument.building}
             <br />
             <strong>salle :</strong> {instrument.room}
@@ -103,7 +102,7 @@ export default function Instrument({
         ) : (
           <>
             <button
-              style={{ width: "45px" }}
+              style={{ width: "12px" }}
               onClick={() => {
                 handleFicheClick(instrument);
               }}

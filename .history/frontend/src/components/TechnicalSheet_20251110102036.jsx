@@ -248,7 +248,7 @@ function TechnicalSheet({ sheet, onDelete }) {
             </div>
           ) : (
             <button
-              style={{ width: "45px" }}
+              style={{ width: "35px" }}
               onClick={() => {
                 handleDisplaySheet(sheet);
               }}

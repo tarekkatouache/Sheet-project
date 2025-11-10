@@ -6,7 +6,6 @@ import { getAllTechnicalSheets } from "../services/technicalSheet";
 import { getInstruments } from "../services/instruments";
 import { useEffect } from "react";
 import { getLengthAuditLogs } from "../services/auditLogs";
-import { getAuditLogs } from "../services/auditLogs";
 
 // get the upload folder size
 const fetchUploadFolderSize = async () => {
@@ -55,16 +54,7 @@ export default function DashboardPageContent() {
 
   // console.log("Sheet count:", sheetCount.toString());
   // fetch audit logs lenth
-  useEffect(() => {
-    console.log("Fetching audit logs length...");
-    const fetchAuditLogsLength = async () => {
-      const auditLogs = await getAuditLogs();
-      setAuditLogCount(auditLogs.length);
-      console.log("Audit log count:", auditLogs.length);
-    };
-    fetchAuditLogsLength();
-  }, []);
-  console.log("Audit log count state:", auditLogCount);
+  useEffect(() => {}, []);
 
   return (
     <div className="ContenT">
@@ -73,7 +63,6 @@ export default function DashboardPageContent() {
         className="DashboardUpCardsContent"
       >
         <div className="up-cards">
-          {/* users number card */}
           <div className="component-card yellow">
             <div className="card-content">
               <div>
@@ -98,33 +87,6 @@ export default function DashboardPageContent() {
               <p>Utilisateurs</p>
             </div>
           </div>
-
-          {/* systems card */}
-          <div className="component-card blue">
-            <div className="card-content">
-              <div>
-                <h2>{auditLogCount ? auditLogCount : 0}</h2>
-              </div>
-              <span className="icon">
-                {" "}
-                <img
-                  src="/dashbord_icons/documentation.png"
-                  alt="icon
-                    
-                    "
-                  style={{
-                    display: "block",
-                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
-                    width: "60px",
-                    padding: "2px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="card-footer">nombre total d'actions</div>
-            {/* numbers of downloads word or consulter PDF */}
-          </div>
-          {/* technical sheet card */}
 
           <div className="component-card red">
             <div className="card-content">
@@ -151,7 +113,7 @@ export default function DashboardPageContent() {
               <p>Fiche Technique</p>
             </div>
           </div>
-          {/* instrument card */}
+
           <div className="component-card green">
             <div className="card-content">
               <div>
@@ -177,7 +139,7 @@ export default function DashboardPageContent() {
               <p>Instrument</p>
             </div>
           </div>
-          {/* audit log card (nombre d actions) */}
+
           <div className="component-card blue">
             <div className="card-content">
               <div>

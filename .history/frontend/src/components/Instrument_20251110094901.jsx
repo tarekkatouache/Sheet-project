@@ -103,7 +103,7 @@ export default function Instrument({
         ) : (
           <>
             <button
-              style={{ width: "45px" }}
+              style={{ width: "4  5px" }}
               onClick={() => {
                 handleFicheClick(instrument);
               }}

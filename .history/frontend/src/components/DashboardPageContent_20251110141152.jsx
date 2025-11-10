@@ -98,32 +98,6 @@ export default function DashboardPageContent() {
               <p>Utilisateurs</p>
             </div>
           </div>
-
-          {/* systems card */}
-          <div className="component-card blue">
-            <div className="card-content">
-              <div>
-                <h2>{auditLogCount ? auditLogCount : 0}</h2>
-              </div>
-              <span className="icon">
-                {" "}
-                <img
-                  src="/dashbord_icons/documentation.png"
-                  alt="icon
-                    
-                    "
-                  style={{
-                    display: "block",
-                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
-                    width: "60px",
-                    padding: "2px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="card-footer">nombre total d'actions</div>
-            {/* numbers of downloads word or consulter PDF */}
-          </div>
           {/* technical sheet card */}
 
           <div className="component-card red">
