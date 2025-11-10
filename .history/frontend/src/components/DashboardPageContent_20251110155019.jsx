@@ -108,7 +108,7 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/gear.png"
+                  src="/dashbord_icons/documentation.png"
                   alt="icon
                     
                     "

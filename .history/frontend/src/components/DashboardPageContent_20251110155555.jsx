@@ -108,7 +108,7 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/gear.png"
+                  src="/dashbord_icons/documentation.png"
                   alt="icon
                     
                     "
@@ -133,7 +133,7 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/energy-system.png"
+                  src="/dashbord_icons/gear.png"
                   alt="icon
                     
                     "

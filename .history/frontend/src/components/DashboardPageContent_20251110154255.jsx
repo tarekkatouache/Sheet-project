@@ -99,6 +99,7 @@ export default function DashboardPageContent() {
             </div>
           </div>
 
+          {/* technical sheet card */}
           {/* systems card */}
           <div className="component-card blue">
             <div className="card-content">
@@ -108,32 +109,7 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/gear.png"
-                  alt="icon
-                    
-                    "
-                  style={{
-                    display: "block",
-                    // filter: "invert(1) brightness(1.5) contrast(1.2)",
-                    width: "60px",
-                    padding: "2px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="card-footer">Systemes</div>
-            {/* numbers of downloads word or consulter PDF */}
-          </div>
-          {/* sub systems card */}
-          <div className="component-card blue">
-            <div className="card-content">
-              <div>
-                <h2>{auditLogCount ? auditLogCount : 0}</h2>
-              </div>
-              <span className="icon">
-                {" "}
-                <img
-                  src="/dashbord_icons/energy-system.png"
+                  src="/dashbord_icons/documentation.png"
                   alt="icon
                     
                     "
@@ -149,7 +125,6 @@ export default function DashboardPageContent() {
             <div className="card-footer">Sous Systemes</div>
             {/* numbers of downloads word or consulter PDF */}
           </div>
-          {/* technical sheet card */}
 
           <div className="component-card red">
             <div className="card-content">

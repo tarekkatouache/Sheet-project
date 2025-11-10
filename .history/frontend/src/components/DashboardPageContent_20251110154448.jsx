@@ -108,7 +108,7 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/gear.png"
+                  src="/dashbord_icons/documentation.png"
                   alt="icon
                     
                     "
@@ -124,7 +124,7 @@ export default function DashboardPageContent() {
             <div className="card-footer">Systemes</div>
             {/* numbers of downloads word or consulter PDF */}
           </div>
-          {/* sub systems card */}
+          {/* systems card */}
           <div className="component-card blue">
             <div className="card-content">
               <div>
@@ -133,7 +133,7 @@ export default function DashboardPageContent() {
               <span className="icon">
                 {" "}
                 <img
-                  src="/dashbord_icons/energy-system.png"
+                  src="/dashbord_icons/documentation.png"
                   alt="icon
                     
                     "
