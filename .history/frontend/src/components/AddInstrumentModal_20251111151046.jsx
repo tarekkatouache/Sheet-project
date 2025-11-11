@@ -17,8 +17,8 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     room: "",
     building: "",
     services: [],
-    createdByUserId: userId,
-    updatedByUserId: userId,
+    createdByUserId: null,
+    updatedByUserId: null,
     subSystemId: "",
     systemId: "",
   });

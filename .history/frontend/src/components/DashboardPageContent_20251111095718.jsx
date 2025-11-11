@@ -7,17 +7,15 @@ import { getInstruments } from "../services/instruments";
 import { useEffect } from "react";
 import { getLengthAuditLogs } from "../services/auditLogs";
 import { getAuditLogs } from "../services/auditLogs";
-import { getSystems } from "../services/systems";
-import { getSubSystems } from "../services/subSystems";
 
 // get the upload folder size
 const fetchUploadFolderSize = async () => {
   const data = await getUploadFolderSize();
   return data.sizeInBytes;
 };
-
 const siz = await fetchUploadFolderSize();
-/////////////////////////////////////
+
+///////////////////////
 function formatBytes(bytes) {
   if (bytes === 0) return "0 B";
   const units = ["B", "KB", "MB", "GB", "TB"];
@@ -67,18 +65,7 @@ export default function DashboardPageContent() {
     fetchAuditLogsLength();
   }, []);
   console.log("Audit log count state:", auditLogCount);
-  // GET SYSTEMS AND SUBSYSTEMS COUNTS
-  const [systemCount, setSystemCount] = React.useState(0);
-  const [subSystemCount, setSubSystemCount] = React.useState(0);
-  useEffect(() => {
-    const fetchSystemsAndSubSystems = async () => {
-      const systems = await getSystems();
-      setSystemCount(systems.length);
-      const subSystems = await getSubSystems();
-      setSubSystemCount(subSystems.length);
-    };
-    fetchSystemsAndSubSystems();
-  }, []);
+
   return (
     <div className="ContenT">
       <div
@@ -116,7 +103,7 @@ export default function DashboardPageContent() {
           <div className="component-card blue">
             <div className="card-content">
               <div>
-                <h2>{systemCount ? systemCount : 0}</h2>
+                <h2>{auditLogCount ? auditLogCount : 0}</h2>
               </div>
               <span className="icon">
                 {" "}
@@ -141,7 +128,7 @@ export default function DashboardPageContent() {
           <div className="component-card tow">
             <div className="card-content">
               <div>
-                <h2>{subSystemCount ? subSystemCount : 0}</h2>
+                <h2>{auditLogCount ? auditLogCount : 0}</h2>
               </div>
               <span className="icon">
                 {" "}
@@ -216,7 +203,7 @@ export default function DashboardPageContent() {
             </div>
           </div>
           {/* audit log card (nombre d actions) */}
-          <div className="component-card yellow2">
+          <div className="component-card yellow">
             <div className="card-content">
               <div>
                 <h2>{auditLogCount ? auditLogCount : 0}</h2>

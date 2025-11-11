@@ -221,7 +221,7 @@ export default function TechnicalPage() {
         {/* instrument filter with datalist  (searchable + writable)  */}
         <div>
           <input
-            style={{ width: "180px" }}
+            style={{ width: "200px" }}
             list="instruments"
             placeholder="All Instruments"
             onChange={(e) => {

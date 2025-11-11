@@ -211,17 +211,17 @@ export default function TechnicalPage() {
         className="filters"
         style={{ display: "flex", gap: "10px", marginBottom: "20px" }}
       >
-        {/* <input
+        <input
           type="text"
           placeholder="Search by title or description..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        /> */}
+        />
 
         {/* instrument filter with datalist  (searchable + writable)  */}
         <div>
           <input
-            style={{ width: "180px" }}
+            style={{ width: "200px" }}
             list="instruments"
             placeholder="All Instruments"
             onChange={(e) => {

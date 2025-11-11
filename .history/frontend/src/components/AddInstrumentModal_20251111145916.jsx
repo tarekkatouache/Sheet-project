@@ -17,8 +17,9 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     room: "",
     building: "",
     services: [],
-    createdByUserId: userId,
-    updatedByUserId: userId,
+    createdByUserId: null,
+    updatedByUserId: null,
+    instrumentId: "",
     subSystemId: "",
     systemId: "",
   });
@@ -116,14 +117,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             onChange={handleChange}
             required
           >
-            {console.log("subsystemID : ", formData.subSystemId)}
             <option value="">-- Sélectionner un sous-système --</option>
             {/* display all subsystems and put the subSystem id in */}
 
             {subSystems &&
               subSystems.map((subSystem) => (
                 <option key={subSystem.id} value={subSystem.id}>
-                  {(formData.systemId = subSystem.systemId)}
+                  {/* {(formData.systemId = subSystem.systemId)} */}
                   {subSystem.name}
                 </option>
               ))}

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { getLengthAuditLogs } from "../services/auditLogs";
 import { getAuditLogs } from "../services/auditLogs";
 import { getSystems } from "../services/systems";
-import { getSubSystems } from "../services/subSystems";
+import { getSubSystems } from "../services/systems";
 
 // get the upload folder size
 const fetchUploadFolderSize = async () => {
@@ -67,7 +67,7 @@ export default function DashboardPageContent() {
     fetchAuditLogsLength();
   }, []);
   console.log("Audit log count state:", auditLogCount);
-  // GET SYSTEMS AND SUBSYSTEMS COUNTS
+ // GET SYSTEMS AND SUBSYSTEMS COUNTS
   const [systemCount, setSystemCount] = React.useState(0);
   const [subSystemCount, setSubSystemCount] = React.useState(0);
   useEffect(() => {
@@ -76,9 +76,8 @@ export default function DashboardPageContent() {
       setSystemCount(systems.length);
       const subSystems = await getSubSystems();
       setSubSystemCount(subSystems.length);
-    };
+    }
     fetchSystemsAndSubSystems();
-  }, []);
   return (
     <div className="ContenT">
       <div
@@ -116,7 +115,7 @@ export default function DashboardPageContent() {
           <div className="component-card blue">
             <div className="card-content">
               <div>
-                <h2>{systemCount ? systemCount : 0}</h2>
+                <h2>{auditLogCount ? auditLogCount : 0}</h2>
               </div>
               <span className="icon">
                 {" "}

@@ -8,7 +8,7 @@
 
 .up-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
@@ -76,10 +76,7 @@
   background: #e1d442;
 }
 .component-card.tow .card-footer {
-  background: #7742e1;
-}
-.component-card.yellow2 .card-footer {
-  background: #a7a594;
+  background: #42e15f;
 }
 
 /*  */

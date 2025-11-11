@@ -115,11 +115,11 @@ export default function InstrumentContent() {
         Structures Systemes et Composants
       </h1>
       {/* show add instrument button to admin and superuser only */}
-      {/* {(isAdmin() || isSuperuser()) && (
+      {(isAdmin() || isSuperuser()) && (
         <button className="addinstrument" onClick={() => setShowModal(true)}>
           Ajouter Instrument
         </button>
-      )} */}
+      )}
 
       {/* search instrument by name , location, description */}
       <input

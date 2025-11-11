@@ -200,7 +200,7 @@ export default function TechnicalPage() {
     referenceFilter,
     keywordFilter,
   ]);
-  /////////////////////// make all inputs shrinck auto
+  ///////////////////////
 
   return (
     <div className="technical-page">
@@ -221,7 +221,7 @@ export default function TechnicalPage() {
         {/* instrument filter with datalist  (searchable + writable)  */}
         <div>
           <input
-            style={{ width: "180px" }}
+            style={{ width: "200px" }}
             list="instruments"
             placeholder="All Instruments"
             onChange={(e) => {
@@ -330,7 +330,7 @@ export default function TechnicalPage() {
         {/* Keywords filter */}
         <div>
           <input
-            style={{ width: "180px  " }}
+            style={{ width: "200px" }}
             list="keywords"
             placeholder="All Keywords"
             onChange={(e) => setKeywordFilter(e.target.value)}

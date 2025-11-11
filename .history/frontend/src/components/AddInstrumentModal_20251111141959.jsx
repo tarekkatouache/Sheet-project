@@ -17,8 +17,9 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     room: "",
     building: "",
     services: [],
-    createdByUserId: userId,
-    updatedByUserId: userId,
+    createdByUserId: null,
+    updatedByUserId: null,
+    instrumentId: "",
     subSystemId: "",
     systemId: "",
   });
@@ -44,15 +45,13 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
 
     fetchSubSystems();
   }, []);
-  console.log("subSystems:", subSystems);
   ////////////////////////////
   const handleChange = (e) => {
     console.log(
-      "Changing formData:",
+      "Handling change for:",
       e.target.name,
-      e.target.value,
-      "formData",
-      formData
+      "with value:",
+      e.target.value
     );
     setFormData((prev) => ({
       ...prev,
@@ -64,7 +63,6 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
     formData.createdByUserId = userId;
     formData.updatedByUserId = userId;
 
-    console.log(" form data : ", formData);
     addInstrument(formData)
       .then((response) => {
         console.log("Instrument added:", response);
@@ -116,14 +114,12 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
             onChange={handleChange}
             required
           >
-            {console.log("subsystemID : ", formData.subSystemId)}
             <option value="">-- Sélectionner un sous-système --</option>
-            {/* display all subsystems and put the subSystem id in */}
-
+            {/* display all subsystems  */}
             {subSystems &&
               subSystems.map((subSystem) => (
                 <option key={subSystem.id} value={subSystem.id}>
-                  {(formData.systemId = subSystem.systemId)}
+                  {/* {(formData.systemId = subSystem.systemId)} */}
                   {subSystem.name}
                 </option>
               ))}
@@ -157,7 +153,6 @@ export default function AddInstrumentModal({ onClose, onAdd }) {
                         }
                         // Otherwise add it
                         else {
-                          console.log("Toggling service:", formData.services);
                           return {
                             ...prev,
                             services: [...services, service],

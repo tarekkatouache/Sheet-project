@@ -116,7 +116,7 @@ export default function DashboardPageContent() {
           <div className="component-card blue">
             <div className="card-content">
               <div>
-                <h2>{systemCount ? systemCount : 0}</h2>
+                <h2>{auditLogCount ? auditLogCount : 0}</h2>
               </div>
               <span className="icon">
                 {" "}
