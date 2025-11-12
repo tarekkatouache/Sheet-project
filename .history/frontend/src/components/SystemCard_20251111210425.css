@@ -1,0 +1,29 @@
+/* Keep existing .card styles */
+
+.card {
+  position: relative; /* ensure positioning context */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+}
+
+/* ✅ Button row pinned to bottom */
+.div-button-container {
+  display: flex;
+  justify-content: center; /* or flex-end if you prefer right-aligned */
+  align-items: center;
+  gap: 8px;
+  margin-top: auto; /* pushes it to the bottom */
+  padding-bottom: 10px;
+}
+
+/* Keep your button styling */
+.card_button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  margin: 3px;
+  width: auto;
+}

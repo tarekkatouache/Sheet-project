@@ -1,0 +1,38 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require("../db");
+
+const System = sequelize.define(
+  "System",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true, // each system name should be unique
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    original_file_path: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  pdf_file_path: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  {
+    tableName: "systems",
+    timestamps: true,
+    paranoid: true,
+  }
+);
+
+// models/System.js
+
+module.exports = System;
