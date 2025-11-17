@@ -7,9 +7,9 @@ export default function SubSystemCard({ subSystem, onDelete }) {
 
   // build an array representing U slots (top-to-bottom visual)
   const handleCardClick = () => {
-    navigate(
-      `/dashboard/instrumentsPerSubSystem/${subSystem.id}/${subSystem.name}`
-    );
+    // navigate(
+    //   `/dashboard/instrumentsPerSubSystem/${subSystem.id}/${subSystem.name}`
+    // );
     console.log("sub system card clicked");
   };
   function handleDisplaySheetSupSystem(subSystem) {
@@ -29,7 +29,6 @@ export default function SubSystemCard({ subSystem, onDelete }) {
       <div
         className="insider"
         style={{
-          height: "400px",
           backgroundColor: "#eff1eaff",
           padding: 8,
           borderRadius: 2,

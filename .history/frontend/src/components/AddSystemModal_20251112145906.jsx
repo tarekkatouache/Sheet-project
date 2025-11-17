@@ -151,9 +151,7 @@ export default function AddSystemModal({ isOpen, onClose, onSystemCreated }) {
             <button className="cancelButton" type="button" onClick={onClose}>
               <p>Annuler</p>
             </button>
-            {/* <button
-              onClick={openNewWindow}
-            >click</button> */}
+            <button>click</button>
           </div>
         </form>
       </div>

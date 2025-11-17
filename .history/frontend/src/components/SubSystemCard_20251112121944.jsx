@@ -14,7 +14,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
   };
   function handleDisplaySheetSupSystem(subSystem) {
     console.log("Opening PDF at path:", subSystem.pdfPathFile);
-    window.open(`http://localhost:5000/${subSystem.pdfPathFile}`, "_blank");
+    // window.open(`http://localhost:5000/${subSystem.pdfPathFile}`, "_blank");
     // console.log("SubSystem $$$$$$$$$", Subsystem);
   }
 
