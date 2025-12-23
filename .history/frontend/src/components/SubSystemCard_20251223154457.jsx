@@ -161,7 +161,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("click fiche sub system button ");
-                // console.log("SubSystemId:", system.id);
+                console.log("SubSystemId:", system.id);
                 // handleDisplaySheetSystem(system);
               }}
               className="card_button"

@@ -1,16 +1,6 @@
 import React from "react";
 import "./SubSystemCard.css";
 import { useNavigate } from "react-router-dom";
-//  check if the user is admin
-function isAdmin() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.role === "admin";
-}
-// check if the user is  superuser
-function isSuperUser() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.role === "superuser";
-}
 
 export default function SubSystemCard({ subSystem, onDelete }) {
   const navigate = useNavigate();
@@ -102,7 +92,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    // setIsEditing(true);
+                    setIsEditing(true);
                   }}
                 >
                   <img
@@ -119,7 +109,7 @@ export default function SubSystemCard({ subSystem, onDelete }) {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    // onDelete(system.id);
+                    onDelete(system.id);
                   }}
                   className="card_button"
                 >
@@ -136,12 +126,12 @@ export default function SubSystemCard({ subSystem, onDelete }) {
               </>
             )}
 
-            {isSuperUser() && (
+            {isSuperuser() && (
               <button
                 className="card_button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  // setIsEditing(true);
+                  setIsEditing(true);
                 }}
               >
                 <img
@@ -161,8 +151,8 @@ export default function SubSystemCard({ subSystem, onDelete }) {
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("click fiche sub system button ");
-                // console.log("SubSystemId:", system.id);
-                // handleDisplaySheetSystem(system);
+                console.log("SubSystemId:", system.id);
+                handleDisplaySheetSystem(system);
               }}
               className="card_button"
             >

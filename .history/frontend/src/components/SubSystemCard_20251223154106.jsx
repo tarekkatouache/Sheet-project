@@ -1,16 +1,6 @@
 import React from "react";
 import "./SubSystemCard.css";
 import { useNavigate } from "react-router-dom";
-//  check if the user is admin
-function isAdmin() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.role === "admin";
-}
-// check if the user is  superuser
-function isSuperUser() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.role === "superuser";
-}
 
 export default function SubSystemCard({ subSystem, onDelete }) {
   const navigate = useNavigate();
@@ -92,92 +82,6 @@ export default function SubSystemCard({ subSystem, onDelete }) {
             justifyContent: "center",
           }}
         >
-          {/* $$$$$$$$$$$$$$$$$$$$$$$$ */}
-          <div className="div-button-container">
-            {isAdmin() && (
-              <>
-                <button
-                  type="button"
-                  className="card_button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    // setIsEditing(true);
-                  }}
-                >
-                  <img
-                    src="/icons2/compose.png"
-                    alt="edit"
-                    style={{
-                      filter: "invert(1) brightness(1.5) contrast(1.2)",
-                      width: "20px",
-                      padding: "2px",
-                    }}
-                  />
-                </button>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // onDelete(system.id);
-                  }}
-                  className="card_button"
-                >
-                  <img
-                    src="/icons2/delete.png"
-                    alt="delete"
-                    style={{
-                      filter: "invert(1) brightness(1.5) contrast(1.2)",
-                      width: "20px",
-                      padding: "2px",
-                    }}
-                  />
-                </button>
-              </>
-            )}
-
-            {isSuperUser() && (
-              <button
-                className="card_button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // setIsEditing(true);
-                }}
-              >
-                <img
-                  src="/icons2/compose.png"
-                  alt="edit"
-                  style={{
-                    filter: "invert(1) brightness(1.5) contrast(1.2)",
-                    width: "20px",
-                    padding: "2px",
-                  }}
-                />
-              </button>
-            )}
-
-            {/* Always visible button */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                console.log("click fiche sub system button ");
-                // console.log("SubSystemId:", system.id);
-                // handleDisplaySheetSystem(system);
-              }}
-              className="card_button"
-            >
-              <img
-                src="/icons2/sheet2.png"
-                alt="sheet"
-                style={{
-                  filter: "invert(1) brightness(1.5) contrast(1.2)",
-                  width: "20px",
-                  padding: "2px",
-                }}
-              />
-            </button>
-          </div>
-          {/* $$$$$$$$$$$$$$$$$$$$$$$$ */}
           {/* <button
             style={{ marginRight: "1a50px" }}
             onClick={(e) => {
